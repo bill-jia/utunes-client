@@ -1,3 +1,6 @@
 div.container
-	div(ng-include="'components/navbar/navbar.html")
+	div(ng-include="'app/components/navbar/navbar.html'")
 	h1 Albums
+
+	ul(ng-repeat="album in albums")
+		li {{album.title}} {{album.year}}
