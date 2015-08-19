@@ -1,7 +1,7 @@
 angular.module "uTunes"
-  .directive 'acmeNavbar', ->
+  .directive 'acmeYeomanNavbar', ->
 
-    NavbarController = (moment) ->
+    YeomanNavbarController = (moment) ->
       vm = this
       # "vm.creation" is avaible by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow()
@@ -9,8 +9,8 @@ angular.module "uTunes"
 
     directive =
       restrict: 'E'
-      templateUrl: 'app/components/navbar/navbar.html'
+      templateUrl: 'app/components/yeomannavbar/yeomannavbar.html'
       scope: creationDate: '='
-      controller: NavbarController
+      controller: YeomanNavbarController
       controllerAs: 'vm'
       bindToController: true

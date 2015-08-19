@@ -3,9 +3,12 @@ angular.module "uTunes"
     $stateProvider
       .state "home",
         url: "/"
-        templateUrl: "app/main/main.html"
-        controller: "MainController"
-        controllerAs: "main"
+        templateUrl: "app/main/index.html"
+      .state "yeoman",
+        url: "/yo"
+        templateUrl: "app/yeoman/yeoman.html"
+        controller: "YeomanController"
+        controllerAs: "yeoman"
 
       .state "albums",
         url: "/albums"

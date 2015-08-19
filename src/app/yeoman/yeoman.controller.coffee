@@ -1,5 +1,5 @@
 angular.module "uTunes"
-  .controller "MainController", ($timeout, webDevTec, toastr) ->
+  .controller "YeomanController", ($timeout, webDevTec, toastr) ->
     vm = this
     activate = ->
       getWebDevTec()
