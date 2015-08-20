@@ -6,6 +6,7 @@ angular.module "uTunes"
 
       service.listAlbums = () -> Restangular.all(model).getList()
       service.getAlbum = (albumId) -> Restangular.one(model, albumId).get()
+      service.getTracks = (albumId) -> Restangular.one(model, albumId).getList("tracks")
 
       service
   ])

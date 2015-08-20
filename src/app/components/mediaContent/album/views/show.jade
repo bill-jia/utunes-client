@@ -2,3 +2,9 @@ div#album-show
 	h1 {{album.title}} {{album.year}}
 	a.btn(ui-sref="root.albums.edit({albumId: album.id})")
 		|Edit this album
+	h2 Tracks
+		div.container#album-tracks
+			ul(ng-repeat="track in tracks")
+				li
+					|{{track.track_number}} {{track.title}}
+
