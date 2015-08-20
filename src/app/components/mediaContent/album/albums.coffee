@@ -12,7 +12,6 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
-      console.dir album
     )
 ])
 
@@ -20,9 +19,25 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
     # $scope.album = {}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
-        console.log data
         $state.go("root.albums.index", {}, {reload: true})
     )
+])
+
+app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService",
+  ($scope, $state, $stateParams, AlbumService) ->
+    AlbumService.getAlbum($stateParams.albumId).then((album) ->
+      $scope.album = album
+    )
+
+    $scope.save = () ->
+      $scope.album.put().then(() ->
+        $state.go("root.albums.show", {"albumId": $stateParams.albumId})
+      )
+
+    $scope.delete = () ->
+      $scope.album.remove().then(() ->
+        $state.go("root.albums.index", {}, {reload: true})
+      )
 ])
 
 app.config(["$stateProvider",

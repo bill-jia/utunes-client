@@ -1,1 +1,11 @@
-h1 Edit an album
+h1 Edit {{album.title}}
+
+div.container
+	div.form-group
+		button.btn.btn-danger(ng-click="delete()") Delete
+	div.form-group
+		input.form-control(id="title" name="title" type="text" ng-model="album.title" placeholder="{{album.title}}")
+	div.form-group
+		input.form-control(id="year" name="year" type="number" ng-model="album.year" placeholder="{{album.year}}")
+	div.form-group
+		button.btn.btn-primary(ng-click="save()") Save
