@@ -2,14 +2,18 @@ app = angular.module "uTunes"
 
 app.controller("AlbumsController", ["$scope", "AlbumService",
   ($scope, AlbumService) ->
-    AlbumService.list().then((albums) ->
+    AlbumService.listAlbums().then((albums) ->
       $scope.albums = albums
-      console.dir albums
       )
 ])
 
-app.controller("AlbumController", ["$scope", "AlbumService",
-  ($scope, AlbumService) ->
+app.controller("AlbumController", ["$scope", "$stateParams", "AlbumService",
+  ($scope, $stateParams, AlbumService) ->
+
+    AlbumService.getAlbum($stateParams.albumId).then((album) ->
+      $scope.album = album
+      console.dir album
+    )
 ])
 
 app.config(["$stateProvider",

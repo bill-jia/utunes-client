@@ -8,5 +8,6 @@ angular.module "uTunes"
         angular.extend(obj, Album)
       )
 
-      list: () -> Restangular.all(model).getList()
+      listAlbums: () -> Restangular.all(model).getList()
+      getAlbum: (albumId) -> Restangular.one(model, albumId).get()
   ])
