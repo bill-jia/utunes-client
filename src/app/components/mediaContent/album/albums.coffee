@@ -13,9 +13,12 @@ app.config(["$stateProvider",
     $stateProvider
       .state "root.albums",
         name: "albums"
+        abstract: true
         url: "albums"
-        templateUrl: "app/components/mediaContent/album/albums.html"
-        controller: "AlbumsController" 
+        template: "<ui-view/>"
+      .state "root.albums.index",
+        name: "albums.index"
+        url: "/"
+        templateUrl: "app/components/mediaContent/album/views/index.html"
+        controller: "AlbumsController"
 ])
-
-    
