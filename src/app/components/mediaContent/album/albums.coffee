@@ -8,7 +8,11 @@ app.controller("AlbumsController", ["$scope", "AlbumService",
       )
 ])
 
-app.config(["$stateProvider", 
+app.controller("AlbumController", ["$scope", "AlbumService",
+  ($scope, AlbumService) ->
+])
+
+app.config(["$stateProvider",
   ($stateProvider) ->
     $stateProvider
       .state "root.albums",
@@ -21,4 +25,9 @@ app.config(["$stateProvider",
         url: "/"
         templateUrl: "app/components/mediaContent/album/views/index.html"
         controller: "AlbumsController"
+      .state "root.albums.show",
+        name: "albums.show"
+        url: "/{albumId}/show"
+        templateUrl: "app/components/mediaContent/album/views/show.html"
+        controller: "AlbumController"
 ])

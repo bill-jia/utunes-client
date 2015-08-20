@@ -18,7 +18,7 @@ angular.module "uTunes"
       .state "root.about",
         name: "about"
         url: "about"
-        templateUrl: "app/main/about.html"   
+        templateUrl: "app/main/about.html"
       .state "root.artists",
         name: "artists"
         url: "artists"

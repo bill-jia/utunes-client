@@ -1,4 +1,6 @@
 h1 Albums
 
 ul(ng-repeat="album in albums")
-	li {{album.title}} {{album.year}}
+	li
+		a.btn(ui-sref="root.albums.show({albumId:album.id})")
+			|{{album.title}} {{album.year}}
