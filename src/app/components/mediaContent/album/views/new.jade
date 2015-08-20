@@ -1,0 +1,9 @@
+h1 Add an album
+
+div.container
+	div.form-group
+		input.form-control(id="title" name="title" type="text" ng-model="album.title" placeholder="Title")
+	div.form-group
+		input.form-control(id="year" name="year" type="number" ng-model="album.year" placeholder="Year")
+	div.form-group
+		button.btn.btn-primary(ng-click="save()") Add

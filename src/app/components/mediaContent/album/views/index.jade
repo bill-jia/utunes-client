@@ -4,3 +4,5 @@ ul(ng-repeat="album in albums")
 	li
 		a.btn(ui-sref="root.albums.show({albumId:album.id})")
 			|{{album.title}} {{album.year}}
+a.btn(ui-sref="root.albums.new")
+	|Add an album
