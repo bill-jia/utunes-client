@@ -15,11 +15,10 @@ angular.module "uTunes"
         name: "faq"
         url: "faq"
         templateUrl: "app/main/faq.html"
-      .state "root.albums",
-        name: "albums"
-        url: "albums"
-        templateUrl: "app/components/mediaContent/album/albums.html"
-        controller: "AlbumsController"
+      .state "root.about",
+        name: "about"
+        url: "about"
+        templateUrl: "app/main/about.html"   
       .state "root.artists",
         name: "artists"
         url: "artists"
