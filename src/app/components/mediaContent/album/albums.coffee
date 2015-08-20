@@ -18,8 +18,11 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
 app.controller("AlbumNewController", ["$scope", "$location", "AlbumService",
   ($scope, $location, AlbumService) ->
-    $scope.save = () ->
-      console.log("attempting to save")
+    # $scope.album = {}
+    $scope.save = () -> AlbumService.post($scope.album).then((data) ->
+        console.log data
+        $location.path("/albums")
+    )
 ])
 
 app.config(["$stateProvider",
