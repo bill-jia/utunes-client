@@ -1,0 +1,7 @@
+h1 Tracks
+
+ul(ng-repeat="track in tracks")
+	li
+		|{{track.title}} {{track.year}}
+		a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
+			|Edit Track

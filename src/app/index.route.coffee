@@ -27,10 +27,6 @@ angular.module "uTunes"
         name: "playlists"
         url: "playlists"
         templateUrl: "app/components/mediaContent/playlist/playlists.html"
-      .state "root.tracks",
-        name: "tracks"
-        templateUrl: "app/components/mediaContent/track/tracks.html"
-
       .state "yeoman",
         url: "/yo"
         templateUrl: "app/yeoman/yeoman.html"

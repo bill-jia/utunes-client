@@ -1,4 +1,4 @@
 angular.module "uTunes"
-  .run ($log) ->
+  .run ($log, Restangular) ->
     console.log 'uTunes running'
     $log.debug 'runBlock end'

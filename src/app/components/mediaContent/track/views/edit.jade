@@ -1,0 +1,9 @@
+h1 Edit {{track.title}}
+
+div.container
+	div.form-group
+		button.btn.btn-danger(ng-click="delete()") Delete
+	div.form-group
+		input.form-control(id="title" name="title" type="text" ng-model="track.title" placeholder="{{track.title}}")
+	div.form-group
+		button.btn.btn-primary(ng-click="save()") Save
