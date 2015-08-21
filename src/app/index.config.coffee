@@ -9,3 +9,5 @@ angular.module "uTunes"
     toastr.options.progressBar = true
   .config (RestangularProvider) ->
     RestangularProvider.setBaseUrl("/api")
+  .config ($mdThemingProvider) ->
+    $mdThemingProvider.theme('default').primaryPalette("indigo").backgroundPalette("grey").accentPalette("blue")

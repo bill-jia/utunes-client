@@ -1,3 +1,6 @@
-div.container
-	h2
-		|This is the sidebar (LEFT OR RIGHT?)
+md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')")
+
+	a(ui-sref=".albums.index") Albums 
+	a(ui-sref=".artists") Artists 
+	a(ui-sref=".playlists") Playlists 
+	a(ui-sref=".tracks.index") Tracks 

@@ -1,8 +1,9 @@
-x-navbar
-x-searchbar
+div(layout="column")
+	section(layout="row")
+		x-navbar(flex = 66)
+		x-searchbar
+	section(layout="row" layout-align="top center")
+		x-sidebar		
+		div(ui-view)
+	x-audio-player
 
-div.container
-	div(ui-view)
-
-x-sidebar
-x-audio-player

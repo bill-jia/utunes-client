@@ -1,1 +1,1 @@
-angular.module 'uTunes', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ui.router.stateHelper', 'ui.bootstrap']
+angular.module 'uTunes', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'ngMaterial']
