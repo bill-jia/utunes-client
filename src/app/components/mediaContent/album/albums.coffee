@@ -20,10 +20,20 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
-    $scope.album = {}
+    $scope.album = {tracks: [{track_number:"", title: "", length_in_seconds: ""} ]}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
         $state.go("root.albums.index", {}, {reload: true})
     )
+
+    $scope.addTrack = () ->
+      $scope.album.tracks.push({track_number:"", title: "", length_in_seconds: ""})
+
+    $scope.removeTrack = (index, album) ->
+      track = album.tracks[index]
+      if track.id
+        track._destroy = true
+      else
+        album.tracks.splice(index,1)
 ])
 
 app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService",

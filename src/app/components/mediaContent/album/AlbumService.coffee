@@ -6,12 +6,11 @@ angular.module "uTunes"
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
             console.log "Request intercepted"
             if (operation == "put" || operation == "post")
-              console.log "Put/Post"
+              console.dir elem
               album: elem
             else
-              console.log "Other stuff"
               elem
-      )
+          )
       )
       model = "albums"
       service = AlbumRestangular.service(model)

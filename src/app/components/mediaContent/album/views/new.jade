@@ -2,8 +2,23 @@ h1 Add an album
 
 div.container
 	div.form-group
-		input.form-control(id="title" name="title" type="text" ng-model="album.title" placeholder="Title")
+		label.control-label Album Title
+		input.form-control(id="album-title" name="title" type="text" ng-model="album.title" placeholder="Title")
 	div.form-group
+		label.control-label Year
 		input.form-control(id="year" name="year" type="number" ng-model="album.year" placeholder="Year")
+	h2 Tracks
+	div(ng-repeat="track in album.tracks")
+		div(ng-hide="track._destroy")
+			div.form-group
+				label.control-label Track Number
+				input.form-control(id="track-number" name="track_number" type="number" ng-model="track.track_number" placeholder="Track Number")
+			div.form-group
+				label.control-label Title
+				input.form-control(id="track-title" name="title" type="text" ng-model="track.title" placeholder="Title")
+			div.form-group
+				button.btn.btn-danger.btn-xs(ng-click="removeTrack($index, album)") X
+	div.form-group
+		button.btn.btn-success(ng-click="addTrack()") + Add track
 	div.form-group
 		button.btn.btn-primary(ng-click="save()") Add
