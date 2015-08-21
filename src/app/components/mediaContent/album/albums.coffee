@@ -20,7 +20,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
-    # $scope.album = {}
+    $scope.album = {}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
         $state.go("root.albums.index", {}, {reload: true})
     )

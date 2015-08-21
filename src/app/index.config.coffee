@@ -9,3 +9,12 @@ angular.module "uTunes"
     toastr.options.progressBar = true
   .config (RestangularProvider) ->
     RestangularProvider.setBaseUrl("/api")
+    RestangularProvider.addRequestInterceptor((elem, operation, what, url) ->
+        console.log "Request intercepted"
+        if (operation == "put" || operation == "POST")
+          console.log "Put/Post"
+          album: elem
+        else
+          console.log "Other stuff"
+          elem
+      )
