@@ -5,12 +5,12 @@ angular.module "uTunes"
       TrackRestangular = Restangular.withConfig(
         (RestangularConfigurer) ->
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
-            console.log "Request intercepted"
+            # console.log "Request intercepted"
             if (operation == "put" || operation == "post")
-              console.log "Put/Post"
+              # console.log "Put/Post"
               track: elem
             else
-              console.log "Other stuff"
+              # console.log "Other stuff"
               elem
           )
       )

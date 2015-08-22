@@ -1,10 +1,9 @@
-div#album-show
+md-content#album-show(layout-padding="" style="padding: 24px;")
 	h1 {{album.title}} {{album.year}}
-	a.btn(ui-sref="root.albums.edit({albumId: album.id})")
+	md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})")
 		|Edit this album
 	h2 Tracks
-		div.container#album-tracks
-			ul(ng-repeat="track in tracks")
-				li
-					|{{track.track_number}} {{track.title}}
-
+	div#album-tracks
+		ul(ng-repeat="track in tracks")
+			li
+				|{{track.track_number}} {{track.title}}

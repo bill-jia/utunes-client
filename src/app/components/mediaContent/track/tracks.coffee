@@ -4,10 +4,7 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
   ($scope, TrackService, AlbumService) ->
     TrackService.listTracks().then((tracks) ->
       $scope.tracks = tracks
-      # console.dir $scope.tracks[0] 
-      # console.dir $scope.tracks[1]
-      # console.dir $scope.tracks[2]
-      console.log $scope.tracks.length
+      # console.log $scope.tracks.length
       for track, index in $scope.tracks
         albumId = track.album_id
         track.album = AlbumService.getAlbum(albumId).$object
@@ -17,6 +14,7 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
 app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",
   ($scope, $state, $stateParams, TrackService) ->
     TrackService.getTrack($stateParams.trackId).then((track) ->
+      # console.dir track
       $scope.track = track
     )
 

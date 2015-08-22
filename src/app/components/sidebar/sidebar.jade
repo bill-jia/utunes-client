@@ -1,6 +1,6 @@
 md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')")
-
-	a(ui-sref=".albums.index") Albums 
-	a(ui-sref=".artists") Artists 
-	a(ui-sref=".playlists") Playlists 
-	a(ui-sref=".tracks.index") Tracks 
+	md-button-group(layout="column")
+		md-button(ui-sref=".albums.index") Albums 
+		md-button(ui-sref=".artists") Artists 
+		md-button(ui-sref=".playlists") Playlists 
+		md-button(ui-sref=".tracks.index") Tracks 

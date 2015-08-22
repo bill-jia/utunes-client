@@ -1,9 +1,12 @@
-h1 Edit {{track.title}}
+md-content(layout-padding="" style="padding: 24px;")
 
-div.container
-	div.form-group
-		button.btn.btn-danger(ng-click="delete()") Delete
-	div.form-group
-		input.form-control(id="title" name="title" type="text" ng-model="track.title" placeholder="{{track.title}}")
-	div.form-group
-		button.btn.btn-primary(ng-click="save()") Save
+	h1 Edit {{track.title}}
+
+	md-content(layout-padding="" layout="row" layout-sm="column")
+		form(name="edit-track-form")
+			md-input-container
+				label Title
+				input(id="title" name="title" type="text" ng-model="track.title")
+			md-input-container(layout="row")
+				md-button.md-raised.md-warn(ng-click="delete") Delete
+				md-button.md-raised.md-primary(ng-click="save()") Save
