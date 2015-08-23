@@ -25,14 +25,14 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
-    $scope.album = {producers:[{name: "", class_year: "", role: "", bio: ""}],
+    $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
     tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: ""} ]}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
         $state.go("root.albums.index", {}, {reload: true})
     )
 
     $scope.addProducer = () ->
-      $scope.album.producers.push({name: "", class_year: "", role: "", bio: ""})
+      $scope.album.producers.push({name: "", class_year: "", bio: ""})
 
     $scope.removeProducer = (index, album) ->
       producer = album.producers[index]
