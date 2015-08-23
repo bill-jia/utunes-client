@@ -23,9 +23,6 @@ md-content(layout-padding="" style="padding: 24px;")
 						md-input-container
 							label Role
 							input(id="producer-role" name="role" type="text" ng-model="producer.role")
-						md-input-container
-							label Bio
-							textarea(id="producer-bio" name="bio" type="text" ng-model="producer.bio")
 					section(layout="column")
 						md-input-container
 							md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") X Remove Producer
@@ -53,9 +50,6 @@ md-content(layout-padding="" style="padding: 24px;")
 											md-input-container
 												label Class Year
 												input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
-											md-input-container
-												label Bio
-												textarea(id="artist-bio" name="bio" type="text" ng-model="artist.bio")
 										section(layout="column")
 											md-input-container
 												md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist
