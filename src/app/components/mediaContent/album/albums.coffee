@@ -7,26 +7,42 @@ app.controller("AlbumIndexController", ["$scope", "AlbumService",
       )
 ])
 
-app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
-  ($scope, $stateParams, AlbumService) ->
+app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService", "TrackService",
+  ($scope, $stateParams, AlbumService, TrackService) ->
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
     )
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->
       $scope.tracks = tracks
+      for track in $scope.tracks
+        track.artists = TrackService.getArtists(track.id).$object
+    )
+    AlbumService.getProducers($stateParams.albumId).then((producers) ->
+      $scope.producers = producers
     )
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
-    $scope.album = {tracks: [{track_number:"", title: "", length_in_seconds: ""} ]}
+    $scope.album = {producers:[{name: "", class_year: "", role: "", bio: ""}],
+    tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: ""} ]}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
         $state.go("root.albums.index", {}, {reload: true})
     )
 
+    $scope.addProducer = () ->
+      $scope.album.producers.push({name: "", class_year: "", role: "", bio: ""})
+
+    $scope.removeProducer = (index, album) ->
+      producer = album.producers[index]
+      if producer.id
+        producer._destroy = true
+      else
+        album.producers.splice(index,1)
+
     $scope.addTrack = () ->
-      $scope.album.tracks.push({track_number:"", title: "", length_in_seconds: ""})
+      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: ""})
 
     $scope.removeTrack = (index, album) ->
       track = album.tracks[index]
@@ -34,6 +50,16 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         track._destroy = true
       else
         album.tracks.splice(index,1)
+
+    $scope.addArtist = (track) ->
+      track.artists.push({name: "", class_year: ""})
+
+    $scope.removeArtist = (index, track) ->
+      artist = track.artists[index]
+      if artist.id
+        artist._destroy = true
+      else
+        track.artists.splice(index,1)
 ])
 
 app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService",

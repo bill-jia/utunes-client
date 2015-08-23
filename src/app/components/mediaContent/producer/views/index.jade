@@ -1,0 +1,6 @@
+md-content(layout-padding="" style="padding: 24px;")
+	h1 Producers
+
+	ul(ng-repeat="producer in producers")
+		li
+			a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}

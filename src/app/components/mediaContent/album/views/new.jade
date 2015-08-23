@@ -5,10 +5,29 @@ md-content(layout-padding="" style="padding: 24px;")
 		form(name="new-album-form")
 			md-input-container
 				label Album Title
-				input(id="album-title" name="title" type="text" ng-model="album.title" placeholder="Title")
+				input(id="album-title" name="title" type="text" ng-model="album.title")
 			md-input-container
 				label Year
-				input(id="year" name="year" type="number" ng-model="album.year" placeholder="Year")
+				input(id="album-year" name="year" type="number" ng-model="album.year")
+			h2 Producers
+			div(ng-repeat="producer in album.producers")
+				div(ng-hide="producer._destroy")
+				section(layout="row")
+					section(layout="column")
+						md-input-container
+							label Name
+							input(id="producer-name" name="name" type="text" ng-model="producer.name")
+						md-input-container
+							label Class Year
+							input(id="producer-class-year" name="class_year" type="number" ng-model="producer.class_year")
+						md-input-container
+							label Role
+							input(id="producer-role" name="role" type="text" ng-model="producer.role")
+					section(layout="column")
+						md-input-container
+							md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") X Remove Producer
+			md-input-container
+				md-button.md-raised.md-accent(ng-click="addProducer()") + Add Producer		
 			h2 Tracks
 			div(ng-repeat="track in album.tracks")
 				div(ng-hide="track._destroy")
@@ -16,13 +35,29 @@ md-content(layout-padding="" style="padding: 24px;")
 						section(layout="column")
 							md-input-container
 								label Track Number
-								input(id="track-number" name="track_number" type="number" ng-model="track.track_number" placeholder="Track Number")
+								input(id="track-number" name="track_number" type="number" ng-model="track.track_number")
 							md-input-container
 								label Title
-								input(id="track-title" name="title" type="text" ng-model="track.title" placeholder="Title")
+								input(id="track-title" name="title" type="text" ng-model="track.title")
+							h3 Artists
+							div(ng-repeat="artist in track.artists")
+								div(ng-hide="artist._destroy")
+									section(layout="row")
+										section(layout="column")
+											md-input-container
+												label Name
+												input(id="artist-name" name="name" type="text" ng-model="artist.name")
+											md-input-container
+												label Class Year
+												input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
+										section(layout="column")
+											md-input-container
+												md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist
+								md-input-container
+									md-button.md-raised.md-accent(ng-click="addArtist(track)") + Add Artist
 						section(layout="column")
 							md-input-container
-								md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") X
+								md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") X Remove Track
 			md-input-container
 				md-button.md-raised.md-accent(ng-click="addTrack()") + Add track
 			md-input-container

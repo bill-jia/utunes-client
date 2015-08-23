@@ -17,6 +17,7 @@ angular.module "uTunes"
       service.listAlbums = () -> AlbumRestangular.all(model).getList()
       service.getAlbum = (albumId) -> AlbumRestangular.one(model, albumId).get()
       service.getTracks = (albumId) -> AlbumRestangular.one(model, albumId).getList("tracks")
+      service.getProducers = (albumId) -> AlbumRestangular.one(model, albumId).getList("producers")
 
       service
   ])
