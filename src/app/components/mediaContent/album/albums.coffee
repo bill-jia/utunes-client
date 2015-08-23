@@ -26,8 +26,9 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
     $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
-    tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: ""} ]}
+    tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", audio: ""} ]}
     $scope.save = () -> AlbumService.post($scope.album).then((data) ->
+
         $state.go("root.albums.index", {}, {reload: true})
     )
 
@@ -42,7 +43,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         album.producers.splice(index,1)
 
     $scope.addTrack = () ->
-      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: ""})
+      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", audio: ""})
 
     $scope.removeTrack = (index, album) ->
       track = album.tracks[index]

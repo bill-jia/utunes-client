@@ -10,3 +10,6 @@ md-content(layout-padding="" style="padding: 24px;")
 			md-input-container(layout="row")
 				md-button.md-raised.md-warn(ng-click="delete") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
+			md-input-container
+				h3 Audio File
+				input(id="track-audio" name = "audio" type="file" ngf-select ng-model="track.audio")

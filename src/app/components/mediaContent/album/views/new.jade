@@ -9,6 +9,9 @@ md-content(layout-padding="" style="padding: 24px;")
 			md-input-container
 				label Year
 				input(id="album-year" name="year" type="number" ng-model="album.year")
+			md-input-container
+				h3 Album Cover
+				input(id="album-album-cover" name = "album_cover" type="file" ngf-select ng-model="album.album_cover")
 			h2 Producers
 			div(ng-repeat="producer in album.producers")
 				div(ng-hide="producer._destroy")
@@ -36,6 +39,9 @@ md-content(layout-padding="" style="padding: 24px;")
 							md-input-container
 								label Title
 								input(id="track-title" name="title" type="text" ng-model="track.title")
+							md-input-container
+								h3 Audio File
+								input(id="track-audio" name = "audio" type="file" ngf-select ng-model="track.audio")
 							h3 Artists
 							div(ng-repeat="artist in track.artists")
 								div(ng-hide="artist._destroy")
