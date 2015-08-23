@@ -7,3 +7,6 @@ md-content#album-show(layout-padding="" style="padding: 24px;")
 		ul(ng-repeat="track in tracks")
 			li
 				|{{track.track_number}} {{track.title}}
+				ul(ng-repeat="artist in track.artists")
+					li
+						a(ui-sref="root.artists.show({artistId: artist.id})"){{artist.name}} {{artist.year}}
