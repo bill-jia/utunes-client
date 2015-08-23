@@ -8,7 +8,7 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
       for track in $scope.tracks
         albumId = track.album_id
         track.album = AlbumService.getAlbum(albumId).$object
-        track.artists = TrackService.getArtists(track.id)
+        track.artists = TrackService.getArtists(track.id).$object
       )
 ])
 
