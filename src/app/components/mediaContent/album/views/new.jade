@@ -16,7 +16,7 @@ md-content(layout-padding="" style="padding: 24px;")
 						section(layout="column")
 							md-input-container
 								label Track Number
-								input(id="track-number" name="track_number" type="number" ng-model="track.track_number" placeholder="Track Number")
+								input(id="track-number" name="track_number" type="number" ng-model="track.track_number")
 							md-input-container
 								label Title
 								input(id="track-title" name="title" type="text" ng-model="track.title" placeholder="Title")
@@ -31,6 +31,9 @@ md-content(layout-padding="" style="padding: 24px;")
 												md-input-container
 													label Class Year
 													input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
+												md-input-container
+													label Bio
+													textarea(id="artist-bio" name="bio" type="text" ng-model="artist.bio")
 											section(layout="column")
 												md-input-container
 													md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist
