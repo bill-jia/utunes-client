@@ -1,11 +1,12 @@
-h1 Tracks
+md-content(layout-padding="" style="padding: 24px;")
+	h1 Tracks
 
-ul(ng-repeat="track in tracks")
-	li
-		|{{track.title}} {{track.year}} 
-		ul(ng-repeat="artist in track.artists")
-			li
-				a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
-		a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}} 
-		a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
-			|Edit Track
+	ul(ng-repeat="track in tracks")
+		li
+			|{{track.title}}
+			ul(ng-repeat="artist in track.artists")
+				li
+					a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
+			a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}} 
+			a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
+				|Edit Track

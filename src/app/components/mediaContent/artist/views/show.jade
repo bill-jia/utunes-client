@@ -1,0 +1,21 @@
+md-content#artist-show(layout-padding="" style="padding: 24px;")
+	h1 {{artist.name}} {{artist.class_year}}
+	md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})")
+		|Edit this artist
+	div#artist-albums
+		h2 Albums
+		md-grid-list.album-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
+			md-grid-tile.md-primary.md-hue-1(ng-repeat="album in albums" md-rowspan="1" md-colspan="1")
+				md-grid-tile-footer
+					md-button(ui-sref="root.albums.show({albumId:album.id})")
+						|{{album.title}}
+					{{album.year}}
+	div#artist-tracks
+		h2 Tracks
+		ul(ng-repeat="track in tracks")
+			li
+				|{{track.title}}
+				ul(ng-repeat="artist in track.artists")
+					li
+						a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
+				a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}} 
