@@ -2,6 +2,7 @@ md-content#artist-show(layout-padding="" style="padding: 24px;")
 	h1 {{artist.name}} {{artist.class_year}}
 	md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})")
 		|Edit this artist
+	p {{artist.bio}}
 	div#artist-albums
 		h2 Albums
 		md-grid-list.album-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
