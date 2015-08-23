@@ -7,7 +7,7 @@ app.controller("ArtistIndexController", ["$scope", "ArtistService",
     )
 ])
 
-app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService", "TrackService", "AlbumService"
+app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService", "TrackService", "AlbumService",
   ($scope, $stateParams, ArtistService, TrackService, AlbumService) ->
 
     ArtistService.getArtist($stateParams.artistId).then((artist) ->

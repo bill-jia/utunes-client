@@ -5,9 +5,10 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
     TrackService.listTracks().then((tracks) ->
       $scope.tracks = tracks
       # console.log $scope.tracks.length
-      for track, index in $scope.tracks
+      for track in $scope.tracks
         albumId = track.album_id
         track.album = AlbumService.getAlbum(albumId).$object
+        track.artists = TrackService.getArtists(track.id)
       )
 ])
 
