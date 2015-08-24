@@ -11,7 +11,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				input(id="album-year" name="year" type="number" ng-model="album.year")
 			md-input-container
 				h3 Album Cover
-				input(id="album-album-cover" name = "album_cover" type="file" ngf-select ng-model="album.album_cover")
+				input(id="album-cover-image" name = "cover_image" type="file" ngf-select ng-model="album.cover_image")
 			h2 Producers
 			div(ng-repeat="producer in album.producers")
 				div(ng-hide="producer._destroy")
