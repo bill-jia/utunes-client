@@ -12,6 +12,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
+      console.dir $scope.album
     )
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->
       $scope.tracks = tracks
@@ -23,14 +24,16 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
     )
 ])
 
-app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
-  ($scope, $state, AlbumService) ->
+app.controller("AlbumNewController", ["$scope", "$state", "AlbumService", "AlbumUploader",
+  ($scope, $state, AlbumService, AlbumUploader) ->
     $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
     tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", audio: ""} ], cover_image: ""}
-    $scope.save = () -> AlbumService.post($scope.album).then((data) ->
+    $scope.save = () ->
+      # console.dir $scope.album
+      AlbumUploader.createAlbumWithAttachment($scope.album).then(() ->
+        $state.go("root.albums.index", {}, {reload: true})  
+      )
 
-        $state.go("root.albums.index", {}, {reload: true})
-    )
 
     $scope.addProducer = () ->
       $scope.album.producers.push({name: "", class_year: "", bio: ""})

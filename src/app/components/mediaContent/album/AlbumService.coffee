@@ -6,6 +6,7 @@ angular.module "uTunes"
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
             # console.log "Request intercepted"
             if (operation == "put" || operation == "post")
+              console.log "Restangular"
               console.dir elem
               album: elem
             else
