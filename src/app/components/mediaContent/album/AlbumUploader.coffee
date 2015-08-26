@@ -4,8 +4,9 @@ angular.module "uTunes"
     sendPayload = (formData, method, url) ->
       files = []
       names = []
-      files.push formData.cover_image
-      names.push formData.cover_image.name
+      if formData.cover_image
+        files.push formData.cover_image
+        names.push formData.cover_image.name
       for track in formData.tracks
         files.push track.audio
         names.push track.track_number
