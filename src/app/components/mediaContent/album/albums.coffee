@@ -27,7 +27,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService", "AlbumUploader",
   ($scope, $state, AlbumService, AlbumUploader) ->
     $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
-    tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", audio: ""} ], cover_image: ""}
+    tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", file: ""} ], file: ""}
     $scope.save = () ->
       # console.dir $scope.album
       AlbumUploader.createAlbumWithAttachment($scope.album).then(() ->
@@ -46,7 +46,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService", "Album
         album.producers.splice(index,1)
 
     $scope.addTrack = () ->
-      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", audio: ""})
+      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", file: ""})
 
     $scope.removeTrack = (index, album) ->
       track = album.tracks[index]
@@ -66,16 +66,22 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService", "Album
         track.artists.splice(index,1)
 ])
 
-app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService",
-  ($scope, $state, $stateParams, AlbumService) ->
+app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "AlbumUploader"
+  ($scope, $state, $stateParams, AlbumService, AlbumUploader) ->
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
     )
 
     $scope.save = () ->
-      $scope.album.put().then(() ->
+      upload().then(() ->
         $state.go("root.albums.show", {"albumId": $stateParams.albumId})
       )
+
+    upload = () ->
+      if $scope.album.file
+        AlbumUploader.editAlbumWithAttachment($scope.album, $stateParams.albumId)
+      else
+        $scope.album.put()
 
     $scope.delete = () ->
       $scope.album.remove().then(() ->
