@@ -50,19 +50,14 @@ angular.module "uTunes"
             console.log("error status: " + status)
           )
 
-      createAlbumWithAttachment = (formData) ->
-        sendPayload(formData, "POST", "/api/albums")
-      editAlbumWithAttachment = (formData, albumId) ->
-        sendPayload(formData, "PUT", "/api/albums/#{albumId}")
-
       listAlbums: () -> AlbumRestangular.all(model).getList()
       getAlbum: (albumId) -> AlbumRestangular.one(model, albumId).get()
       getTracks: (albumId) -> AlbumRestangular.one(model, albumId).getList("tracks")
       getProducers: (albumId) -> AlbumRestangular.one(model, albumId).getList("producers")
-      createAlbum: (album) -> createAlbumWithAttachment(album)
+      createAlbum: (album) -> sendPayload(album, "POST", "/api/albums")
       updateAlbum: (album, albumId) ->
         if album.file
-          editAlbumWithAttachment(album, albumId)
+          sendPayload(album, "PUT", "/api/albums/#{albumId}")
         else
           album.put()
   ])

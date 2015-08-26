@@ -1,24 +1,47 @@
 angular.module "uTunes"
-  .factory("TrackService", ["Restangular",
-    (Restangular) ->
+  .factory("TrackService", ["Restangular", "Upload",
+    (Restangular, Upload) ->
       model = "tracks"
       TrackRestangular = Restangular.withConfig(
         (RestangularConfigurer) ->
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
             # console.log "Request intercepted"
             if (operation == "put" || operation == "post")
-              # console.log "Put/Post"
+              console.log "Put/Post"
+              console.dir elem
               track: elem
             else
               # console.log "Other stuff"
               elem
           )
       )
-      service = TrackRestangular.service(model)
 
-      service.listTracks = () -> TrackRestangular.all(model).getList()
-      service.getTrack = (trackId) -> TrackRestangular.one(model, trackId).get()
-      service.getArtists = (trackId) -> TrackRestangular.one(model, trackId).getList("artists")
+      sendPayload = (formData, method, url) ->
+        options =
+          url: url
+          method: method
+          file: formData.file
+          fields:
+            track:
+              title: formData.title
+        console.log "Uploader"
+        console.dir options.file
 
-      service
+        Upload.upload(options)
+          .success((data, status, headers, config) ->
+            console.log("files " + config.file.name + "uploaded. Response: " + data)
+          )
+          .error((data, status, headers, config) ->
+            console.log("error status: " + status)
+          )
+
+      listTracks: () -> TrackRestangular.all(model).getList()
+      getTrack: (trackId) -> TrackRestangular.one(model, trackId).get()
+      getArtists: (trackId) -> TrackRestangular.one(model, trackId).getList("artists")
+      updateTrack: (track, trackId) ->
+        if track.file
+          sendPayload(track, "PUT", "/api/tracks/#{trackId}")
+        else
+          track.put()
+
   ])

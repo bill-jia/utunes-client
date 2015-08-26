@@ -20,10 +20,9 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
     )
 
     $scope.save = () ->
-      $scope.track.put().then(() ->
-        $state.go("root.tracks.index",{}, {reload: true})
+      TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->
+        $state.go("root.tracks.index", {}, {reload: true})
       )
-
     $scope.delete = () ->
       $scope.track.remove().then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
