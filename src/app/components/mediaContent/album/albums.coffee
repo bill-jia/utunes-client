@@ -31,7 +31,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService", "Album
     $scope.save = () ->
       # console.dir $scope.album
       AlbumUploader.createAlbumWithAttachment($scope.album).then(() ->
-        $state.go("root.albums.index", {}, {reload: true})  
+        $state.go("root.albums.index", {}, {reload: true})
       )
 
 

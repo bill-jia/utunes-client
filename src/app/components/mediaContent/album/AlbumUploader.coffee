@@ -2,12 +2,19 @@ angular.module "uTunes"
   .factory "AlbumUploader", ["Upload", (Upload) ->
 
     sendPayload = (formData, method, url) ->
-      cover_image = formData.cover_image ?[]
+      files = []
+      names = []
+      files.push formData.cover_image
+      names.push formData.cover_image.name
+      for track in formData.tracks
+        files.push track.audio
+        names.push track.track_number
+
       options =
         url: url
         method: method
-        file: cover_image
-        file_form_data_name: cover_image.name? ""
+        file: files
+        fileFormDataName: names
         fields:
           album:
             title: formData.title
@@ -15,7 +22,9 @@ angular.module "uTunes"
             producers: formData.producers
             tracks: formData.tracks
       console.log "Uploader"
-      console.dir formData
+      console.dir options.file
+      console.dir options.fileFormDataName
+
       Upload.upload(options)
         .success((data, status, headers, config) ->
           console.log("files " + config.file.name + "uploaded. Response: " + data)
