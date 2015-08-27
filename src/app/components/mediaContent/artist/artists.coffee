@@ -31,12 +31,12 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
     )
 
     $scope.save = () ->
-      $scope.artist.put().then(() ->
+      ArtistService.updateArtist($scope.artist, $stateParams.artistId).then(() ->
         $state.go("root.artists.show", {"artistId": $stateParams.artistId})
       )
 
     $scope.delete = () ->
-      $scope.artist.remove().then(() ->
+      $scope.artist.remove({delete_associated_tracks: $scope.artist.delete_associated_tracks}).then(() ->
         $state.go("root.artists.index", {}, {reload: true})
       )
 ])

@@ -1,6 +1,6 @@
 angular.module "uTunes"
-  .factory("ArtistService", ["Restangular",
-    (Restangular) ->
+  .factory("ArtistService", ["Restangular", "Upload",
+    (Restangular, Upload) ->
       ArtistRestangular = Restangular.withConfig(
         (RestangularConfigurer) ->
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
@@ -12,12 +12,36 @@ angular.module "uTunes"
           )
       )
       model = "artists"
-      service = ArtistRestangular.service(model)
 
-      service.listArtists = () -> ArtistRestangular.all(model).getList()
-      service.getArtist = (artistId) -> ArtistRestangular.one(model, artistId).get()
-      service.getTracks = (artistId) -> ArtistRestangular.one(model, artistId).getList("tracks")
-      service.getAlbums = (artistId) -> ArtistRestangular.one(model, artistId).getList("albums")
+      sendPayload = (formData, method, url) ->
+        options =
+          url: url
+          method: method
+          file: formData.file
+          fields:
+            artist:
+              name: formData.name
+              class_year: formData.class_year
+              bio: formData.bio
+        console.log "Uploader"
+        console.dir options.file
 
-      service
+        Upload.upload(options)
+          .success((data, status, headers, config) ->
+            console.log("files " + config.file.name + "uploaded. Response: " + data)
+          )
+          .error((data, status, headers, config) ->
+            console.log("error status: " + status)
+          )
+
+      listArtists: () -> ArtistRestangular.all(model).getList()
+      getArtist: (artistId) -> ArtistRestangular.one(model, artistId).get()
+      getTracks: (artistId) -> ArtistRestangular.one(model, artistId).getList("tracks")
+      getAlbums: (artistId) -> ArtistRestangular.one(model, artistId).getList("albums")
+      updateArtist: (artist, artistId) ->
+        if artist.file
+          sendPayload(artist, "PUT", "/api/artists/#{artistId}")
+        else
+          artist.put()
+
   ])

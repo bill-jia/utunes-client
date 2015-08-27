@@ -6,10 +6,13 @@ md-content(layout-padding="" style="padding: 24px;")
 		form(name="edit-producer-form")
 			md-input-container
 				label Name
-				input(id="name" name="name" type="text" ng-model="producer.name" placeholder="{{album.title}}")
+				input(id="name" name="name" type="text" ng-model="producer.name")
 			md-input-container
 				Label Class Year
-				input(id="class-year" name="class_year" type="number" ng-model="producer.class_year" placeholder="{{producer.class_year}}")
+				input(id="class-year" name="class-year" type="number" ng-model="producer.class_year")
+			md-input-container
+				h3 Profile Picture
+				input(id="profile-picture" name = "profile-picture" type="file" ngf-select ng-model="producer.file")		
 			md-input-container
 				label Bio
 				textarea(id="producer-bio" name="bio" type="text" ng-model="producer.bio")

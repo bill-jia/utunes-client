@@ -25,7 +25,7 @@ app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "P
     )
 
     $scope.save = () ->
-      $scope.producer.put().then(() ->
+      ProducerService.updateProducer($scope.producer, $stateParams.producerId).then(() ->
         $state.go("root.producers.show", {"producerId": $stateParams.producerId})
       )
 

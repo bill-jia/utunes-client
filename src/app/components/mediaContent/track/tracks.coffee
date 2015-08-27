@@ -17,16 +17,28 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
     TrackService.getTrack($stateParams.trackId).then((track) ->
       # console.dir track
       $scope.track = track
+      track.artists = TrackService.getArtists(track.id).$object
     )
 
     $scope.save = () ->
       TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
       )
+
     $scope.delete = () ->
       $scope.track.remove().then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
       )
+
+    $scope.removeArtist = (index) ->
+      artist = $scope.track.artists[index]
+      if artist.id
+        artist.remove_association = true
+      else
+        $scope.track.artists.splice(index, 1)
+
+    $scope.addArtist = () ->
+      $scope.track.artists.push({name: "", class_year: ""})
 ])
 
 app.config(["$stateProvider",
