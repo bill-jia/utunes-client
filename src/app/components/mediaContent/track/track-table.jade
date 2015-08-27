@@ -1,16 +1,24 @@
 table
-  //- thead
-  //-   tr
-  //-     th(ng-repeat="header in headers")
+  thead
+    tr
+      th(ng-repeat="header in headers")
+        |{{header}}
   tbody
     tr(ng-repeat="track in tracks")
-      td()
-        |{{track.title}}
-        ul(ng-repeat="artist in track.artists")
-          li
-            a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
-        a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}}
-        audio(controls)
-          source(ng-src="{{track.audio.url}}")
-        a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
-          |Edit Track
+      td(ng-repeat= "header in headers")
+        div(ng-if="header == 'Track Number'")
+          |{{track.track_number}}
+        div(ng-if="header == 'Title'")
+          |{{track.title}}
+        div(ng-if="header == 'Artists'")
+          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
+        div(ng-if="header == 'Album'")
+          a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}}
+        div(ng-if="header == 'Length'")
+          |{{track.length_in_seconds}}
+        div(ng-if="header == 'Audio'")
+          audio(controls)
+            source(ng-src="{{track.audio.url}}")
+        div(ng-if="header == 'Edit'")
+          a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
+            |Edit Track

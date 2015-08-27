@@ -23,6 +23,8 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
       $scope.producers = producers
     )
+
+    $scope.headers = ['Track Number', 'Title', 'Artists', 'Length', 'Audio']
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",

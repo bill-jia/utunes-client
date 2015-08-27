@@ -9,6 +9,8 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
         track.album = AlbumService.getAlbum(track.album_id).$object
         track.artists = TrackService.getArtists(track.id).$object
       )
+
+    $scope.headers = ['Title', 'Artists', 'Album', 'Length', 'Audio', 'Edit']
 ])
 
 app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",
