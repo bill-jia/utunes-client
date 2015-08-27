@@ -1,1 +1,16 @@
-table.track-table(md-colresize)
+table
+  //- thead
+  //-   tr
+  //-     th(ng-repeat="header in headers")
+  tbody
+    tr(ng-repeat="track in tracks")
+      td()
+        |{{track.title}}
+        ul(ng-repeat="artist in track.artists")
+          li
+            a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
+        a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}}
+        audio(controls)
+          source(ng-src="{{track.audio.url}}")
+        a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
+          |Edit Track

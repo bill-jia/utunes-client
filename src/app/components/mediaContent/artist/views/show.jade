@@ -14,10 +14,4 @@ md-content#artist-show(layout-padding="" style="padding: 24px;")
 					{{album.year}}
 	div#artist-tracks
 		h2 Tracks
-		ul(ng-repeat="track in tracks")
-			li
-				|{{track.title}}
-				ul(ng-repeat="artist in track.artists")
-					li
-						a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
-				a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}} 
+		x-track-table(tracks="tracks")
