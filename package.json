@@ -1,7 +1,9 @@
 {
   "name": "uTunes",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "mdi": "^1.2.65"
+  },
   "scripts": {
     "test": "gulp test"
   },

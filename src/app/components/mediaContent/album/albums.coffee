@@ -17,6 +17,8 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
       $scope.tracks = tracks
       for track in $scope.tracks
         track.artists = TrackService.getArtists(track.id).$object
+        track.album = AlbumService.getAlbum(track.album_id).$object
+        console.dir track
     )
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
       $scope.producers = producers
