@@ -2,7 +2,11 @@ table
   thead
     tr
       th(ng-repeat="header in headers")
-        a(href='#'){{header.name}}
+        a(href="#" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
+          i.mdi.mdi-chevron-up(ng-show="reverse && header.field == predicate")
+          i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
+        span(ng-if="!handleSort(header.field)")
+          |{{header.name}}
   tbody
     tr(ng-repeat="track in tracks")
       td(ng-repeat= "header in headers")
