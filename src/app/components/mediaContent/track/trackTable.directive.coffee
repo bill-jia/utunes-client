@@ -6,6 +6,7 @@ app.directive 'trackTable', () ->
     scope:
       tracks: '='
       headers: '='
+      count: '='
     templateUrl: "app/components/mediaContent/track/track-table.html"
     controller: ($scope, $filter, $window) ->
       orderBy = $filter('orderBy')
@@ -35,3 +36,18 @@ app.directive 'trackTable', () ->
 
       orderByAlbum = (track) ->
         track.album.title
+
+      $scope.numberOfPages = () ->
+        Math.ceil($scope.tracks.length/$scope.count)
+
+      $scope.getNumber = (number) ->
+        new Array(number)
+
+      $scope.goToPage = (page) ->
+        $scope.tablePage = page
+
+app.filter('startFrom', () ->
+  (input, start) ->
+    start = +start
+    input.slice start
+)

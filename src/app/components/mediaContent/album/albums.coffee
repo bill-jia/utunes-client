@@ -45,6 +45,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         field: 'audio'
       }
     ]
+    $scope.count=25
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",

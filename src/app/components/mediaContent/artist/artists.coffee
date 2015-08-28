@@ -46,6 +46,7 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
       }
       'Artists', 'Album', 'Length', 'Audio'
     ]
+    $scope.count = 25
 ])
 
 app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService",

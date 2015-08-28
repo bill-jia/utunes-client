@@ -36,6 +36,7 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
         field: 'edit'
       }
     ]
+    $scope.count = 25
 ])
 
 app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",

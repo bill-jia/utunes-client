@@ -10,4 +10,4 @@ md-content#album-show(layout-padding="" style="padding: 24px;")
 				a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}
 	div#album-tracks
 		h2 Tracks
-		x-track-table(tracks="tracks" headers="headers")
+		x-track-table(tracks="tracks" headers="headers" count="count")
