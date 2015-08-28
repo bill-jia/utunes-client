@@ -11,6 +11,7 @@ app.directive 'trackTable', () ->
     controller: ($scope, $filter, $window) ->
       orderBy = $filter('orderBy')
       sortable =   ["track_number", "title", "artists", "album", "length_in_seconds"]
+      # console.dir $scope.tracks
 
       $scope.handleSort = (field) ->
         if (sortable.indexOf(field) > -1)
@@ -45,6 +46,9 @@ app.directive 'trackTable', () ->
 
       $scope.goToPage = (page) ->
         $scope.tablePage = page
+
+      $scope.playTrack = (track, $event) ->
+        alert track.audio.url
 
 app.filter('startFrom', () ->
   (input, start) ->

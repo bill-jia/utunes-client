@@ -8,25 +8,25 @@ table
         span(ng-if="!handleSort(header.field)")
           |{{header.name}}
   tbody
-    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" )
+    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack(track, $event)")
       td(ng-repeat= "header in headers")
         div(ng-if="header.field == 'track_number'")
           |{{track.track_number}}
         div(ng-if="header.field == 'title'")
           |{{track.title}}
         div(ng-if="header.field == 'artists'")
-          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
             span(ng-if=)
             {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
         div(ng-if="header.field == 'album'")
-          a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}}
+          a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
         div(ng-if="header.field == 'length_in_seconds'")
           |{{track.length_in_seconds}}
         div(ng-if="header.field == 'audio'")
           audio(controls)
             source(ng-src="{{track.audio.url}}")
         div(ng-if="header.field == 'edit'")
-          a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
+          a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
             |Edit Track
 .md-table-footer(layout="row")
   span Tracks per page:
@@ -52,4 +52,3 @@ table
       i.mdi.mdi-chevron-right
     md-button.md-primary.md-hue-2(ng-disabled="tablePage==numberOfPages()-1" ng-click="goToPage(numberOfPages-1)")
       i.mdi.mdi-chevron-double-right
-  
