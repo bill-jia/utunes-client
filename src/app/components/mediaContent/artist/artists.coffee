@@ -23,7 +23,29 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
         track.artists = TrackService.getArtists(track.id).$object
     )
 
-    $scope.headers = ['Title', 'Artists', 'Album', 'Length', 'Audio']
+    $scope.headers = [
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Album'
+        field: 'album'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Audio'
+        field: 'audio'
+      }
+      'Artists', 'Album', 'Length', 'Audio'
+    ]
 ])
 
 app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService",

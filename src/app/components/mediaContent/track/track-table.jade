@@ -2,23 +2,25 @@ table
   thead
     tr
       th(ng-repeat="header in headers")
-        |{{header}}
+        a(href='#'){{header.name}}
   tbody
     tr(ng-repeat="track in tracks")
       td(ng-repeat= "header in headers")
-        div(ng-if="header == 'Track Number'")
+        div(ng-if="header.field == 'track_number'")
           |{{track.track_number}}
-        div(ng-if="header == 'Title'")
+        div(ng-if="header.field == 'title'")
           |{{track.title}}
-        div(ng-if="header == 'Artists'")
-          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
-        div(ng-if="header == 'Album'")
+        div(ng-if="header.field == 'artists'")
+          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+            span(ng-if=)
+            {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+        div(ng-if="header.field == 'album'")
           a(ui-sref="root.albums.show({albumId: track.album.id})"){{track.album.title}}
-        div(ng-if="header == 'Length'")
+        div(ng-if="header.field == 'length_in_seconds'")
           |{{track.length_in_seconds}}
-        div(ng-if="header == 'Audio'")
+        div(ng-if="header.field == 'audio'")
           audio(controls)
             source(ng-src="{{track.audio.url}}")
-        div(ng-if="header == 'Edit'")
+        div(ng-if="header.field == 'edit'")
           a.btn(ui-sref="root.tracks.edit({trackId:track.id})")
             |Edit Track

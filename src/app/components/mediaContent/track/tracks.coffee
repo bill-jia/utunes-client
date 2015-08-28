@@ -10,7 +10,32 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
         track.artists = TrackService.getArtists(track.id).$object
       )
 
-    $scope.headers = ['Title', 'Artists', 'Album', 'Length', 'Audio', 'Edit']
+    $scope.headers = [
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Album'
+        field: 'album'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Audio'
+        field: 'audio'
+      }
+      {
+        name: 'Edit'
+        field: 'edit'
+      }
+    ]
 ])
 
 app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",

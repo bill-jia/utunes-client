@@ -18,13 +18,33 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
       for track in $scope.tracks
         track.artists = TrackService.getArtists(track.id).$object
         track.album = AlbumService.getAlbum(track.album_id).$object
-        console.dir track
     )
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
       $scope.producers = producers
     )
 
-    $scope.headers = ['Track Number', 'Title', 'Artists', 'Length', 'Audio']
+    $scope.headers = [
+      {
+        name: 'Track Number'
+        field: 'track_number'
+      }
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Audio'
+        field: 'audio'
+      }
+    ]
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
