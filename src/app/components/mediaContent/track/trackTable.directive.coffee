@@ -8,7 +8,7 @@ app.directive 'trackTable', () ->
       headers: '='
       count: '='
     templateUrl: "app/components/mediaContent/track/track-table.html"
-    controller: ($scope, $filter, $window) ->
+    controller: ($scope, $filter, $window, onSelectTrack) ->
       orderBy = $filter('orderBy')
       sortable =   ["track_number", "title", "artists", "album", "length_in_seconds"]
       # console.dir $scope.tracks
@@ -48,7 +48,7 @@ app.directive 'trackTable', () ->
         $scope.tablePage = page
 
       $scope.playTrack = (track, $event) ->
-        alert track.audio.url
+        onSelectTrack.broadcast(track.audio.url)
 
 app.filter('startFrom', () ->
   (input, start) ->
