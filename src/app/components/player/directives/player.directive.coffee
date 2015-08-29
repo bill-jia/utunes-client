@@ -3,10 +3,10 @@ angular.module "uTunes"
     directive =
       restrict: 'E'
       scope: {}
-      templateUrl: 'app/components/player/player.html'
+      templateUrl: 'app/components/player/views/player.html'
       controller: ($scope, $element) ->
         audio = $element.find("audio")
-        
+
         $scope.$on("selecttrack", (e, audioUrl)->
           console.log "Received"
           console.log audioUrl
