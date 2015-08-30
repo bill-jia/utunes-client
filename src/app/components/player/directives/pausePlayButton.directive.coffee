@@ -3,6 +3,15 @@ angular.module "uTunes"
     directive =
       require: "^audioPlayer"
       restrict: 'E'
-      scope: {}
+      scope:
+        playing: "="
       templateUrl: 'app/components/player/views/pause-play-button.html'
       link: (scope, element, attrs, playerController) ->
+        scope.pausePlay = () ->
+          playerController.pausePlay()
+
+        element.on "mouseover", (e) ->
+          element.addClass "active"
+
+        element.on "mouseleave", (e) ->
+          element.removeClass "active"

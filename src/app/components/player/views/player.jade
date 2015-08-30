@@ -2,14 +2,15 @@ md-content
   audio(controls)
     source(ng-src="{{source}}")
 
+  p The controls go here
   div.md-player-controls(layout="row")
     rewind-button
-    pause-play-button
+    pause-play-button(playing="playing")
     fast-forward-button
     current-time
     scrub-bar
     scrub-bar-current-time
     total-time
-    shuffle-button
-    loop-button
+    shuffle-button(shuffle="shuffle")
+    repeat-button(repeat="repeat")
     volume-bar
