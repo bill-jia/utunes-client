@@ -1,5 +1,5 @@
 angular.module "uTunes"
-  .directive 'audioPlayer', ->
+  .directive 'audioPlayer', ["$interval", ($interval) ->
     directive =
       restrict: 'E'
       scope: {}
@@ -11,6 +11,12 @@ angular.module "uTunes"
         $scope.repeat = "off"
         $scope.volume = 0.5
         $scope.muted = false
+        $scope.currentTime = 0
+
+        timeoutId = $interval(() ->
+          $scope.currentTime = $scope.audio.currentTime
+          # console.log $scope.currentTime
+        , 250)
 
         $scope.$on("selecttrack", (e, audioUrl)->
           console.log "Received"
@@ -48,3 +54,8 @@ angular.module "uTunes"
           $scope.audio.volume = volume
           $scope.volume = volume
           console.log "player volume = " + $scope.volume
+
+        setPosition: (position) ->
+          $scope.audio.currentTime = position*$scope.audio.duration
+          $scope.currentTime = $scope.audio.currentTime
+  ]

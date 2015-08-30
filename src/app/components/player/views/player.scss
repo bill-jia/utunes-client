@@ -42,7 +42,7 @@ $playhead-size: 20px;
 
 #playhead {
   font-size: $playhead-size;
-  top: ($icon-size - $playhead-size + 4)/2;
+  top: ($icon-size - $playhead-size + 2)/2;
   left: 0 - $playhead-size/2;
   position: absolute;
   z-index: 100;
@@ -73,7 +73,7 @@ $playhead-size: 20px;
 
 #volumehead {
   font-size: $playhead-size;
-  top: ($icon-size - $playhead-size + 4)/2;
+  top: ($icon-size - $playhead-size + 2)/2;
   left: 50 - $playhead-size/2;
   position: absolute;
   z-index: 100;

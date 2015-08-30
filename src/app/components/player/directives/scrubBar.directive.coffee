@@ -10,6 +10,9 @@ angular.module "uTunes"
         playhead = element.find("#playhead")
         halfPlayheadSize =  parseInt(playhead.css("font-size"), 10)/2
 
+        setPosition = (position) ->
+          scope.$apply(playerController.setPosition(position))
+
         totalTime.on "click", (e) ->
           currentTimeline.css({
             width: e.pageX - currentTimeline.offset().left
@@ -17,6 +20,8 @@ angular.module "uTunes"
           playhead.css({
             left: e.pageX - currentTimeline.offset().left - halfPlayheadSize
           })
+          setPosition(currentTimeline.width()/totalTime.width())
+
 
         playhead.on "mousedown", (e) ->
           playhead.addClass "active"
@@ -39,4 +44,17 @@ angular.module "uTunes"
               Math.min(e.pageX - currentTimeline.offset().left - halfPlayheadSize, totalTime.width() - halfPlayheadSize), -halfPlayheadSize
             )
           })
+          setPosition(currentTimeline.width()/totalTime.width())
+
+        scope.$watch(
+          (scope) -> scope.currentTime,
+          (newValue) ->
+            console.log newValue
+            currentTimeline.css({
+              width: (newValue/scope.audio.duration)*totalTime.width()
+            })
+            playhead.css({
+              left: (newValue/scope.audio.duration)*totalTime.width() - halfPlayheadSize
+            })
+        )
   ]
