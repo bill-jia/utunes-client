@@ -9,6 +9,8 @@ angular.module "uTunes"
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
+        $scope.volume = 0.5
+        $scope.muted = false
 
         $scope.$on("selecttrack", (e, audioUrl)->
           console.log "Received"
@@ -23,6 +25,9 @@ angular.module "uTunes"
         setShuffle: () ->
           $scope.shuffle = !$scope.shuffle
 
+        changeMuteState: () ->
+          $scope.muted = !$scope.muted
+
         changeRepeatState: () ->
           if $scope.repeat == "off"
             $scope.repeat = "on"
@@ -30,3 +35,7 @@ angular.module "uTunes"
             $scope.repeat = "once"
           else if $scope.repeat == "once"
             $scope.repeat = "off"
+
+        setVolume: (volume) ->
+          $scope.volume = volume
+          console.log "player volume = " + $scope.volume

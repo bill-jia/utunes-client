@@ -1,6 +1,8 @@
-.md-player-controls {
-  font-size: 32px;
+$icon-size: 32px;
 
+.md-player-controls {
+  font-size: $icon-size;
+  positon: fixed;
 }
 
 .md-player-controls .active {
@@ -13,4 +15,66 @@
 
 .md-player-controls {
   color: #212121;
+}
+
+.timeline {
+  margin-top: $icon-size/2;
+  width: 400px;
+  height: 10px;
+  border-radius: 7px;
+  background-color: #bdbdbd;
+}
+
+.timeline-current {
+  background-color: #2979ff;
+  height: 10px;
+  border-radius: 7px;
+  width: 0px;
+}
+
+#scrub-bar {
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+$playhead-size: 20px;
+
+#playhead {
+  font-size: $playhead-size;
+  top: ($icon-size - $playhead-size + 4)/2;
+  left: 0 - $playhead-size/2;
+  position: absolute;
+  z-index: 100;
+}
+
+#volume-controls {}
+
+#volume-bar {
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.volume {
+  margin-top: $icon-size/2;
+  width: 100px;
+  height: 10px;
+  border-radius: 7px;
+  background-color: #bdbdbd;
+}
+
+.volume-current {
+  background-color: #2979ff;
+  height: 10px;
+  width: 50px;
+  border-radius: 7px;
+}
+
+#volumehead {
+  font-size: $playhead-size;
+  top: ($icon-size - $playhead-size + 4)/2;
+  left: 50 - $playhead-size/2;
+  position: absolute;
+  z-index: 100;
 }

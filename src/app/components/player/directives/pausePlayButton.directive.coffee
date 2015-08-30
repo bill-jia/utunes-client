@@ -3,8 +3,6 @@ angular.module "uTunes"
     directive =
       require: "^audioPlayer"
       restrict: 'E'
-      scope:
-        playing: "="
       templateUrl: 'app/components/player/views/pause-play-button.html'
       link: (scope, element, attrs, playerController) ->
         scope.pausePlay = () ->
