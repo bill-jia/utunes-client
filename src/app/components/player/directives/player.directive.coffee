@@ -5,7 +5,7 @@ angular.module "uTunes"
       scope: {}
       templateUrl: 'app/components/player/views/player.html'
       controller: ($scope, $element) ->
-        audio = $element.find("audio")
+        $scope.audio = $element.find("audio")[0]
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
@@ -16,17 +16,25 @@ angular.module "uTunes"
           console.log "Received"
           console.log audioUrl
           $scope.source = audioUrl
-          audio.load()
+          $scope.audio.load()
+          $scope.audio.volume = $scope.volume
+          $scope.audio.muted = $scope.muted
         )
 
         pausePlay: () ->
-          $scope.playing = !$scope.playing
+          if $scope.audio.readyState == 3 || $scope.audio.readyState == 4
+            if $scope.playing
+              $scope.audio.pause()
+            else
+              $scope.audio.play()
+            $scope.playing = !$scope.playing
 
         setShuffle: () ->
           $scope.shuffle = !$scope.shuffle
 
         changeMuteState: () ->
           $scope.muted = !$scope.muted
+          $scope.audio.muted = $scope.muted
 
         changeRepeatState: () ->
           if $scope.repeat == "off"
@@ -37,5 +45,6 @@ angular.module "uTunes"
             $scope.repeat = "off"
 
         setVolume: (volume) ->
+          $scope.audio.volume = volume
           $scope.volume = volume
           console.log "player volume = " + $scope.volume
