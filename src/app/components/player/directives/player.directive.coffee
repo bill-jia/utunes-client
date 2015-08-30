@@ -23,6 +23,7 @@ angular.module "uTunes"
           # console.log audioUrl
           $scope.source = audioUrl
           $scope.audio.load()
+          $scope.audio.autoplay = true
           $scope.audio.volume = $scope.volume
           $scope.audio.muted = $scope.muted
         )

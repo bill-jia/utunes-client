@@ -13,3 +13,7 @@ angular.module "uTunes"
 
         element.on "mouseleave", (e) ->
           element.removeClass "active"
+
+        scope.audio.onplay = (e) ->
+          console.log "Playing"
+          playerController.pausePlay()
