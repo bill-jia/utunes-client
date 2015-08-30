@@ -19,8 +19,8 @@ angular.module "uTunes"
         , 250)
 
         $scope.$on("selecttrack", (e, audioUrl)->
-          console.log "Received"
-          console.log audioUrl
+          # console.log "Received"
+          # console.log audioUrl
           $scope.source = audioUrl
           $scope.audio.load()
           $scope.audio.volume = $scope.volume
@@ -53,7 +53,7 @@ angular.module "uTunes"
         setVolume: (volume) ->
           $scope.audio.volume = volume
           $scope.volume = volume
-          console.log "player volume = " + $scope.volume
+          # console.log "player volume = " + $scope.volume
 
         setPosition: (position) ->
           $scope.audio.currentTime = position*$scope.audio.duration

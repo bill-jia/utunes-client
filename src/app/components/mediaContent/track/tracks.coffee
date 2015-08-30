@@ -28,10 +28,6 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
         field: 'length_in_seconds'
       }
       {
-        name: 'Audio'
-        field: 'audio'
-      }
-      {
         name: 'Edit'
         field: 'edit'
       }

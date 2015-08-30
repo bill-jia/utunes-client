@@ -40,10 +40,6 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         name: 'Length'
         field: 'length_in_seconds'
       }
-      {
-        name: 'Audio'
-        field: 'audio'
-      }
     ]
     $scope.count=25
 ])

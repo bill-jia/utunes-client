@@ -16,15 +16,11 @@ table
           |{{track.title}}
         div(ng-if="header.field == 'artists'")
           a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
-            span(ng-if=)
             {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
         div(ng-if="header.field == 'album'")
           a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
         div(ng-if="header.field == 'length_in_seconds'")
           |{{track.length_in_seconds}}
-        div(ng-if="header.field == 'audio'")
-          audio(controls)
-            source(ng-src="{{track.audio.url}}")
         div(ng-if="header.field == 'edit'")
           a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
             |Edit Track

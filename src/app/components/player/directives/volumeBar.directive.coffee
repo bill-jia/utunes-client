@@ -21,7 +21,7 @@ angular.module "uTunes"
 
         setVolume = (volume) ->
           scope.$apply(playerController.setVolume(volume))
-          console.log "Control volume" + scope.volume
+          # console.log "Control volume" + scope.volume
 
         volumeBar.on "click", (e) ->
           currentVolumeBar.css({

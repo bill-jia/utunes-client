@@ -49,7 +49,7 @@ angular.module "uTunes"
         scope.$watch(
           (scope) -> scope.currentTime,
           (newValue) ->
-            console.log newValue
+            # console.log newValue
             currentTimeline.css({
               width: (newValue/scope.audio.duration)*totalTime.width()
             })
