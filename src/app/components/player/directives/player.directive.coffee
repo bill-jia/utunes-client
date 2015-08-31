@@ -44,6 +44,8 @@ angular.module "uTunes"
           $scope.duration = $scope.audio.duration
           updateCanFastForward()
           updateCanRewind()
+          console.dir $scope.queue
+          console.dir $scope.queue[index]
 
         updateCanFastForward = () ->
           if $scope.repeat == "off" && ($scope.currentIndex+1)%$scope.queue.length == $scope.stopIndex
@@ -62,7 +64,7 @@ angular.module "uTunes"
             $scope.audio.load()
           else
             if $scope.canFastForward
-              loadTrack(($scope.currentIndex+1)%$scope.queue.length)
+              $scope.$apply(loadTrack(($scope.currentIndex+1)%$scope.queue.length))
 
         shuffle = (array) ->
           arrayCopy = array.slice(1)
