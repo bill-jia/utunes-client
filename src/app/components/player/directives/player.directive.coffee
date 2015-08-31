@@ -15,6 +15,7 @@ angular.module "uTunes"
         $scope.stopIndex = 0
         $scope.canRewind = false
         $scope.canFastForward = true
+        $scope.duration = 0
 
         $scope.audio = $element.find("audio")[0]
         $scope.audio.autoplay = true
@@ -32,10 +33,17 @@ angular.module "uTunes"
             $scope.queue = $scope.shuffledTrackList
           else
             $scope.queue = $scope.trackList
-          $scope.source = $scope.queue[$scope.currentIndex].audio.url
-          $scope.audio.load()
-
+          loadTrack(0)
         )
+
+        loadTrack = (index) ->
+          $scope.currentIndex = index
+          $scope.source = $scope.queue[index].audio.url
+          $scope.currentTime = 0
+          $scope.audio.load()
+          $scope.duration = $scope.audio.duration
+          updateCanFastForward()
+          updateCanRewind()
 
         updateCanFastForward = () ->
           if $scope.repeat == "off" && ($scope.currentIndex+1)%$scope.queue.length == $scope.stopIndex
@@ -54,11 +62,7 @@ angular.module "uTunes"
             $scope.audio.load()
           else
             if $scope.canFastForward
-              $scope.$apply($scope.currentIndex= ($scope.currentIndex+1)%$scope.queue.length)
-              $scope.$apply($scope.source = $scope.queue[$scope.currentIndex].audio.url)
-              $scope.audio.load()
-              updateCanFastForward()
-              updateCanRewind()
+              loadTrack(($scope.currentIndex+1)%$scope.queue.length)
 
         shuffle = (array) ->
           arrayCopy = array.slice(1)
@@ -112,17 +116,11 @@ angular.module "uTunes"
 
         fastForward: () ->
           if $scope.canFastForward
-            $scope.currentIndex= ($scope.currentIndex+1)%$scope.queue.length
-            updateCanFastForward()
-            updateCanRewind()
-            $scope.source = $scope.queue[$scope.currentIndex].audio.url
-            $scope.audio.load()
+            loadTrack(($scope.currentIndex+1)%$scope.queue.length)
+
 
         rewind: () ->
           if $scope.canRewind
-            $scope.currentIndex = ($scope.queue.length + $scope.currentIndex - 1)%$scope.queue.length
-            updateCanRewind()
-            updateCanFastForward()
-            $scope.source = $scope.queue[$scope.currentIndex].audio.url
-            $scope.audio.load()
+            loadTrack(($scope.queue.length + $scope.currentIndex - 1)%$scope.queue.length)
+
   ]
