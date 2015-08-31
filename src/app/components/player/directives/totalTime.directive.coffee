@@ -3,6 +3,5 @@ angular.module "uTunes"
     directive =
       require: "^audioPlayer"
       restrict: 'E'
-      scope: {}
       templateUrl: 'app/components/player/views/total-time.html'
-      link: (scope, element, attrs, playerController) ->
+      link: (scope, element, attrs, playerController) -> 

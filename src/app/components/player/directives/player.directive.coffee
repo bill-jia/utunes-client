@@ -41,7 +41,6 @@ angular.module "uTunes"
           $scope.source = $scope.queue[index].audio.url
           $scope.currentTime = 0
           $scope.audio.load()
-          $scope.duration = $scope.audio.duration
           updateCanFastForward()
           updateCanRewind()
           console.dir $scope.queue
@@ -59,13 +58,6 @@ angular.module "uTunes"
           else
             $scope.canRewind = true
 
-        $scope.audio.onended = (e) ->
-          if $scope.repeat == "once"
-            $scope.audio.load()
-          else
-            if $scope.canFastForward
-              $scope.$apply(loadTrack(($scope.currentIndex+1)%$scope.queue.length))
-
         shuffle = (array) ->
           arrayCopy = array.slice(1)
           shuffledArray = []
@@ -75,6 +67,17 @@ angular.module "uTunes"
             shuffledArray.push arrayCopy[j]
             arrayCopy.splice(j, 1)
           shuffledArray
+
+        $scope.audio.onended = (e) ->
+          if $scope.repeat == "once"
+            $scope.audio.load()
+          else
+            if $scope.canFastForward
+              $scope.$apply(loadTrack(($scope.currentIndex+1)%$scope.queue.length))
+
+        $scope.audio.onloadedmetadata = (e) ->
+          $scope.$apply($scope.duration = $scope.audio.duration)
+          console.log $scope.duration
 
         pausePlay: () ->
           if $scope.audio.readyState == 3 || $scope.audio.readyState == 4
@@ -113,6 +116,7 @@ angular.module "uTunes"
           $scope.volume = volume
 
         setPosition: (position) ->
+          console.log $scope.audio.duration
           $scope.audio.currentTime = position*$scope.audio.duration
           $scope.currentTime = $scope.audio.currentTime
 

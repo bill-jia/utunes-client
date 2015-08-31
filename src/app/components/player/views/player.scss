@@ -1,4 +1,7 @@
 $icon-size: 32px;
+$playhead-size: 20px;
+$time-size: 20px;
+$spacing: 20px;
 
 .md-player-controls {
   font-size: $icon-size;
@@ -34,11 +37,9 @@ $icon-size: 32px;
 
 #scrub-bar {
   position: relative;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: $spacing;
+  margin-right: $spacing;
 }
-
-$playhead-size: 20px;
 
 #playhead {
   font-size: $playhead-size;
@@ -52,8 +53,8 @@ $playhead-size: 20px;
 
 #volume-bar {
   position: relative;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: $spacing;
+  margin-right: $spacing;
 }
 
 .volume {
@@ -77,4 +78,15 @@ $playhead-size: 20px;
   left: 50 - $playhead-size/2;
   position: absolute;
   z-index: 100;
+}
+
+.time {
+  font-size: $time-size;
+  top: ($icon-size - $time-size + 2)/2;
+  position: relative;
+  width: 60px;
+}
+
+#current-time {
+  margin-left: $spacing;
 }
