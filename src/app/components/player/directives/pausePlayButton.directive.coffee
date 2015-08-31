@@ -15,5 +15,5 @@ angular.module "uTunes"
           element.removeClass "active"
 
         scope.audio.onplay = (e) ->
-          console.log "Playing"
-          playerController.pausePlay()
+          if !scope.playing
+            playerController.pausePlay()

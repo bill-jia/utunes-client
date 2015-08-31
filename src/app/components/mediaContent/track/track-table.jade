@@ -8,7 +8,7 @@ table
         span(ng-if="!handleSort(header.field)")
           |{{header.name}}
   tbody
-    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack(track, $event)")
+    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)")
       td(ng-repeat= "header in headers")
         div(ng-if="header.field == 'track_number'")
           |{{track.track_number}}

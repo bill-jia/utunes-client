@@ -5,28 +5,70 @@ angular.module "uTunes"
       scope: {}
       templateUrl: 'app/components/player/views/player.html'
       controller: ($scope, $element) ->
-        $scope.audio = $element.find("audio")[0]
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
         $scope.volume = 0.5
         $scope.muted = false
         $scope.currentTime = 0
+        $scope.currentIndex = 0
+        $scope.stopIndex = 0
+        $scope.canRewind = false
+        $scope.canFastForward = true
+
+        $scope.audio = $element.find("audio")[0]
+        $scope.audio.autoplay = true
+        $scope.audio.volume = $scope.volume
+        $scope.audio.muted = $scope.muted
 
         timeoutId = $interval(() ->
           $scope.currentTime = $scope.audio.currentTime
-          # console.log $scope.currentTime
         , 250)
 
-        $scope.$on("selecttrack", (e, audioUrl)->
-          # console.log "Received"
-          # console.log audioUrl
-          $scope.source = audioUrl
+        $scope.$on("selecttrack", (e, tracks)->
+          $scope.trackList = tracks
+          $scope.shuffledTrackList = shuffle($scope.trackList)
+          if $scope.shuffle
+            $scope.queue = $scope.shuffledTrackList
+          else
+            $scope.queue = $scope.trackList
+          $scope.source = $scope.queue[$scope.currentIndex].audio.url
           $scope.audio.load()
-          $scope.audio.autoplay = true
-          $scope.audio.volume = $scope.volume
-          $scope.audio.muted = $scope.muted
+
         )
+
+        updateCanFastForward = () ->
+          if $scope.repeat == "off" && ($scope.currentIndex+1)%$scope.queue.length == $scope.stopIndex
+            $scope.canFastForward = false
+          else
+            $scope.canFastForward = true
+
+        updateCanRewind = () ->
+          if $scope.repeat == "off" && $scope.currentIndex == $scope.stopIndex
+            $scope.canRewind = false
+          else
+            $scope.canRewind = true
+
+        $scope.audio.onended = (e) ->
+          if $scope.repeat == "once"
+            $scope.audio.load()
+          else
+            if $scope.canFastForward
+              $scope.$apply($scope.currentIndex= ($scope.currentIndex+1)%$scope.queue.length)
+              $scope.$apply($scope.source = $scope.queue[$scope.currentIndex].audio.url)
+              $scope.audio.load()
+              updateCanFastForward()
+              updateCanRewind()
+
+        shuffle = (array) ->
+          arrayCopy = array.slice(1)
+          shuffledArray = []
+          shuffledArray.push array[0]
+          for i in [array.length-1..0]
+            j = Math.floor(Math.random()*i)
+            shuffledArray.push arrayCopy[j]
+            arrayCopy.splice(j, 1)
+          shuffledArray
 
         pausePlay: () ->
           if $scope.audio.readyState == 3 || $scope.audio.readyState == 4
@@ -38,6 +80,13 @@ angular.module "uTunes"
 
         setShuffle: () ->
           $scope.shuffle = !$scope.shuffle
+          currentTrack = $scope.queue[$scope.currentIndex]
+          if $scope.shuffle
+            $scope.queue = $scope.shuffledTrackList
+          else
+            $scope.queue = $scope.trackList
+          $scope.currentIndex = $scope.queue.indexOf(currentTrack)
+          $scope.stopIndex = $scope.currentIndex
 
         changeMuteState: () ->
           $scope.muted = !$scope.muted
@@ -50,13 +99,30 @@ angular.module "uTunes"
             $scope.repeat = "once"
           else if $scope.repeat == "once"
             $scope.repeat = "off"
+          updateCanFastForward()
+          updateCanRewind()
 
         setVolume: (volume) ->
           $scope.audio.volume = volume
           $scope.volume = volume
-          # console.log "player volume = " + $scope.volume
 
         setPosition: (position) ->
           $scope.audio.currentTime = position*$scope.audio.duration
           $scope.currentTime = $scope.audio.currentTime
+
+        fastForward: () ->
+          if $scope.canFastForward
+            $scope.currentIndex= ($scope.currentIndex+1)%$scope.queue.length
+            updateCanFastForward()
+            updateCanRewind()
+            $scope.source = $scope.queue[$scope.currentIndex].audio.url
+            $scope.audio.load()
+
+        rewind: () ->
+          if $scope.canRewind
+            $scope.currentIndex = ($scope.queue.length + $scope.currentIndex - 1)%$scope.queue.length
+            updateCanRewind()
+            updateCanFastForward()
+            $scope.source = $scope.queue[$scope.currentIndex].audio.url
+            $scope.audio.load()
   ]

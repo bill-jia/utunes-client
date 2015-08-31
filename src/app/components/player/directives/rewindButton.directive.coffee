@@ -3,9 +3,11 @@ angular.module "uTunes"
     directive =
       require: "^audioPlayer"
       restrict: 'E'
-      scope: {}
       templateUrl: 'app/components/player/views/rewind-button.html'
       link: (scope, element, attrs, playerController) ->
+        scope.rewind = () ->
+          playerController.rewind()
+          
         element.on "mouseover", (e) ->
           element.addClass "active"
 

@@ -3,9 +3,10 @@ angular.module "uTunes"
     directive =
       require: "^audioPlayer"
       restrict: 'E'
-      scope: {}
       templateUrl: 'app/components/player/views/fast-forward-button.html'
       link: (scope, element, attrs, playerController) ->
+        scope.fastForward = () ->
+          playerController.fastForward()
 
         element.on "mouseover", (e) ->
           element.addClass "active"
