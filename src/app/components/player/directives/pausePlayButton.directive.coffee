@@ -8,10 +8,10 @@ angular.module "uTunes"
         scope.pausePlay = () ->
           playerController.pausePlay()
 
-        element.on "mouseover", (e) ->
+        element.bind "mouseover", (e) ->
           element.addClass "active"
 
-        element.on "mouseleave", (e) ->
+        element.bind "mouseleave", (e) ->
           element.removeClass "active"
 
         scope.audio.onplay = (e) ->

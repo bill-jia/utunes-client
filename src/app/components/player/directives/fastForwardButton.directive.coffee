@@ -8,8 +8,8 @@ angular.module "uTunes"
         scope.fastForward = () ->
           playerController.fastForward()
 
-        element.on "mouseover", (e) ->
+        element.bind "mouseover", (e) ->
           element.addClass "active"
 
-        element.on "mouseleave", (e) ->
+        element.bind "mouseleave", (e) ->
           element.removeClass "active"

@@ -13,7 +13,7 @@ angular.module "uTunes"
         setPosition = (position) ->
           scope.$apply(playerController.setPosition(position))
 
-        totalTime.on "click", (e) ->
+        totalTime.bind "click", (e) ->
           currentTimeline.css({
             width: e.pageX - currentTimeline.offset().left
           })
@@ -23,12 +23,12 @@ angular.module "uTunes"
           setPosition(currentTimeline.width()/totalTime.width())
 
 
-        playhead.on "mousedown", (e) ->
+        playhead.bind "mousedown", (e) ->
           playhead.addClass "active"
           $document.on 'mousemove', mousemove
           $document.on 'mouseup', mouseup
 
-        $document.on "mouseup", (e) ->
+        $document.bind "mouseup", (e) ->
           playhead.removeClass "active"
 
         mouseup = () ->

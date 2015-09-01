@@ -11,19 +11,19 @@ angular.module "uTunes"
         volumeHead = element.find("#volumehead")
         halfVolumeheadSize = parseInt(volumeHead.css("font-size"), 10)/2
 
-        icon.on "mouseover", (e) ->
+        icon.bind "mouseover", (e) ->
           icon.addClass "active"
-        icon.on "mouseleave", (e) ->
+        icon.bind "mouseleave", (e) ->
           icon.removeClass "active"
 
-        icon.on "click", (e) ->
+        icon.bind "click", (e) ->
           scope.$apply(playerController.changeMuteState())
 
         setVolume = (volume) ->
           scope.$apply(playerController.setVolume(volume))
           # console.log "Control volume" + scope.volume
 
-        volumeBar.on "click", (e) ->
+        volumeBar.bind "click", (e) ->
           currentVolumeBar.css({
             width: e.pageX - currentVolumeBar.offset().left
           })
@@ -32,12 +32,12 @@ angular.module "uTunes"
           })
           setVolume(currentVolumeBar.width()/volumeBar.width())
 
-        volumeHead.on "mousedown", (e) ->
+        volumeHead.bind "mousedown", (e) ->
           volumeHead.addClass "active"
           $document.on 'mousemove', mousemove
           $document.on 'mouseup', mouseup
 
-        $document.on "mouseup", (e) ->
+        $document.bind "mouseup", (e) ->
           volumeHead.removeClass "active"
 
         mouseup = () ->

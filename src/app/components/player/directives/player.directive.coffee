@@ -14,7 +14,7 @@ angular.module "uTunes"
         $scope.currentIndex = 0
         $scope.stopIndex = 0
         $scope.canRewind = false
-        $scope.canFastForward = true
+        $scope.canFastForward = false
         $scope.duration = 0
 
         $scope.audio = $element.find("audio")[0]
