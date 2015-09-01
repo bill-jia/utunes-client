@@ -4,7 +4,7 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {}
       templateUrl: 'app/components/player/views/player.html'
-      controller: ($scope, $element) ->
+      controller: ($scope, $element, onTrackPlaying) ->
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
@@ -43,8 +43,7 @@ angular.module "uTunes"
           $scope.audio.load()
           updateCanFastForward()
           updateCanRewind()
-          console.dir $scope.queue
-          console.dir $scope.queue[index]
+          onTrackPlaying.broadcast($scope.queue[index])
 
         updateCanFastForward = () ->
           if $scope.repeat == "off" && ($scope.currentIndex+1)%$scope.queue.length == $scope.stopIndex
@@ -77,7 +76,6 @@ angular.module "uTunes"
 
         $scope.audio.onloadedmetadata = (e) ->
           $scope.$apply($scope.duration = $scope.audio.duration)
-          console.log $scope.duration
 
         pausePlay: () ->
           if $scope.audio.readyState == 3 || $scope.audio.readyState == 4
@@ -116,7 +114,6 @@ angular.module "uTunes"
           $scope.volume = volume
 
         setPosition: (position) ->
-          console.log $scope.audio.duration
           $scope.audio.currentTime = position*$scope.audio.duration
           $scope.currentTime = $scope.audio.currentTime
 

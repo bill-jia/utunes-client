@@ -5,3 +5,12 @@ md-sidenav.md-sidenav-left.md-whiteframe-z5(layout="column" md-component-id="lef
 		md-button.side-button(ui-sref=".playlists" flex) Playlists
 		md-button.side-button(ui-sref=".producers.index" flex) Producers
 		md-button.side-button(ui-sref=".tracks.index" flex) Tracks 
+	div#now-playing(layout="row")
+		img(ng-src="{{track.album.cover_image.thumb.url}}")
+		div(layout="column")
+			div.scroll-box
+				div.scroll-text {{track.title}}
+			div.scroll-box
+				div.scroll-text
+					a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+						|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}

@@ -10,4 +10,11 @@ app.factory("onSelectTrack", ["$rootScope",
         for i in [0..index-1]
           processedTracks.push tracks[i]
       $rootScope.$broadcast("selecttrack", processedTracks)
+
+])
+
+app.factory("onTrackPlaying", ["$rootScope",
+  ($rootScope) ->
+    broadcast: (track) ->
+      $rootScope.$broadcast("trackplaying", track)
 ])

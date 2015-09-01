@@ -11,7 +11,6 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
   ($scope, $stateParams, AlbumService, TrackService) ->
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
-      console.dir album
       $scope.album = album
     )
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->
