@@ -1,9 +1,10 @@
 app = angular.module "uTunes"
 
-app.controller("ArtistIndexController", ["$scope", "ArtistService",
-  ($scope, ArtistService) ->
+app.controller("ArtistIndexController", ["$scope", "ArtistService", "onElementsLoaded",
+  ($scope, ArtistService, onElementsLoaded) ->
     ArtistService.listArtists().then((artists) ->
-      $scope.artists = artists
+      $scope.artists = artists.plain()
+      onElementsLoaded.broadcast()
     )
 ])
 
