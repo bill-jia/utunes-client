@@ -7,14 +7,15 @@ app.controller("ArtistIndexController", ["$scope", "ArtistService",
     )
 ])
 
-app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService", "TrackService", "AlbumService",
-  ($scope, $stateParams, ArtistService, TrackService, AlbumService) ->
+app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService", "TrackService", "AlbumService", "onElementsLoaded"
+  ($scope, $stateParams, ArtistService, TrackService, AlbumService, onElementsLoaded) ->
 
     ArtistService.getArtist($stateParams.artistId).then((artist) ->
       $scope.artist = artist
     )
     ArtistService.getAlbums($stateParams.artistId).then((albums) ->
-      $scope.albums = albums
+      $scope.albums = albums.plain()
+      onElementsLoaded.broadcast()
     )
     ArtistService.getTracks($stateParams.artistId).then((tracks) ->
       $scope.tracks = tracks
