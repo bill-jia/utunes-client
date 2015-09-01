@@ -6,7 +6,7 @@ md-content#artist-show(layout-padding="" style="padding: 24px;")
 	img(ng-src="{{artist.profile_picture.large.url}}")
 	div#artist-albums
 		h2 Albums
-		grid-list
+		grid-list(items="albums")
 	div#artist-tracks
 		h2 Tracks
 		x-track-table(tracks="tracks" headers="headers" count="count")

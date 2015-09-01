@@ -2,11 +2,11 @@ angular.module "uTunes"
   .directive 'gridList', () ->
     directive =
       restrict: 'E'
+      scope: {
+        items: "="
+      }
       templateUrl: 'app/components/mediaContent/gridList/grid-list.html'
-      controller: ($scope, $element) ->
-
-        #
-        # console.dir $scope.items[0]
+      link: (scope, element, attrs) ->
         buildGridModel = (items) ->
           tiles = []
           for item in items
@@ -31,9 +31,12 @@ angular.module "uTunes"
             tiles.push tile
 
           return tiles
-        $scope.$on "elementsloaded", () ->
-          console.log "Elements received"
-          $scope.items = if $scope.albums then $scope.albums else $scope.artists
-          console.dir $scope.items
-          $scope.tiles = buildGridModel($scope.items)
-          console.dir $scope.tiles
+        # scope.$on "elementsloaded", (e, items) ->
+        #   console.log "Elements received"
+        scope.$watch('items', (newValue)->
+          if newValue
+            scope.tiles = buildGridModel(scope.items)
+            console.dir scope.items
+        , true)
+
+          # console.dir $scope.tiles
