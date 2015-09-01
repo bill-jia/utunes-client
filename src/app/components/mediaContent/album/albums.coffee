@@ -86,11 +86,81 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         track.artists.splice(index,1)
 ])
 
-app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService",
-  ($scope, $state, $stateParams, AlbumService) ->
+app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService"
+  ($scope, $state, $stateParams, AlbumService, TrackService) ->
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
+      console.dir $scope.album
     )
+
+    AlbumService.getProducers($stateParams.albumId).then((producers) ->
+      $scope.producers = producers
+    )
+
+    AlbumService.getTracks($stateParams.albumId).then((tracks) ->
+      $scope.tracks = tracks
+      for track in $scope.tracks
+        track.artists = TrackService.getArtists(track.id).$object
+        track.album = AlbumService.getAlbum(track.album_id).$object
+    )
+
+    $scope.headers = [
+      {
+        name: 'Track Number'
+        field: 'track_number'
+      }
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Edit'
+        field: 'edit'
+      }
+    ]
+
+    $scope.addProducer = () ->
+      unless $scope.album.producers
+        $scope.album.producers = []
+      $scope.album.producers.push({name: "", class_year: "", bio: ""})
+
+    $scope.removeProducer = (index, album) ->
+      producer = album.producers[index]
+      if producer.id
+        producer._destroy = true
+      else
+        album.producers.splice(index,1)
+
+    $scope.addTrack = () ->
+      unless $scope.album.tracks
+        $scope.album.tracks = []
+      $scope.album.tracks.push({artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", file: ""})
+      console.dir $scope.album.tracks
+
+    $scope.removeTrack = (index, album) ->
+      track = album.tracks[index]
+      if track.id
+        track._destroy = true
+      else
+        album.tracks.splice(index,1)
+
+    $scope.addArtist = (track) ->
+      track.artists.push({name: "", class_year: ""})
+
+    $scope.removeArtist = (index, track) ->
+      artist = track.artists[index]
+      if artist.id
+        artist._destroy = true
+      else
+        track.artists.splice(index,1)
 
     $scope.save = () ->
       AlbumService.updateAlbum($scope.album, $stateParams.albumId).then(() ->

@@ -56,7 +56,7 @@ angular.module "uTunes"
       getProducers: (albumId) -> AlbumRestangular.one(model, albumId).getList("producers")
       createAlbum: (album) -> sendPayload(album, "POST", "/api/albums")
       updateAlbum: (album, albumId) ->
-        if album.file
+        if album.file || album.tracks
           sendPayload(album, "PUT", "/api/albums/#{albumId}")
         else
           album.put()
