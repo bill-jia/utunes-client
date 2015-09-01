@@ -1,5 +1,7 @@
 md-content#album-show(layout-padding="" style="padding: 24px;")
 	h1 {{album.title}} {{album.year}}
+	div
+		img(ng-src="{{album.cover_image.large.url}}")
 	md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})")
 		|Edit this album
 	div#album-producers
@@ -9,9 +11,4 @@ md-content#album-show(layout-padding="" style="padding: 24px;")
 				a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}
 	div#album-tracks
 		h2 Tracks
-		ul(ng-repeat="track in tracks")
-			li
-				|{{track.track_number}} {{track.title}}
-				ul(ng-repeat="artist in track.artists")
-					li
-						a(ui-sref="root.artists.show({artistId: artist.id})"){{artist.name}} {{artist.year}}
+		x-track-table(tracks="tracks" headers="headers" count="count")

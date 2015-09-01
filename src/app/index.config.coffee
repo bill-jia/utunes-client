@@ -13,4 +13,4 @@ angular.module "uTunes"
     $mdThemingProvider.theme('default')
       .primaryPalette("indigo", {"default":"600", "hue-1":"300", "hue-2":"900"})
       .backgroundPalette("grey")
-      .accentPalette("amber", {"default":"A700", "hue-1":"A400"})
+      .accentPalette("blue", {"default":"A700", "hue-1":"A400"})

@@ -1,0 +1,50 @@
+table
+  thead
+    tr
+      th(ng-repeat="header in headers")
+        a(href="#" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
+          i.mdi.mdi-chevron-up(ng-show="reverse && header.field == predicate")
+          i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
+        span(ng-if="!handleSort(header.field)")
+          |{{header.name}}
+  tbody
+    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)")
+      td(ng-repeat= "header in headers")
+        div(ng-if="header.field == 'track_number'")
+          |{{track.track_number}}
+        div(ng-if="header.field == 'title'")
+          |{{track.title}}
+        div(ng-if="header.field == 'artists'")
+          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
+            {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+        div(ng-if="header.field == 'album'")
+          a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
+        div(ng-if="header.field == 'length_in_seconds'")
+          |{{track.length_in_seconds}}
+        div(ng-if="header.field == 'edit'")
+          a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
+            |Edit Track
+.md-table-footer(layout="row")
+  span Tracks per page:
+    a(href="#" ng-click="goToPage(0); count = 10") 10
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 25") 25
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 50") 50
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 100") 100
+    | , 
+    a(href="#" ng-click="goToPage(0); count = tracks.length") All
+    | (current is {{count}})
+  span(flex)
+  span(ng-show="numberOfPages() > 1")
+    md-button.md-primary.md-hue-2(ng-disabled="tablePage==0" ng-click="goToPage(0)" aria-label="First Page")
+      i.mdi.mdi-chevron-double-left
+    md-button.md-primary.md-hue-2(ng-disabled="tablePage==0" ng-click="goToPage(tablePage-1)" aria-label="Previous Page")
+      i.mdi.mdi-chevron-left
+    md-button.md-primary.md-hue-2(href='#' ng-repeat='i in getNumber(numberOfPages()) track by $index' ng-click="goToPage($index)")
+      | {{$index+1}} 
+    md-button.md-primary.md-hue-2(ng-disabled="tablePage==numberOfPages()-1" ng-click="goToPage(tablePage+1)" aria-label="Next Page")
+      i.mdi.mdi-chevron-right
+    md-button.md-primary.md-hue-2(ng-disabled="tablePage==numberOfPages()-1" ng-click="goToPage(numberOfPages-1)")
+      i.mdi.mdi-chevron-double-right

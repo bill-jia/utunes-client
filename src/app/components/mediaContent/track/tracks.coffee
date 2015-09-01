@@ -6,10 +6,33 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
       $scope.tracks = tracks
       # console.log $scope.tracks.length
       for track in $scope.tracks
-        albumId = track.album_id
-        track.album = AlbumService.getAlbum(albumId).$object
+        track.album = AlbumService.getAlbum(track.album_id).$object
         track.artists = TrackService.getArtists(track.id).$object
       )
+
+    $scope.headers = [
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Album'
+        field: 'album'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Edit'
+        field: 'edit'
+      }
+    ]
+    $scope.count = 25
 ])
 
 app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",
@@ -17,17 +40,28 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
     TrackService.getTrack($stateParams.trackId).then((track) ->
       # console.dir track
       $scope.track = track
+      track.artists = TrackService.getArtists(track.id).$object
     )
 
     $scope.save = () ->
-      $scope.track.put().then(() ->
-        $state.go("root.tracks.index",{}, {reload: true})
+      TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->
+        $state.go("root.tracks.index", {}, {reload: true})
       )
 
     $scope.delete = () ->
       $scope.track.remove().then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
       )
+
+    $scope.removeArtist = (index) ->
+      artist = $scope.track.artists[index]
+      if artist.id
+        artist.remove_association = true
+      else
+        $scope.track.artists.splice(index, 1)
+
+    $scope.addArtist = () ->
+      $scope.track.artists.push({name: "", class_year: ""})
 ])
 
 app.config(["$stateProvider",

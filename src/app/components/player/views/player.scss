@@ -1,0 +1,92 @@
+$icon-size: 32px;
+$playhead-size: 20px;
+$time-size: 20px;
+$spacing: 20px;
+
+.md-player-controls {
+  font-size: $icon-size;
+  positon: fixed;
+}
+
+.md-player-controls .active {
+  color: #2979ff;
+}
+
+.md-player-controls .inactive {
+  color: #bdbdbd;
+}
+
+.md-player-controls {
+  color: #212121;
+}
+
+.timeline {
+  margin-top: $icon-size/2;
+  width: 400px;
+  height: 10px;
+  border-radius: 7px;
+  background-color: #bdbdbd;
+}
+
+.timeline-current {
+  background-color: #2979ff;
+  height: 10px;
+  border-radius: 7px;
+  width: 0px;
+}
+
+#scrub-bar {
+  position: relative;
+  margin-left: $spacing;
+  margin-right: $spacing;
+}
+
+#playhead {
+  font-size: $playhead-size;
+  top: ($icon-size - $playhead-size + 2)/2;
+  left: 0 - $playhead-size/2;
+  position: absolute;
+  z-index: 100;
+}
+
+#volume-controls {}
+
+#volume-bar {
+  position: relative;
+  margin-left: $spacing;
+  margin-right: $spacing;
+}
+
+.volume {
+  margin-top: $icon-size/2;
+  width: 100px;
+  height: 10px;
+  border-radius: 7px;
+  background-color: #bdbdbd;
+}
+
+.volume-current {
+  background-color: #2979ff;
+  height: 10px;
+  width: 50px;
+  border-radius: 7px;
+}
+
+#volumehead {
+  font-size: $playhead-size;
+  top: ($icon-size - $playhead-size + 2)/2;
+  left: 50 - $playhead-size/2;
+  position: absolute;
+  z-index: 100;
+}
+
+.time {
+  font-size: $time-size;
+  top: ($icon-size - $time-size + 2)/2;
+  position: relative;
+  width: 60px;
+}
+
+#current-time {
+  margin-left: $spacing;
+}

@@ -1,0 +1,12 @@
+div(layout="row")
+  div#volume-controls
+    i.mdi.mdi-volume-high(ng-show="volume >= 0.67 && !muted")
+    i.mdi.mdi-volume-medium(ng-show="volume < 0.67 && volume >= 0.33 && !muted")
+    i.mdi.mdi-volume-low(ng-show="volume < 0.33 && !muted")
+    i.mdi.mdi-volume-off(ng-show="muted")
+  div#volume-bar()
+    div.volume
+      div.volume-current
+    div#volumehead
+      i.mdi.mdi-checkbox-blank-circle
+  

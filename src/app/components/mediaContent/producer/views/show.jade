@@ -2,6 +2,7 @@ md-content#producer-show(layout-padding="" style="padding: 24px;")
 	h1 {{producer.name}} {{producer.class_year}}
 	md-button.md-raised.md-accent(ui-sref="root.producers.edit({producerId: producer.id})")
 		|Edit this producer
+	img(ng-src="{{producer.profile_picture.url}}")
 	p {{producer.bio}}
 	div#producer-albums
 		h2 Albums

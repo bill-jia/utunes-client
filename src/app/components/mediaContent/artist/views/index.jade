@@ -1,6 +1,6 @@
 md-content(layout-padding="" style="padding: 24px;")
 	h1 Artists
-
-	ul(ng-repeat="artist in artists")
-		li
-			a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}
+	grid-list(items="artists")
+	//- ul(ng-repeat="artist in artists")
+	//- 	li
+	//- 		a(ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}

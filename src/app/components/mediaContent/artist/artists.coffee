@@ -3,7 +3,7 @@ app = angular.module "uTunes"
 app.controller("ArtistIndexController", ["$scope", "ArtistService",
   ($scope, ArtistService) ->
     ArtistService.listArtists().then((artists) ->
-      $scope.artists = artists
+      $scope.artists = artists.plain()
     )
 ])
 
@@ -14,7 +14,7 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
       $scope.artist = artist
     )
     ArtistService.getAlbums($stateParams.artistId).then((albums) ->
-      $scope.albums = albums
+      $scope.albums = albums.plain()
     )
     ArtistService.getTracks($stateParams.artistId).then((tracks) ->
       $scope.tracks = tracks
@@ -22,6 +22,27 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
         track.album = AlbumService.getAlbum(track.album_id).$object
         track.artists = TrackService.getArtists(track.id).$object
     )
+
+    $scope.headers = [
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Album'
+        field: 'album'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      'Artists', 'Album', 'Length', 'Audio'
+    ]
+    $scope.count = 25
 ])
 
 app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService",
@@ -31,12 +52,12 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
     )
 
     $scope.save = () ->
-      $scope.artist.put().then(() ->
+      ArtistService.updateArtist($scope.artist, $stateParams.artistId).then(() ->
         $state.go("root.artists.show", {"artistId": $stateParams.artistId})
       )
 
     $scope.delete = () ->
-      $scope.artist.remove().then(() ->
+      $scope.artist.remove({delete_associated_tracks: $scope.artist.delete_associated_tracks}).then(() ->
         $state.go("root.artists.index", {}, {reload: true})
       )
 ])
