@@ -1,16 +1,20 @@
 app = angular.module "uTunes"
 
-app.controller("AlbumIndexController", ["$scope", "AlbumService",
-  ($scope, AlbumService) ->
+app.controller("AlbumIndexController", ["$scope", "AlbumService", "onElementsLoaded"
+  ($scope, AlbumService, onElementsLoaded) ->
     AlbumService.listAlbums().then((albums) ->
-      $scope.albums = albums
-      )
+      $scope.albums = albums.plain()
+      onElementsLoaded.broadcast()
+      # console.dir $scope.albums
+    )
+
 ])
 
 app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService", "TrackService",
   ($scope, $stateParams, AlbumService, TrackService) ->
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
+      console.dir album
       $scope.album = album
     )
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->

@@ -1,4 +1,4 @@
-.album-grid-list .md-primary.md-hue-1 {
+md-grid-list .md-primary.md-hue-1 {
   background: #7986CB;
 }
 
@@ -14,4 +14,8 @@
 
 .dragover {
     border: 5px dashed #7986CB;
+}
+
+md-grid-tile-footer.custom-tile-footer {
+  background-color: rgba(0, 0, 0, 0.3);
 }

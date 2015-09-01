@@ -11,3 +11,10 @@ app.factory("onSelectTrack", ["$rootScope",
           processedTracks.push tracks[i]
       $rootScope.$broadcast("selecttrack", processedTracks)
 ])
+
+app.factory("onElementsLoaded", ["$rootScope",
+  ($rootScope) ->
+    broadcast: () ->
+      console.log "Elements Loaded"
+      $rootScope.$broadcast("elementsloaded")
+])
