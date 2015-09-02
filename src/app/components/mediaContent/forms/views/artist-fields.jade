@@ -1,0 +1,11 @@
+ng-form(name="form" novalidate)
+  div(ng-hide="artist._destroy" layout="column")
+    md-input-container
+      label Name
+      input(id="artist-name" name="name" type="text" ng-model="artist.name")
+    md-input-container
+      label Class Year
+      input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
+    md-input-container(ng-if="edit")
+      label Bio
+      textarea(id="artist-bio" name="bio" type="text" ng-model="artist.bio")

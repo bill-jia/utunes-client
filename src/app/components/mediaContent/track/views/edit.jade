@@ -3,29 +3,8 @@ md-content(layout-padding="" style="padding: 24px;")
 	h1 Edit {{track.title}}
 
 	md-content(layout-padding="" layout="row" layout-sm="column")
-		form(name="edit-track-form")
-			md-input-container
-				label Title
-				input(id="title" name="title" type="text" ng-model="track.title")
-			md-input-container
-				h3 Audio File
-				input(id="track-audio" name = "audio" type="file" ngf-select ng-model="track.file")
-			h2 Artists
-				div(ng-repeat="artist in track.artists")
-					div(ng-hide="artist.remove_association")
-						section(layout="row")
-							section(layout="column")
-								md-input-container
-									label Name
-									input(id="artist-name" name="name" type="text" ng-model="artist.name")
-								md-input-container
-									label Class Year
-									input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
-							section(layout="column")
-								md-input-container
-									md-button.md-raised.md-warn(ng-click="removeArtist($index)") X Remove Artist
-				md-input-container
-					md-button.md-raised.md-accent(ng-click="addArtist()") + Add Artist
+		form(name="parentForm")
+			track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit")
 			md-input-container(layout="row")
 				md-button.md-raised.md-warn(ng-click="delete()") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save

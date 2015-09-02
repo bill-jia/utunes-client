@@ -1,0 +1,14 @@
+ng-form(name="form" novalidate)
+  div(ng-hide="producer._destroy")
+  section(layout="column")
+    md-input-container
+      label Name
+      input(id="producer-name" name="producer_name" type="text" ng-model="producer.name" required)
+      div(ng-messages="form.producer_name.$error")
+        div(ng-message="required") This field is required
+    md-input-container
+      label Class Year
+      input(id="producer-class-year" name="class_year" type="number" ng-model="producer.class_year")
+    md-input-container(ng-if="edit")
+      label Bio
+      textarea(id="producer-bio" name="bio" type="text" ng-model="producer.bio")

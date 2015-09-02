@@ -48,11 +48,24 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
     $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
     tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", file: ""} ], file: ""}
+
+    $scope.formsValid = false
+    $scope.albumEdit = false
+    $scope.artistEdit = false
+    $scope.producerEdit = false
+    $scope.trackEdit = false
+
+    $scope.registerFormScope = (form, id) ->
+      $scope.parentForm["childForm" + id] = form
+      console.dir $scope.parentForm
+
     $scope.save = () ->
       # console.dir $scope.album
-      AlbumService.createAlbum($scope.album).then(() ->
-        $state.go("root.albums.index", {}, {reload: true})
-    )
+      if $scope.parentForm.$valid
+        AlbumService.createAlbum($scope.album).then(() ->
+          $state.go("root.albums.index", {}, {reload: true})
+        )
+      $scope.formsValid = $scope.parentForm.$valid
 
 
     $scope.addProducer = () ->
@@ -74,16 +87,6 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         track._destroy = true
       else
         album.tracks.splice(index,1)
-
-    $scope.addArtist = (track) ->
-      track.artists.push({name: "", class_year: ""})
-
-    $scope.removeArtist = (index, track) ->
-      artist = track.artists[index]
-      if artist.id
-        artist._destroy = true
-      else
-        track.artists.splice(index,1)
 ])
 
 app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService"
@@ -103,6 +106,16 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         track.artists = TrackService.getArtists(track.id).$object
         track.album = AlbumService.getAlbum(track.album_id).$object
     )
+
+    $scope.formsValid = false
+    $scope.albumEdit = true
+    $scope.artistEdit = false
+    $scope.producerEdit = false
+    $scope.trackEdit = false
+
+    $scope.registerFormScope = (form, id) ->
+      $scope.parentForm["childForm" + id] = form
+      console.dir $scope.parentForm
 
     $scope.headers = [
       {
@@ -126,6 +139,8 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         field: 'edit'
       }
     ]
+
+    $scope.count=25
 
     $scope.addProducer = () ->
       unless $scope.album.producers
@@ -151,16 +166,6 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         track._destroy = true
       else
         album.tracks.splice(index,1)
-
-    $scope.addArtist = (track) ->
-      track.artists.push({name: "", class_year: ""})
-
-    $scope.removeArtist = (index, track) ->
-      artist = track.artists[index]
-      if artist.id
-        artist._destroy = true
-      else
-        track.artists.splice(index,1)
 
     $scope.save = () ->
       AlbumService.updateAlbum($scope.album, $stateParams.albumId).then(() ->

@@ -40,8 +40,22 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
     TrackService.getTrack($stateParams.trackId).then((track) ->
       # console.dir track
       $scope.track = track
-      track.artists = TrackService.getArtists(track.id).$object
     )
+
+    TrackService.getArtists($stateParams.trackId).then((artists) ->
+      $scope.artists = Artists
+      console.dir $scope.artists
+    )
+
+    $scope.formsValid = false
+    $scope.albumEdit = false
+    $scope.artistEdit = false
+    $scope.producerEdit = false
+    $scope.trackEdit = true
+
+    $scope.registerFormScope = (form, id) ->
+      $scope.parentForm["childForm" + id] = form
+      console.dir $scope.parentForm
 
     $scope.save = () ->
       TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->
@@ -53,15 +67,6 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
         $state.go("root.tracks.index", {}, {reload: true})
       )
 
-    $scope.removeArtist = (index) ->
-      artist = $scope.track.artists[index]
-      if artist.id
-        artist.remove_association = true
-      else
-        $scope.track.artists.splice(index, 1)
-
-    $scope.addArtist = () ->
-      $scope.track.artists.push({name: "", class_year: ""})
 ])
 
 app.config(["$stateProvider",

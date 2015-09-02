@@ -3,19 +3,8 @@ md-content(layout-padding="" style="padding: 24px;")
 	h1 Edit {{producer.name}} {{producer.class_year}}
 
 	md-content(layout-padding="" layout="row" layout-sm="column")
-		form(name="edit-producer-form")
-			md-input-container
-				label Name
-				input(id="name" name="name" type="text" ng-model="producer.name")
-			md-input-container
-				Label Class Year
-				input(id="class-year" name="class-year" type="number" ng-model="producer.class_year")
-			md-input-container
-				h3 Profile Picture
-				input(id="profile-picture" name = "profile-picture" type="file" ngf-select ng-model="producer.file")		
-			md-input-container
-				label Bio
-				textarea(id="producer-bio" name="bio" type="text" ng-model="producer.bio")
+		form(name="parentForm")
+			producer-fields(register-form-scope="registerFormScope" producer="producer" edit = "producerEdit")
 			md-input-container(layout="row")
 				md-button.md-raised.md-warn(ng-click="delete()") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save

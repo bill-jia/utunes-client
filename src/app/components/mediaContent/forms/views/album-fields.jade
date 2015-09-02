@@ -1,0 +1,15 @@
+ng-form(name="form" novalidate)
+  md-input-container
+    label Album Title
+    input(id="album-title" name="title" type="text" ng-model="album.title" ng-required="true" ng-disabled="disabled")
+    div(ng-messages="form.title.$error")
+      div(ng-message="required") This field is required
+  md-input-container
+    label Year
+    input(id="album-year" name="year" type="number" ng-model="album.year" ng-disabled="disabled")
+  md-input-container
+    h3 Album Cover
+    div.drop-box(id="album-cover-image" name = "cover_image" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="album.file" ng-disabled="disabled") Drop file
+    {{album.file.name}}
+    div(ng-messages="album.file.$error")
+      div(ng-show="album.file.$error=='pattern'") An image is required.

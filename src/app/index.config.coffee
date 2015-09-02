@@ -14,3 +14,4 @@ angular.module "uTunes"
       .primaryPalette("indigo", {"default":"600", "hue-1":"300", "hue-2":"900"})
       .backgroundPalette("grey")
       .accentPalette("blue", {"default":"A700", "hue-1":"A400"})
+      .warnPalette("pink")

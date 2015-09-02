@@ -51,6 +51,16 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
       $scope.artist = artist
     )
 
+    $scope.formsValid = false
+    $scope.albumEdit = false
+    $scope.artistEdit = true
+    $scope.producerEdit = false
+    $scope.trackEdit = false
+
+    $scope.registerFormScope = (form, id) ->
+      $scope.parentForm["childForm" + id] = form
+      console.dir $scope.parentForm
+
     $scope.save = () ->
       ArtistService.updateArtist($scope.artist, $stateParams.artistId).then(() ->
         $state.go("root.artists.show", {"artistId": $stateParams.artistId})

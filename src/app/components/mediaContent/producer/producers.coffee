@@ -24,6 +24,16 @@ app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "P
       $scope.producer = producer
     )
 
+    $scope.formsValid = false
+    $scope.albumEdit = false
+    $scope.artistEdit = false
+    $scope.producerEdit = true
+    $scope.trackEdit = false
+
+    $scope.registerFormScope = (form, id) ->
+      $scope.parentForm["childForm" + id] = form
+      console.dir $scope.parentForm
+
     $scope.save = () ->
       ProducerService.updateProducer($scope.producer, $stateParams.producerId).then(() ->
         $state.go("root.producers.show", {"producerId": $stateParams.producerId})
