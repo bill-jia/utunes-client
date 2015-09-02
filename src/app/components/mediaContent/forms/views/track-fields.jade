@@ -18,7 +18,11 @@ ng-form(name="form" novalidate)
       div(ng-messages="track.file.$error")
         div(ng-show="track.file.$error=='pattern'") An HTML5-compliant audio file is required.
     h3 Artists
-    div(ng-repeat="artist in track.artists" layout="row")
+    ul(ng-repeat="artist in artists")
+      li(ng-hide="artist._remove") {{artist.name}} {{artist.class_year}}
+        a(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
+        a(href="#" ng-click="removeArtistAssociation(artist)") Remove association
+    div(ng-repeat="artist in track.artists" layout="row" ng-hide="artist._remove")
       artist-fields(register-form-scope="registerFormScope" artist="artist" edit="artistEdit")
       md-input-container
         md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist

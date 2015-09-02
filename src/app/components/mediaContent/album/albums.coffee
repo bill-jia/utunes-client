@@ -115,7 +115,7 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
 
     $scope.registerFormScope = (form, id) ->
       $scope.parentForm["childForm" + id] = form
-      console.dir $scope.parentForm
+      # console.dir $scope.parentForm
 
     $scope.headers = [
       {
@@ -149,10 +149,14 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
 
     $scope.removeProducer = (index, album) ->
       producer = album.producers[index]
-      if producer.id
-        producer._destroy = true
-      else
+      unless producer.id
         album.producers.splice(index,1)
+
+    $scope.removeProducerAssociation = (producer) ->
+      producer._remove = true
+      unless $scope.album.producers
+        $scope.album.producers = []
+      $scope.album.producers.push producer
 
     $scope.addTrack = () ->
       unless $scope.album.tracks

@@ -42,11 +42,6 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
       $scope.track = track
     )
 
-    TrackService.getArtists($stateParams.trackId).then((artists) ->
-      $scope.artists = Artists
-      console.dir $scope.artists
-    )
-
     $scope.formsValid = false
     $scope.albumEdit = false
     $scope.artistEdit = false
@@ -55,7 +50,7 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
 
     $scope.registerFormScope = (form, id) ->
       $scope.parentForm["childForm" + id] = form
-      console.dir $scope.parentForm
+      # console.dir $scope.parentForm
 
     $scope.save = () ->
       TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->

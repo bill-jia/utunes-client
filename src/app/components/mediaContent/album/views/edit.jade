@@ -8,10 +8,11 @@ md-content(layout-padding="" style="padding: 24px;")
 			
 			h2 Producers
 			ul(ng-repeat="producer in producers")
-				li
+				li(ng-hide="producer._remove")
 					a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}			
 					a(ui-sref="root.producers.edit({producerId: producer.id})") Edit Producer
-			div(ng-repeat="producer in album.producers" layout="row")
+					a(href="#" ng-click="removeProducerAssociation(producer)") Remove Association
+			div(ng-repeat="producer in album.producers" layout="row" ng-hide="producer._remove")
 				producer-fields(register-form-scope="registerFormScope" producer="producer" edit="producerEdit")
 				md-input-container
 					md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") X Remove Producer
