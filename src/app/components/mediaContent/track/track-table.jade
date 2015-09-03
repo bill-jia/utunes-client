@@ -20,7 +20,10 @@ table
         div(ng-if="header.field == 'album'")
           a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
         div(ng-if="header.field == 'length_in_seconds'")
-          |{{track.length_in_seconds}}
+          span(ng-if="track.length_in_seconds < 3600")
+            | {{track.length_in_seconds*1000 | date:"m:ss"}}
+          span(ng-if="track.length_in_seconds >= 3600")
+            | {{track.length_in_seconds*1000 | date:"H:mm:ss"}}
         div(ng-if="header.field == 'edit'")
           a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
             |Edit Track
