@@ -26,7 +26,7 @@ angular.module "uTunes"
         templateUrl: "app/components/mediaContent/playlist/playlists.html"
       .state "root.login",
         name: "login"
-        url: "login"
+        url: "sign_in"
         templateUrl: "app/components/userSessions/views/new.html"
         controller: "UserSessionsController"
 
