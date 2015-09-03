@@ -15,8 +15,9 @@ ng-form(name="form" novalidate)
         div(ng-message="required") This field is required.
     md-input-container
       h3 Audio File
-      div.drop-box(id="track-audio" name = "audio" type="file" ngf-select ngf-drop ngf-drag-over-class="dragover" ngf-pattern="'.mp3,.ogg,.wav'" ng-model="track.file" required) Drop file
+      div.drop-box(id="track-audio" name = "file" type="file" ngf-select ngf-drop ngf-drag-over-class="dragover" ngf-pattern="'.mp3,.ogg,.wav'" ng-model="track.file" required) Drop file
       p {{track.file.name}}
+      audio#new-track-audio(ngf-src="track.file") 
       div(ng-messages="form.audio.$error")
         div(ng-message="required") This field is required.
       div(ng-messages="track.file.$error")

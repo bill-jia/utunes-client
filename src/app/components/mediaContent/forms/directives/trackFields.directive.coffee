@@ -10,7 +10,7 @@ angular.module "uTunes"
         artistEdit: "="
       }
       templateUrl: 'app/components/mediaContent/forms/views/track-fields.html'
-      link: (scope) ->
+      link: (scope, element) ->
         scope.disabled = false
         # console.dir scope.track
 
@@ -32,11 +32,11 @@ angular.module "uTunes"
           scope.track.artists.push artist
 
         scope.uniqueTrackNumber = (value) ->
-          console.log "Comparison"
+          # console.log "Comparison"
           trackNumbers = []
           for track in scope.tracks
             trackNumbers.push track.track_number
-          console.log trackNumbers
+          # console.log trackNumbers
           if trackNumbers.indexOf(value) == -1
             true
           else
@@ -59,15 +59,15 @@ angular.module "uTunes"
 
         scope.$watch('track', (newValue)->
           if newValue
-            # console.dir scope.track
             if scope.edit && !scope.artists
               TrackService.getArtists(scope.track.id).then((artists) ->
                 scope.artists = artists
-                console.dir scope.artists
+                # console.dir scope.artists
               )
         , true)
-        scope.$watch('tracks', (newValue)->
-          if newValue
-            console.dir scope.tracks
-        , true)
+        scope.$watch('track.file', (newValue) ->
+          audio = element.find("#new-track-audio")[0]
+          audio.onloadedmetadata = (e) ->
+            scope.track.length_in_seconds = audio.duration
+        )
   ]

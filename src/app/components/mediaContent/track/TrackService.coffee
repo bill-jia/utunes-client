@@ -24,7 +24,9 @@ angular.module "uTunes"
           fields:
             track:
               title: formData.title
+              length_in_seconds: formData.length_in_seconds
         console.log "Uploader"
+        console.dir formData
         console.dir options.file
 
         Upload.upload(options)
