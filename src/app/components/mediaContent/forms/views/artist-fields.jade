@@ -2,7 +2,9 @@ ng-form(name="form" novalidate)
   div(layout="column")
     md-input-container
       label Name
-      input(id="artist-name" name="name" type="text" ng-model="artist.name")
+      input(id="artist-name" name="name" type="text" ng-model="artist.name" required)
+      div(ng-messages="form.name.$error")
+        div(ng-message="required") This field is required
     md-input-container
       label Class Year
       input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")

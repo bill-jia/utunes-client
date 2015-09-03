@@ -57,7 +57,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
 
     $scope.registerFormScope = (form, id) ->
       $scope.parentForm["childForm" + id] = form
-      console.dir $scope.parentForm
+      # console.dir $scope.parentForm
 
     $scope.save = () ->
       # console.dir $scope.album
@@ -66,7 +66,6 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
           $state.go("root.albums.index", {}, {reload: true})
         )
       $scope.formsValid = $scope.parentForm.$valid
-
 
     $scope.addProducer = () ->
       $scope.album.producers.push({name: "", class_year: "", bio: ""})
