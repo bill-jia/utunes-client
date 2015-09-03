@@ -1,0 +1,11 @@
+form(ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}")
+  md-input-container
+    label Email
+    input(type="email" name="email" id="email" ng-model="registrationForm.email" required)
+  md-input-container
+    label Password
+    input(type="password" name="password" id="password" ng-model="registrationForm.password" required)
+  md-input-container
+    label Re-enter your password
+    input(type="password" name="password_confirmation" id="password_confirmation" ng-model="registrationForm.password_confirmation" required)
+  md-button.md-raised.md-primary(type="submit") Register

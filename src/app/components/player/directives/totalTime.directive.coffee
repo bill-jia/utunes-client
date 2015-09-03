@@ -4,4 +4,4 @@ angular.module "uTunes"
       require: "^audioPlayer"
       restrict: 'E'
       templateUrl: 'app/components/player/views/total-time.html'
-      link: (scope, element, attrs, playerController) -> 
+      link: (scope, element, attrs, playerController) ->
