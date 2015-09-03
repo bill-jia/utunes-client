@@ -2,10 +2,14 @@ form(ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}")
   md-input-container
     label Email
     input(type="email" name="email" id="email" ng-model="loginForm.email" required)
+    div(ng-messages="errors")
+      div(ng-message="email") {{errors.email[0]}}
   md-input-container
     label Password
     input(type="password" name="password" id="password" ng-model="loginForm.password" required)
+    div(ng-messages="errors")
+      div(ng-message="password") {{errors.password[0]}}
   md-input-container
     md-button.md-raised.md-primary(type="submit") Sign In
-    div(role="alert" ng-show="error")
-      {{error}}
+    div(ng-messages="errors")
+      {{errors[0]}}
