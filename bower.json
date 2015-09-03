@@ -17,6 +17,7 @@
     "mdi": "~1.2.65",
     "moment": "~2.10.3",
     "ng-file-upload": "~7.0.10",
+    "ng-token-auth": "~0.0.28",
     "restangular": "~1.5.1",
     "toastr": "~2.1.1"
   },

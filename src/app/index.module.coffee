@@ -8,5 +8,6 @@ angular.module 'uTunes', [
   'ngMaterial',
   'ngFileUpload',
   'ngMessages',
-  'ui.validate'
+  'ui.validate',
+  'ng-token-auth'
 ]

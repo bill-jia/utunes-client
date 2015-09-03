@@ -1,0 +1,9 @@
+form(ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}")
+  md-input-container
+    label Email
+    input(type="email" name="email" id="email" ng-mdoel="loginForm.email" required)
+  md-input-container
+    label Password
+    input(type="password" name="password" id="password" ng-model="loginForm.password" required)
+  md-input-container
+    md-button.md-raised.md-primary(type="submit") Sign In

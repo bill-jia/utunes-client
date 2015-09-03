@@ -4,4 +4,6 @@ md-toolbar(layout="row")
 		md-button.nav-button(ui-sref=".news" flex) News 
 		md-button.nav-button(ui-sref=".faq" flex) FAQ 
 		md-button.nav-button(ui-sref=".about" flex) About
+		md-button.nav-button(ng-if="!user.id" ui-sref=".login" flex) Login
+		md-button.nav-button(ng-if="user.id" ng-click="signOut()") Log out
 	//- img.potential(src="http://giant.gfycat.com/AnnualShallowBlackwidowspider.gif")

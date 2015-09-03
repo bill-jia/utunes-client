@@ -6,6 +6,7 @@ angular.module "uTunes"
         name: "root"
         url: "/"
         templateUrl: "app/main/index.html"
+        controller: "MainController"
       .state "root.home",
         name: "home"
         url: ""
@@ -23,10 +24,10 @@ angular.module "uTunes"
         name: "playlists"
         url: "playlists"
         templateUrl: "app/components/mediaContent/playlist/playlists.html"
-      .state "yeoman",
-        url: "/yo"
-        templateUrl: "app/yeoman/yeoman.html"
-        controller: "YeomanController"
-        controllerAs: "yeoman"
+      .state "root.login",
+        name: "login"
+        url: "login"
+        templateUrl: "app/components/userSessions/views/new.html"
+        controller: "UserSessionsController"
 
     $urlRouterProvider.otherwise '/'
