@@ -2,7 +2,7 @@ md-content#album-show(layout-padding="" style="padding: 24px;")
 	h1 {{album.title}} {{album.year}}
 	div
 		img(ng-src="{{album.cover_image.large.url}}")
-	md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})")
+	md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
 		|Edit this album
 	div#album-producers
 		h2 Producers

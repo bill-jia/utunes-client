@@ -1,6 +1,6 @@
 md-content#artist-show(layout-padding="" style="padding: 24px;")
 	h1 {{artist.name}} {{artist.class_year}}
-	md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})")
+	md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
 		|Edit this artist
 	p {{artist.bio}}
 	img(ng-src="{{artist.profile_picture.large.url}}")

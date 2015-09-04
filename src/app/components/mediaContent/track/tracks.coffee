@@ -27,11 +27,9 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
         name: 'Length'
         field: 'length_in_seconds'
       }
-      {
-        name: 'Edit'
-        field: 'edit'
-      }
     ]
+    if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
+      $scope.headers.push {name: "Edit", field: "edit"}
     $scope.count = 25
 ])
 
