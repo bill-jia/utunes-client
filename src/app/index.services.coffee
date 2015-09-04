@@ -18,3 +18,38 @@ app.factory("onTrackPlaying", ["$rootScope",
     broadcast: (track) ->
       $rootScope.$broadcast("trackplaying", track)
 ])
+
+app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
+  ($q, $timeout, $rootScope) ->
+    user = $rootScope.user
+    admin: () ->
+      # console.dir user
+      deferred = $q.defer()
+      $timeout(() ->
+        if user.role == "admin"
+          deferred.resolve(user)
+        else
+          deferred.reject("User is not an admin")
+      ,1000)
+      deferred.promise
+    producer: () ->
+      # console.dir user
+      deferred = $q.defer()
+      $timeout(() ->
+        if user.role == "producer" || user.role == "admin"
+          deferred.resolve(user)
+        else
+          deferred.reject("User is not a producer")
+      ,1000)
+      deferred.promise
+    user: () ->
+      # console.dir user
+      deferred = $q.defer()
+      $timeout(() ->
+        if user.role == "user" || user.role == "producer" || user.role == "admin"
+          deferred.resolve(user)
+        else
+          deferred.reject("User is not a user")
+      ,1000)
+      deferred.promise
+])
