@@ -204,6 +204,11 @@ app.config(["$stateProvider",
         url: "/new"
         templateUrl: "app/components/mediaContent/album/views/new.html"
         controller: "AlbumNewController"
+        resolve: {
+          auth: ["$auth", ($auth) ->
+            return $auth.validateUser()
+          ]
+        }
       .state "root.albums.edit",
         name: "albums.edit"
         url: "/{albumId}/edit"

@@ -1,10 +1,13 @@
 md-toolbar(layout="row")
 	div.md-toolbar-tools
-		md-button.nav-button(ui-sref=".home" flex) Home 
-		md-button.nav-button(ui-sref=".news" flex) News 
-		md-button.nav-button(ui-sref=".faq" flex) FAQ 
-		md-button.nav-button(ui-sref=".about" flex) About
-		md-button.nav-button(ng-if="!user.id" ui-sref=".login" flex) Login
-		md-button.nav-button(ng-if="user.id" ng-click="signOut()" flex) Log out
-		md-button.nav-button(ng-if="!user.id" ui-sref=".signup" flex) Signup
+		md-button.nav-button(ui-sref=".home") Home 
+		md-button.nav-button(ui-sref=".news") News 
+		md-button.nav-button(ui-sref=".faq") FAQ 
+		md-button.nav-button(ui-sref=".about") About
+		md-button.nav-button(ng-if="!user.signedIn" ui-sref=".login") Login
+		md-button.nav-button(ng-if="!user.signedIn" ui-sref=".users.new") Signup
+	div.md-toolbar-tools#user-info(ng-if="user.signedIn" layout="row" flex)
+		| Welcome, {{user.name}}
+		md-button.nav-button(ui-sref=".user.edit" flex) Account
+		md-button.nav-button(ng-click="signOut()" flex) Log out
 	//- img.potential(src="http://giant.gfycat.com/AnnualShallowBlackwidowspider.gif")

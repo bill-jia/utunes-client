@@ -29,10 +29,5 @@ angular.module "uTunes"
         url: "sign_in"
         templateUrl: "app/components/userSessions/views/new.html"
         controller: "UserSessionsController"
-      .state "root.signup",
-        name: "signup"
-        url: "sign_up"
-        templateUrl: "app/components/userRegistrations/views/new.html"
-        controller: "UserRegistrationController"
 
     $urlRouterProvider.otherwise '/'
