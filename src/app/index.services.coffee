@@ -30,7 +30,7 @@ app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
           deferred.resolve(user)
         else
           deferred.reject("User is not an admin")
-      ,1000)
+      ,500)
       deferred.promise
     producer: () ->
       # console.dir user
@@ -40,7 +40,7 @@ app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
           deferred.resolve(user)
         else
           deferred.reject("User is not a producer")
-      ,1000)
+      ,500)
       deferred.promise
     user: () ->
       # console.dir user
@@ -50,6 +50,6 @@ app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
           deferred.resolve(user)
         else
           deferred.reject("User is not a user")
-      ,1000)
+      ,500)
       deferred.promise
 ])
