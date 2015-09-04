@@ -8,6 +8,6 @@ md-toolbar(layout="row")
 		md-button.nav-button(ng-if="!user.signedIn" ui-sref=".users.new") Signup
 	div.md-toolbar-tools#user-info(ng-if="user.signedIn" layout="row" flex)
 		| Welcome, {{user.name}}
-		md-button.nav-button(ui-sref=".user.edit" flex) Account
+		md-button.nav-button(ui-sref="root.users.edit({userId:user.id})" flex) Account
 		md-button.nav-button(ng-click="signOut()" flex) Log out
 	//- img.potential(src="http://giant.gfycat.com/AnnualShallowBlackwidowspider.gif")

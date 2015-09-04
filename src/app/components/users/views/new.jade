@@ -1,17 +1,23 @@
-form(ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}")
-  md-input-container
-    label Email
-    input(type="email" name="email" id="email" ng-model="registrationForm.email" required)
-    div(ng-messages="errors")
-      div(ng-message="email") {{errors.email[0]}}
-  md-input-container
-    label Password
-    input(type="password" name="password" id="password" ng-model="registrationForm.password" required)
-    div(ng-messages="errors")
-      div(ng-message="password") {{errors.password[0]}}
-  md-input-container
-    label Re-enter your password
-    input(type="password" name="password_confirmation" id="password_confirmation" ng-model="registrationForm.password_confirmation" required)
-    div(ng-messages="errors")
-      div(ng-message="password_confirmation") {{errors.password_confirmation[0]}}
-  md-button.md-raised.md-primary(type="submit") Register
+md-content(layout-padding="" style="padding: 24px;")
+  form(ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}")
+    md-input-container
+      label Name
+      input(type="text" name="name" id="name" ng-model="registrationForm.name" required)
+      div(ng-messages="errors")
+        div(ng-message="name") {{errors.name[0]}}          
+    md-input-container
+      label Email
+      input(type="email" name="email" id="email" ng-model="registrationForm.email" required)
+      div(ng-messages="errors")
+        div(ng-message="email") {{errors.email[0]}}
+    md-input-container
+      label Password
+      input(type="password" name="password" id="password" ng-model="registrationForm.password" required)
+      div(ng-messages="errors")
+        div(ng-message="password") {{errors.password[0]}}
+    md-input-container
+      label Re-enter your password
+      input(type="password" name="password_confirmation" id="password_confirmation" ng-model="registrationForm.password_confirmation" required)
+      div(ng-messages="errors")
+        div(ng-message="password_confirmation") {{errors.password_confirmation[0]}}
+    md-button.md-raised.md-primary(type="submit") Register
