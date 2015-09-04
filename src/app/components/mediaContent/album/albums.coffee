@@ -1,7 +1,7 @@
 app = angular.module "uTunes"
 
 app.controller("AlbumIndexController", ["$scope", "AlbumService",
-  ($scope, AlbumService) ->
+  ($scope, AlbumService, $rootScope) ->
     AlbumService.listAlbums().then((albums) ->
       $scope.albums = albums
     )
@@ -208,10 +208,21 @@ app.config(["$stateProvider",
           auth: ["$auth", ($auth) ->
             return $auth.validateUser()
           ]
+          producer: ["trackRoles", (trackRoles) ->
+            return trackRoles.producer()
+          ]
         }
       .state "root.albums.edit",
         name: "albums.edit"
         url: "/{albumId}/edit"
         templateUrl: "app/components/mediaContent/album/views/edit.html"
         controller: "AlbumEditController"
+        resolve: {
+          auth: ["$auth", ($auth) ->
+            return $auth.validateUser()
+          ]
+          producer: ["trackRoles", (trackRoles) ->
+            return trackRoles.producer()
+          ]
+        }
 ])

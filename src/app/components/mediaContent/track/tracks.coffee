@@ -82,4 +82,12 @@ app.config(["$stateProvider",
         url: "/{trackId}/edit"
         templateUrl: "app/components/mediaContent/track/views/edit.html"
         controller: "TrackEditController"
+        resolve: {
+          auth: ["$auth", ($auth) ->
+            return $auth.validateUser()
+          ]
+          producer: ["trackRoles", (trackRoles) ->
+            return trackRoles.producer()
+          ]
+        }
 ])
