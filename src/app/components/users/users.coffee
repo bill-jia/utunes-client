@@ -60,7 +60,7 @@ app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "
       )
 
     $scope.delete = () ->
-      $scope.otheruser.remove().then(() ->
+      $scope.otheruser.remove({admin_password: $scope.otheruser.admin_password}).then(() ->
         $state.go("root.users.index", {}, {reload: true})
       )
 
