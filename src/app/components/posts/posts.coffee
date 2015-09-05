@@ -1,23 +1,34 @@
 app = angular.module "uTunes"
 
-app.controller("PostIndexController", ["$scope", "PostService",
-  ($scope, PostService) ->
+app.controller("PostIndexController", ["$scope", "PostService", "UserService", "$state",
+  ($scope, PostService, UserService, $state) ->
     PostService.listPosts().then((posts) ->
-      $scope.posts = posts.plain()
+      $scope.posts = posts
+      for post in $scope.posts
+        post.user = UserService.getUser(post.user_id).$object
     )
+    $scope.delete = (post) ->
+      post.remove().then(() ->
+        $state.go("root.posts.index", {}, {reload: true})
+      )
 ])
 
-app.controller("PostIndexController", ["$scope", "PostService",
+app.controller("PostShowController", ["$scope", "PostService", "UserService"
   ($scope, PostService) ->
 
 ])
 
-app.controller("PostIndexController", ["$scope", "PostService",
-  ($scope, PostService) ->
-
+app.controller("PostNewController", ["$scope", "PostService", "$state",
+  ($scope, PostService, $state) ->
+    $scope.post = {title: "", content: "", user_id: $scope.user.id}
+    $scope.save = () ->
+      # console.dir $scope.album
+      PostService.createPost($scope.post).then(() ->
+        $state.go("root.posts.index", {}, {reload: true})
+      )
 ])
 
-app.controller("PostIndexController", ["$scope", "PostService",
+app.controller("PostEditController", ["$scope", "PostService",
   ($scope, PostService) ->
 
 ])

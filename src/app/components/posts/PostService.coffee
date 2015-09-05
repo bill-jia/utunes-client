@@ -6,7 +6,8 @@ angular.module "uTunes"
           RestangularConfigurer.addRequestInterceptor((elem, operation, what, url) ->
             # console.log "Request intercepted"
             if (operation == "put" || operation == "post")
-              artist: elem
+              console.dir elem
+              post: elem
             else
               elem
           )
@@ -16,5 +17,6 @@ angular.module "uTunes"
       listPosts: () -> PostRestangular.all(model).getList()
       getPost: (postId) -> PostRestangular.one(model, postId).get()
       updatePost: (post) -> post.put()
+      createPost: (post) -> PostRestangular.service(model).post(post)
 
   ])

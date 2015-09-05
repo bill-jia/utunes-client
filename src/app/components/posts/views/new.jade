@@ -1,0 +1,14 @@
+md-content(layout-padding="" style="padding: 24px;")
+
+	h1 New Post
+
+	md-content(layout-padding="" layout="row" layout-sm="column")
+		form(name="form")
+			md-input-container
+				label Title
+				input(id="title" name="name" type="text" ng-model="post.title")
+			md-input-container
+				label Content
+				textarea(id="content" name="content" type="text" ng-model="post.content")
+			md-input-container(layout="row")
+				md-button.md-raised.md-primary(ng-click="save()") Save
