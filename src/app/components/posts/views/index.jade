@@ -4,6 +4,6 @@ md-content(layout-padding="" style="padding: 24px;")
 		|Add a post
 	div(ng-repeat = "post in posts")
 		h3 {{post.title}}
-		div {{post.content}}
+		div.article {{post.content}}
 		div {{post.user.name}} {{post.updated_at | date:"medium"}}
 		md-button.md-raised.md-warn(ng-click="delete(post)") Delete
