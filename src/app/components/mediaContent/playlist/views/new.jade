@@ -1,0 +1,12 @@
+md-content(layout-padding="" style="padding: 24px;")
+  h1 New Playlist
+  form(name="form")
+    md-input-container
+      label Title
+      input(id="title" name="title" type="text" ng-model="playlist.title")
+      div(ng-messages="form.title.$error")
+        div(ng-show="required") A title is required.
+    md-input-container
+      md-switch(id="is_public" ng-model="playlist.is_public" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Public
+    md-input-container(layout="row")
+      md-button.md-raised.md-primary(ng-click="save()") Save

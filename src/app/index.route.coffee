@@ -20,10 +20,6 @@ angular.module "uTunes"
         name: "about"
         url: "about"
         templateUrl: "app/main/about.html"
-      .state "root.playlists",
-        name: "playlists"
-        url: "playlists"
-        templateUrl: "app/components/mediaContent/playlist/playlists.html"
       .state "root.login",
         name: "login"
         url: "sign_in"

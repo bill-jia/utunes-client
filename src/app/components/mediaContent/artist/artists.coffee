@@ -40,7 +40,6 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
         name: 'Length'
         field: 'length_in_seconds'
       }
-      'Artists', 'Album', 'Length', 'Audio'
     ]
     $scope.count = 25
 ])
