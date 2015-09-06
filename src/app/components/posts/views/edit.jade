@@ -6,7 +6,9 @@ md-content(layout-padding="" style="padding: 24px;")
 		form(name="form")
 			md-input-container
 				label Title
-				input(id="title" name="name" type="text" ng-model="post.title")
+				input(id="title" name="title" type="text" ng-model="post.title" required)
+				div(ng-messages="form.title.$error")
+					div(ng-show="required") An image is required.					
 			md-input-container
 				label Content
 				textarea(id="content" name="content" type="text" ng-model="post.content")
