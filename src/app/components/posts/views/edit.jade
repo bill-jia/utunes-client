@@ -1,0 +1,21 @@
+md-content(layout-padding="" style="padding: 24px;")
+
+	h1 Edit post
+
+	md-content(layout-padding="" layout="row" layout-sm="column")
+		form(name="form")
+			md-input-container
+				label Title
+				input(id="title" name="name" type="text" ng-model="post.title")
+			md-input-container
+				label Content
+				textarea(id="content" name="content" type="text" ng-model="post.content")
+			md-input-container
+				h3 Image
+				div.drop-box(id="cover_image" name = "cover_image" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="post.file" ng-disabled="disabled") Drop file
+				{{post.file.name}}
+				div(ng-messages="post.file.$error")
+					div(ng-show="post.file.$error=='pattern'") An image is required.	
+			md-input-container(layout="row")
+				md-button.md-raised.md-warn(ng-click="delete()") Delete
+				md-button.md-raised.md-primary(ng-click="save()") Save

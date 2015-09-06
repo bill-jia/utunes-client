@@ -28,9 +28,23 @@ app.controller("PostNewController", ["$scope", "PostService", "$state",
       )
 ])
 
-app.controller("PostEditController", ["$scope", "PostService",
-  ($scope, PostService) ->
+app.controller("PostEditController", ["$scope", "PostService", "$stateParams", "$state",
+  ($scope, PostService, $stateParams, $state) ->
+    PostService.getPost($stateParams.postId).then((post) ->
+      $scope.post = post
+    )
 
+    $scope.save = () ->
+      console.dir $scope.post
+      PostService.updatePost($scope.post, $stateParams.postId).then(() ->
+        $state.go("root.posts.index", {}, {reload: true})
+        # $state.go("root.posts.show", {"postId": $stateParams.postId})
+      )
+
+    $scope.delete = () ->
+      $scope.post.remove().then(() ->
+        $state.go("root.posts.index", {}, {reload: true})
+      )
 ])
 
 app.config(["$stateProvider", ($stateProvider) ->
