@@ -1,26 +1,32 @@
 app = angular.module "uTunes"
 
-app.controller("PostIndexController", ["$scope", "PostService", "UserService", "$state",
-  ($scope, PostService, UserService, $state) ->
+app.controller("PostIndexController", ["$scope", "PostService", "$state", "$filter",
+  ($scope, PostService, $state, $filter) ->
     PostService.listPosts().then((posts) ->
       $scope.posts = posts
       for post in $scope.posts
-        post.user = UserService.getUser(post.user_id).$object
+        post.content = $filter("cut")(post.content, true, 1400, "...", $state.href("root.posts.show", {postId: post.id}))
+      $scope.posts = $filter("orderBy")($scope.posts, orderByDate, true)
     )
     $scope.delete = (post) ->
       post.remove().then(() ->
         $state.go("root.posts.index", {}, {reload: true})
       )
+
+    orderByDate = (post) ->
+      post.updated_at
 ])
 
-app.controller("PostShowController", ["$scope", "PostService", "UserService"
-  ($scope, PostService) ->
-
+app.controller("PostShowController", ["$scope", "PostService", "$stateParams"
+  ($scope, PostService, $stateParams) ->
+    PostService.getPost($stateParams.postId).then((post) ->
+      $scope.post = post
+    )
 ])
 
 app.controller("PostNewController", ["$scope", "PostService", "$state",
   ($scope, PostService, $state) ->
-    $scope.post = {title: "", content: "", user_id: $scope.user.id}
+    $scope.post = {title: "", content: "", user_id: $scope.user.id, author: $scope.user.name}
     $scope.save = () ->
       # console.dir $scope.album
       PostService.createPost($scope.post).then(() ->

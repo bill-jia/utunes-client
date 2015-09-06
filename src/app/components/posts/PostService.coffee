@@ -23,6 +23,7 @@ angular.module "uTunes"
               title: formData.title
               content: formData.content
               user_id: formData.user_id
+              author: formData.author
         console.log "Uploader"
         console.dir options.file
         console.dir formData
