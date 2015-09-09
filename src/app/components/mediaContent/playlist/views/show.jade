@@ -1,6 +1,8 @@
 md-content(layout-padding="" style="padding: 24px;")
   h1 {{playlist.title}}
   h2 {{playlist.author}}
+  md-button.md-raised.md-accent(ui-sref="root.playlists.edit({playlistId: playlist.id})" ng-if = "user.id && user.id == playlist.user_id")
+    |Edit this playlist
   div#playlist-tracks
     h2 Tracks
     x-track-table(tracks="tracks" headers="headers" count="count")

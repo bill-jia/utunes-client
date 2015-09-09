@@ -8,7 +8,7 @@ table(md-context-menu="menuOptions")
         span(ng-if="!handleSort(header.field)")
           |{{header.name}}
   tbody
-    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)" ng-right-click = "setMenuTrack(track)")
+    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)" ng-right-click = "setMenuTrack(track)" ng-if="!track._remove")
         td(ng-repeat= "header in headers")
             div(ng-if="header.field == 'track_number'")
               |{{track.track_number}}
@@ -27,6 +27,8 @@ table(md-context-menu="menuOptions")
             div(ng-if="header.field == 'edit'")
               a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
               |Edit Track
+            div(ng-if="header.field == 'remove'")
+              a(href="#" ng-click="track._remove = true" stop=event="click") X
 
 .md-table-footer(layout="row")
   span Tracks per page:

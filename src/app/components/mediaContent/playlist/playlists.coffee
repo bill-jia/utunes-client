@@ -49,11 +49,44 @@ app.controller("PlaylistNewController", ["$scope", "PlaylistService", "$state",
       )
 ])
 
-app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$stateParams", "$state",
-  ($scope, PlaylistService, $stateParams, $state) ->
+app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$stateParams", "$state", "AlbumService", "TrackService",
+  ($scope, PlaylistService, $stateParams, $state, AlbumService, TrackService) ->
     PlaylistService.getPlaylist($stateParams.playlistId).then((playlist) ->
       $scope.playlist = playlist
     )
+    PlaylistService.getTracks($stateParams.playlistId).then((tracks) ->
+      $scope.tracks = tracks
+      for track in $scope.tracks
+        track.album = AlbumService.getAlbum(track.album_id).$object
+        track.artists = TrackService.getArtists(track.id).$object
+        track._remove = false
+      $scope.playlist.tracks = $scope.tracks
+      console.dir $scope.playlist
+    )
+    $scope.headers = [
+      {
+        name: 'Title'
+        field: 'title'
+      }
+      {
+        name: 'Artists'
+        field: 'artists'
+      }
+      {
+        name: 'Album'
+        field: 'album'
+      }
+      {
+        name: 'Length'
+        field: 'length_in_seconds'
+      }
+      {
+        name: 'Remove'
+        field: 'remove'
+      }
+    ]
+    $scope.count = 25
+
 
     $scope.save = () ->
       console.dir $scope.playlist
