@@ -5,6 +5,17 @@ app.controller("PlaylistIndexController", ["$scope", "PlaylistService", "$state"
     PlaylistService.listPlaylists().then((playlists) ->
       $scope.playlists = playlists
     )
+    $scope.headers = [
+      {
+        name: "Title"
+        field: "title"
+      }
+      {
+        name: "Author"
+        field: "author"
+      }
+    ]
+    $scope.count = 25
 ])
 
 app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumService", "TrackService", "$stateParams",
