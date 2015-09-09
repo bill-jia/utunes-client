@@ -46,7 +46,7 @@ $spacing: 20px;
   top: ($icon-size - $playhead-size + 2)/2;
   left: 0 - $playhead-size/2;
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
 
 #volume-controls {}
@@ -77,7 +77,7 @@ $spacing: 20px;
   top: ($icon-size - $playhead-size + 2)/2;
   left: 50 - $playhead-size/2;
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
 
 .time {

@@ -9,5 +9,6 @@ angular.module 'uTunes', [
   'ngFileUpload',
   'ngMessages',
   'ui.validate',
+  'ui.bootstrap.contextMenu',
   'ng-token-auth'
 ]

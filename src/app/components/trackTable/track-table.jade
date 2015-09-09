@@ -1,4 +1,4 @@
-table
+table(md-context-menu="menuOptions")
   thead
     tr
       th(ng-repeat="header in headers")
@@ -8,25 +8,26 @@ table
         span(ng-if="!handleSort(header.field)")
           |{{header.name}}
   tbody
-    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)")
-      td(ng-repeat= "header in headers")
-        div(ng-if="header.field == 'track_number'")
-          |{{track.track_number}}
-        div(ng-if="header.field == 'title'")
-          |{{track.title}}
-        div(ng-if="header.field == 'artists'")
-          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
-            {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
-        div(ng-if="header.field == 'album'")
-          a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
-        div(ng-if="header.field == 'length_in_seconds'")
-          span(ng-if="track.length_in_seconds < 3600")
-            | {{track.length_in_seconds*1000 | date:"m:ss"}}
-          span(ng-if="track.length_in_seconds >= 3600")
-            | {{track.length_in_seconds*1000 | date:"H:mm:ss"}}
-        div(ng-if="header.field == 'edit'")
-          a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
-            |Edit Track
+    tr(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)" ng-right-click = "setMenuTrack(track)")
+        td(ng-repeat= "header in headers")
+            div(ng-if="header.field == 'track_number'")
+              |{{track.track_number}}
+            div(ng-if="header.field == 'title'")
+              |{{track.title}}
+            div(ng-if="header.field == 'artists'")
+              a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
+                {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+            div(ng-if="header.field == 'album'")
+              a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
+            div(ng-if="header.field == 'length_in_seconds'")
+              span(ng-if="track.length_in_seconds < 3600")
+                | {{track.length_in_seconds*1000 | date:"m:ss"}}
+              span(ng-if="track.length_in_seconds >= 3600")
+                | {{track.length_in_seconds*1000 | date:"H:mm:ss"}}
+            div(ng-if="header.field == 'edit'")
+              a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
+              |Edit Track
+
 .md-table-footer(layout="row")
   span Tracks per page:
     a(href="#" ng-click="goToPage(0); count = 10") 10

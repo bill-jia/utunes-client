@@ -1,1 +1,6 @@
 md-content(layout-padding="" style="padding: 24px;")
+  h1 {{playlist.title}}
+  h2 {{playlist.author}}
+  div#playlist-tracks
+    h2 Tracks
+    x-track-table(tracks="tracks" headers="headers" count="count")

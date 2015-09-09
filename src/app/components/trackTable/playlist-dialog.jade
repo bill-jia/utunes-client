@@ -1,0 +1,14 @@
+md-dialog
+  form 
+    md-toolbar
+      div.md-toolbar-tools
+        h2 Add to playlist
+        span(flex)
+        md-button(ng-click="cancel()") Close
+    md-dialog-content(style="max-width:700px; max-height:810px;")
+      md-list
+        md-list-item(ng-repeat="playlist in playlists")
+          p {{playlist.title}}
+          md-checkbox.md-primary(ng-model="playlist.wanted")
+    div.md-actions
+      md-button(ng-click="answer()") Add
