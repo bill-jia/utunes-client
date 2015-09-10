@@ -13,7 +13,7 @@ table
     tr(ng-repeat="c in content | startFrom:tablePage*count | limitTo: count" ng-if = "!myPlaylists || c.user_id == $root.user.id")
       td(ng-repeat= "header in headers")
         div(ng-if="header.field == 'title'")
-          a(ui-sref="root.playlists.show({playlistId:c.id})") {{c.title}} {{c.user_id}}
+          a(ui-sref="root.playlists.show({playlistId:c.id})") {{c.title}}
         div(ng-if="header.field != 'title'")
           |{{c[header.field]}}
         
