@@ -20,3 +20,4 @@ md-content(layout-padding="" style="padding: 24px;")
 				md-button.md-raised.md-accent(ng-click="addTrack()") + Add track
 			md-input-container
 				md-button.md-raised.md-primary(ng-click="save()") Add
+				md-progress-circular(md-mode="indeterminate" ng-show="formSending")

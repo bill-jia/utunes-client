@@ -1,2 +1,15 @@
 md-content(layout-padding="" style="padding: 24px;")
   h1 Search Results
+  h2 Albums
+  md-progress-circular(md-mode="indeterminate" ng-show="!albumsLoaded")
+  grid-list(items="albums")
+  h2 Producers
+  md-progress-circular(md-mode="indeterminate" ng-show="!producersLoaded")
+  grid-list(items="producers")
+  h2 Artists
+  md-progress-circular(md-mode="indeterminate" ng-show="!artistsLoaded")
+  grid-list(items="artists")
+  h2 Tracks
+  md-progress-circular(md-mode="indeterminate" ng-show="!tracksLoaded")
+  x-track-table(tracks="tracks" headers="headers" count="count" ng-show="tracksLoaded")
+  

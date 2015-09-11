@@ -9,3 +9,4 @@ md-content(layout-padding="" style="padding: 24px;")
 				md-checkbox.md-warn(ng-model="artist.delete_associated_tracks") Delete associated tracks?
 				md-button.md-raised.md-warn(ng-click="delete()") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
+				md-progress-circular(md-mode="indeterminate" ng-show="formSending")

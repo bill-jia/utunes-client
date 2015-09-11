@@ -35,6 +35,7 @@ angular.module "uTunes"
           )
 
       listArtists: () -> ArtistRestangular.all(model).getList()
+      searchArtists: (searchParams) -> ArtistRestangular.all(model).getList({"search": searchParams})
       getArtist: (artistId) -> ArtistRestangular.one(model, artistId).get()
       getTracks: (artistId) -> ArtistRestangular.one(model, artistId).getList("tracks")
       getAlbums: (artistId) -> ArtistRestangular.one(model, artistId).getList("albums")

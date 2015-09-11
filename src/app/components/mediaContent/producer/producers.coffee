@@ -35,11 +35,13 @@ app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "P
       console.dir $scope.parentForm
 
     $scope.save = () ->
+      $scope.formSending = true
       ProducerService.updateProducer($scope.producer, $stateParams.producerId).then(() ->
         $state.go("root.producers.show", {"producerId": $stateParams.producerId})
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.producer.remove().then(() ->
         $state.go("root.producers.index", {}, {reload: true})
       )

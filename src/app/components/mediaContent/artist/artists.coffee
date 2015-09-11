@@ -61,11 +61,13 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
       console.dir $scope.parentForm
 
     $scope.save = () ->
+      $scope.formSending = true
       ArtistService.updateArtist($scope.artist, $stateParams.artistId).then(() ->
         $state.go("root.artists.show", {"artistId": $stateParams.artistId})
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.artist.remove({delete_associated_tracks: $scope.artist.delete_associated_tracks}).then(() ->
         $state.go("root.artists.index", {}, {reload: true})
       )

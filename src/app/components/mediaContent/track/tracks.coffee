@@ -51,11 +51,13 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
       # console.dir $scope.parentForm
 
     $scope.save = () ->
+      $scope.formSending = true
       TrackService.updateTrack($scope.track, $stateParams.trackId).then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.track.remove().then(() ->
         $state.go("root.tracks.index", {}, {reload: true})
       )

@@ -35,6 +35,7 @@ angular.module "uTunes"
           )
 
       listProducers: () -> ProducerRestangular.all(model).getList()
+      searchProducers: (searchParams) -> ProducerRestangular.all(model).getList({"search": searchParams})
       getProducer: (producerId) -> ProducerRestangular.one(model, producerId).get()
       getAlbums: (producerId) -> ProducerRestangular.one(model, producerId).getList("albums")
       updateProducer: (producer, producerId) ->

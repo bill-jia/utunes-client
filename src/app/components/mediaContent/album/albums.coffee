@@ -62,6 +62,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
     $scope.save = () ->
       # console.dir $scope.album
       if $scope.parentForm.$valid
+        $scope.formSending = true
         AlbumService.createAlbum($scope.album).then(() ->
           $state.go("root.albums.index", {}, {reload: true})
         )
@@ -171,11 +172,13 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         album.tracks.splice(index,1)
 
     $scope.save = () ->
+      $scope.formSending = true
       AlbumService.updateAlbum($scope.album, $stateParams.albumId).then(() ->
         $state.go("root.albums.show", {"albumId": $stateParams.albumId})
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.album.remove().then(() ->
         $state.go("root.albums.index", {}, {reload: true})
       )
