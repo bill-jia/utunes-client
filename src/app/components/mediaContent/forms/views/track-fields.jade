@@ -3,14 +3,13 @@ ng-form(name="form" novalidate)
     md-input-container
       label Track Number
       input(id="track-number" name="track_number" type="number" ng-model="track.track_number" required ui-validate="{unique: 'uniqueTrackNumber($value)'}")
-      a(href="#" ng-click="getTrackArray()") Get Track Array
       div(ng-messages="form.track_number.$error")
         div(ng-message="required") This field is required.
         div(ng-message="number") A number is required.
         div(ng-message="unique") Track numbers must be unique.
     md-input-container
       label Title
-      input(id="track-title" name="track_title" type="text" ng-model="track.title")
+      input(id="track-title" name="track_title" type="text" ng-model="track.title" required)
       div(ng-messages="form.track_title.$error")
         div(ng-message="required") This field is required.
     md-input-container

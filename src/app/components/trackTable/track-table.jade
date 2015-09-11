@@ -25,8 +25,7 @@ table(md-context-menu="menuOptions")
               span(ng-if="track.length_in_seconds >= 3600")
                 | {{track.length_in_seconds*1000 | date:"H:mm:ss"}}
             div(ng-if="header.field == 'edit'")
-              a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click")
-              |Edit Track
+              a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click") Edit Track
             div(ng-if="header.field == 'remove'")
               a(href="#" ng-click="track._remove = true" stop=event="click") X
 

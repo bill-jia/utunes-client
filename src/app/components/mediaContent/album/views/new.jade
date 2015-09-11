@@ -13,7 +13,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				md-button.md-raised.md-accent(ng-click="addProducer()") + Add Producer		
 			h2 Tracks
 			div(ng-repeat="track in album.tracks" layout="row")
-				track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" tracks="album.tracks")
+				track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" tracks="album.tracks" track-numbers="trackNumbers")
 				md-input-container
 					md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") X Remove Track
 			md-input-container

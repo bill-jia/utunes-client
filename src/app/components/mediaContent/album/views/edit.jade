@@ -22,7 +22,7 @@ md-content(layout-padding="" style="padding: 24px;")
 			h2 Tracks
 			x-track-table(tracks="tracks" headers="headers" count="count")
 			div(ng-repeat="track in album.tracks" layout="row")
-				track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit")		
+				track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" tracks = "album.tracks" track-numbers="trackNumbers")
 				md-input-container
 					md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") X Remove Track
 			md-input-container

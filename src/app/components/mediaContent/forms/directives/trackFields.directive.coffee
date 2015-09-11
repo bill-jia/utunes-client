@@ -8,6 +8,7 @@ angular.module "uTunes"
         tracks: "="
         edit: "="
         artistEdit: "="
+        trackNumbers: "="
       }
       templateUrl: 'app/components/mediaContent/forms/views/track-fields.html'
       link: (scope, element) ->
@@ -33,24 +34,18 @@ angular.module "uTunes"
 
         scope.uniqueTrackNumber = (value) ->
           # console.log "Comparison"
-          trackNumbers = []
+          trackNumbers = scope.trackNumbers.slice(0)
+          console.log "From existing tracks"
+          console.dir trackNumbers
           for track in scope.tracks
             trackNumbers.push track.track_number
           # console.log trackNumbers
+          console.log "From potential tracks"
+          console.dir trackNumbers
           if trackNumbers.indexOf(value) == -1
             true
           else
             false
-
-        scope.comparetoOne = (value) ->
-          console.log "Comparison"
-          value >= 1
-
-        scope.getTrackArray = () ->
-          trackNumbers = []
-          for track in scope.tracks
-            trackNumbers.push track.track_number
-          console.log trackNumbers
 
         $timeout(() ->
           scope.form.fields = ["track_number", "title", "audio"]

@@ -48,6 +48,7 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
   ($scope, $state, AlbumService) ->
     $scope.album = {producers:[{name: "", class_year: "", bio: ""}],
     tracks: [{artists: [{name: "", class_year: "", bio: ""}], track_number:"", title: "", length_in_seconds: "", file: ""} ], file: ""}
+    $scope.trackNumbers = []
 
     $scope.formsValid = false
     $scope.albumEdit = false
@@ -91,6 +92,8 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
 
 app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService"
   ($scope, $state, $stateParams, AlbumService, TrackService) ->
+    $scope.trackNumbers = []
+
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
       console.dir $scope.album
@@ -103,6 +106,7 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->
       $scope.tracks = tracks
       for track in $scope.tracks
+        $scope.trackNumbers.push track.track_number
         track.artists = TrackService.getArtists(track.id).$object
         track.album = AlbumService.getAlbum(track.album_id).$object
     )
@@ -170,6 +174,7 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         track._destroy = true
       else
         album.tracks.splice(index,1)
+      console.dir album.tracks
 
     $scope.save = () ->
       $scope.formSending = true
