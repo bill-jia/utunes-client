@@ -4,6 +4,11 @@ app.controller("SearchResultsController", ["$scope", "AlbumService", "ArtistServ
   ($scope, AlbumService, ArtistService, TrackService, ProducerService, $stateParams) ->
     searchParams = $stateParams.searchParams
     console.log searchParams
+    AlbumService.searchAlbums(searchParams).then((albums) ->
+      console.dir albums
+      $scope.albums = albums
+      console.dir $scope.albums
+    )
 ])
 
 app.config(["$stateProvider",
