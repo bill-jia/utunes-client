@@ -1,8 +1,12 @@
-div(layout="column")
-	section(layout="row")
-		x-navbar(flex = 66)
-		x-searchbar
-	section(layout="row" layout-align="top center")
-		x-sidebar		
+md-toolbar(style="position:fixed;")
+	x-navbar
+div(style="height:70px;width:100%;")
+div(layout="row" layout-align="top center")
+		md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left")
+			x-sidebar-left
 		div(ui-view flex=66)
+		md-sidenav.md-sidenav-right.md-whiteframe-z2(layout="column" md-component-id="right")
+			x-sidebar-right
+div(style="height:50px;width:100%;")
+md-bottom-sheet(style="position:fixed;")
 	x-audio-player

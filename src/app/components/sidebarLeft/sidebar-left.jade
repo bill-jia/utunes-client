@@ -1,0 +1,26 @@
+md-toolbar
+	div.md-toolbar-tools
+		h2
+			span Menu
+		span(flex)
+		md-button.md-icon-button(ng-click="close()")
+			i.mdi.mdi-close
+md-button-group(layout="column")
+	md-button.side-button(ui-sref=".home") Home 
+	md-button.side-button(ui-sref=".posts.index") News 
+	md-button.side-button(ui-sref=".faq") FAQ 
+	md-button.side-button(ui-sref=".about") About
+	md-button.side-button(ui-sref=".albums.index" ng-click="close()" flex) Albums 
+	md-button.side-button(ui-sref=".artists.index" ng-click="close()" flex) Artists 
+	md-button.side-button(ui-sref=".playlists.index" ng-click="close()" flex) Playlists
+	md-button.side-button(ui-sref=".producers.index" ng-click="close()" flex) Producers
+	md-button.side-button(ui-sref=".tracks.index" flex) Tracks 
+div#now-playing(layout="row")
+	img(ng-src="{{track.album.cover_image.thumb.url}}")
+	div(layout="column")
+		div.scroll-box
+			div.scroll-text {{track.title}}
+		div.scroll-box
+			div.scroll-text
+				a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId artist.id})")
+					|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}

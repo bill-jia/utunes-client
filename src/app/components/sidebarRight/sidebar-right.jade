@@ -1,0 +1,18 @@
+md-toolbar
+	div.md-toolbar-tools
+		h2
+			span(ng-if="!user.signedIn") Login
+			span(ng-if="user.signedIn") {{user.name}}
+		span(flex)
+		md-button.md-icon-button(ng-click="close()")
+			i.mdi.mdi-close
+div.sidebar-content
+	div(ng-show="!user.signedIn")
+		div(ng-include="template")
+		a(href="#" ng-click="switchLogin()")
+			span(ng-if= "template == login") Not registered? Make an account
+			span(ng-if= "template == signup") Already have an account? Login
+	div(ng-show="user.signedIn")
+		md-button.nav-button(ui-sref="root.users.edit({userId:user.id})"  ng-click="close()" flex) Account
+		md-button.nav-button(ng-if="user.role == 'admin'" ui-sref="root.users.index" ng-click="close()" flex) Manage
+		md-button.nav-button(ng-click="signOut()" flex) Log out

@@ -1,14 +1,17 @@
 angular.module "uTunes"
-  .directive 'sidebar', ->
+  .directive 'sidebarLeft', ->
     directive =
       restrict: 'E'
       scope: {}
-      templateUrl: 'app/components/sidebar/sidebar.html'
-      link: (scope, element) ->
-        scope.$on "trackplaying", (e, track) ->
-          scope.track = track
+      templateUrl: 'app/components/sidebarLeft/sidebar-left.html'
+      controller: ($scope, $element, $timeout, $mdSidenav) ->
+        $scope.$on "trackplaying", (e, track) ->
+          $scope.track = track
 
-        scrollBoxes = element.find(".scroll-box")
+        $scope.close = () ->
+          $mdSidenav("left").close()
+
+        scrollBoxes = $element.find(".scroll-box")
 
         scrollBoxes.mouseenter(->
           $(this).stop()
