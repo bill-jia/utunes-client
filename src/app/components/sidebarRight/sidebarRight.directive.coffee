@@ -21,12 +21,12 @@ angular.module "uTunes"
         $scope.signOut = () ->
           $auth.signOut().then((resp)->).catch((resp)->)
 
-        $scope.handleRegBtnClick = () ->
+        $scope.handleRegBtnClick = (registrationForm) ->
           console.log "Registration"
-          $auth.submitRegistration($scope.registrationForm).then(()->
+          $auth.submitRegistration(registrationForm).then(()->
             $auth.submitLogin({
-              email: $scope.registrationForm.email,
-              password: $scope.registrationForm.password
+              email: registrationForm.email,
+              password: registrationForm.password
             })
           )
 

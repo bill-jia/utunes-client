@@ -22,5 +22,5 @@ div#now-playing(layout="row")
 			div.scroll-text {{track.title}}
 		div.scroll-box
 			div.scroll-text
-				a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId artist.id})")
+				a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
 					|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}

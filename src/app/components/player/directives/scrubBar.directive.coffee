@@ -4,9 +4,10 @@ angular.module "uTunes"
       require: "^audioPlayer"
       restrict: 'E'
       templateUrl: 'app/components/player/views/scrub-bar.html'
-      link: (scope, element, attrs, playerController) ->
+      link: (scope, element, attrs, playerController, $window) ->
         currentTimeline = element.find(".timeline-current")
         totalTime = element.find(".timeline")
+        totalTime.width($(window).width() - 528)
         playhead = element.find("#playhead")
         halfPlayheadSize =  parseInt(playhead.css("font-size"), 10)/2
 
@@ -30,6 +31,10 @@ angular.module "uTunes"
 
         $document.bind "mouseup", (e) ->
           playhead.removeClass "active"
+
+        $(window).resize(()->
+          totalTime.width($(window).width() - 528)
+        )
 
         mouseup = () ->
           $document.off "mousemove", mousemove

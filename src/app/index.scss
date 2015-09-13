@@ -11,6 +11,10 @@ html {
   font-family: 'Roboto Slab', serif;
 }
 
+body {
+  height: 100%;
+}
+
 [layout=row] {
   flex-direction: row;
 }
@@ -32,6 +36,18 @@ html {
 
 .position-fixed {
   position: fixed;
+}
+
+#banner {
+  width: 100%;
+}
+
+#content-sheet {
+  position: relative;
+  top: -5px;
+  width: 100%;
+  height:auto !important;
+  min-height:800px;
 }
 
 /**

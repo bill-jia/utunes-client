@@ -1,5 +1,5 @@
 md-content(layout-padding="" style="padding: 24px;")
-  form(ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}")
+  form(ng-submit="handleRegBtnClick(registrationForm)" role="form" ng-init="registrationForm = {}")
     md-input-container
       label Name
       input(type="text" name="name" id="name" ng-model="registrationForm.name" required)

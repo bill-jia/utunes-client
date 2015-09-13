@@ -1,10 +1,12 @@
-md-toolbar(style="position:fixed;")
+md-toolbar.md-whiteframe-z5(style="position:fixed;")
 	x-navbar
-div(style="height:70px;width:100%;")
+div(style="height:64px;width:100%;")
+img#banner(src="/api/assets/images/banner.jpg")
 div(layout="row" layout-align="top center")
 		md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left")
 			x-sidebar-left
-		div(ui-view flex=66)
+		div#content-sheet.md-whiteframe-z3
+			div#main-content(ui-view flex)
 		md-sidenav.md-sidenav-right.md-whiteframe-z2(layout="column" md-component-id="right")
 			x-sidebar-right
 div(style="height:50px;width:100%;")
