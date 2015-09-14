@@ -15,6 +15,13 @@ div.sidebar-content
 			span(ng-if= "template == login") Not registered? Sign up!
 			span(ng-if= "template == signup") Already have an account? Login
 	div(ng-show="user.signedIn")
-		md-button.nav-button(ui-sref="root.users.edit({userId:user.id})"  ng-click="close()" flex) Account
-		md-button.nav-button(ng-if="user.role == 'admin'" ui-sref="root.users.index" ng-click="close()" flex) Manage
-		md-button.nav-button(ng-click="signOut()" flex) Log out
+		md-list
+			md-list-item(ng-click="goTo($event, 'root.users.edit', {userId:user.id})" ng-class="{'nav-selected': state == 'root.home'}")
+				i.mdi.mdi.mdi-account-key.sidebar-icon
+				p.sidebar-selection Account
+			md-list-item(ng-if="user.role == 'admin'" ng-click="goTo($event, 'root.users.index', {})" ng-class="{'nav-selected': state.indexOf('root.posts') == 0}")
+				i.mdi.mdi.mdi-account-multiple.sidebar-icon
+				p.sidebar-selection Manage
+		//- md-button.nav-button(ui-sref="root.users.edit({userId:user.id})"  ng-click="close()" flex) Account
+		//- md-button.nav-button(ng-if="user.role == 'admin'" ui-sref="root.users.index" ng-click="close()" flex) Manage
+		md-button.nav-button(ng-click="signOut()" style="float:right;") Log out

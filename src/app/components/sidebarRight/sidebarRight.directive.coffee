@@ -4,13 +4,17 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {}
       templateUrl: 'app/components/sidebarRight/sidebar-right.html'
-      controller: ($scope, $element, $timeout, $mdSidenav, $auth) ->
+      controller: ($scope, $element, $timeout, $mdSidenav, $auth, $state) ->
         $scope.user = $scope.$root.user
         $scope.login = "app/components/userSessions/views/new.html"
         $scope.signup = "app/components/users/views/new.html"
         $scope.template = $scope.login
         $scope.close = () ->
           $mdSidenav("right").close()
+
+        $scope.goTo = (e, state, params) ->
+          $state.go(state, params, {reload: true})
+          $scope.close()
 
         $scope.switchLogin = () ->
           $scope.template = if ($scope.template == $scope.login) then $scope.signup else $scope.login

@@ -6,7 +6,7 @@ md-toolbar
 		md-button.md-icon-button(ng-click="close()")
 			i.mdi.mdi-close
 div.sidebar-content
-	md-list.nav-list
+	md-list
 		md-list-item(ng-click="goTo($event, 'root.home')" ng-class="{'nav-selected': state == 'root.home'}")
 			i.mdi.mdi.mdi-home.sidebar-icon
 			p.sidebar-selection Home 
