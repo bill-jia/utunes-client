@@ -1,14 +1,13 @@
+md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left" flex="50")
+	x-sidebar-left
+md-sidenav.md-sidenav-right.md-whiteframe-z2(layout="column" md-component-id="right" flex="50")
+	x-sidebar-right
 md-toolbar.md-whiteframe-z5(style="position:fixed;")
 	x-navbar
 div(style="height:64px;width:100%;")
 img#banner(src="/api/assets/images/banner.jpg")
-div(layout="row" layout-align="top center")
-		md-sidenav.md-sidenav-left.md-whiteframe-z2(layout="column" md-component-id="left")
-			x-sidebar-left
-		div#content-sheet.md-whiteframe-z3
-			div#main-content(ui-view flex)
-		md-sidenav.md-sidenav-right.md-whiteframe-z2(layout="column" md-component-id="right")
-			x-sidebar-right
+div#content-sheet.md-whiteframe-z3
+	div#main-content(ui-view flex)
 div(style="height:50px;width:100%;")
 md-bottom-sheet(style="position:fixed;")
 	x-audio-player

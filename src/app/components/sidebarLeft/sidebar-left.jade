@@ -5,22 +5,43 @@ md-toolbar
 		span(flex)
 		md-button.md-icon-button(ng-click="close()")
 			i.mdi.mdi-close
-md-button-group(layout="column")
-	md-button.side-button(ui-sref=".home") Home 
-	md-button.side-button(ui-sref=".posts.index") News 
-	md-button.side-button(ui-sref=".faq") FAQ 
-	md-button.side-button(ui-sref=".about") About
-	md-button.side-button(ui-sref=".albums.index" ng-click="close()" flex) Albums 
-	md-button.side-button(ui-sref=".artists.index" ng-click="close()" flex) Artists 
-	md-button.side-button(ui-sref=".playlists.index" ng-click="close()" flex) Playlists
-	md-button.side-button(ui-sref=".producers.index" ng-click="close()" flex) Producers
-	md-button.side-button(ui-sref=".tracks.index" flex) Tracks 
-div#now-playing(layout="row")
-	img(ng-src="{{track.album.cover_image.thumb.url}}")
-	div(layout="column")
-		div.scroll-box
-			div.scroll-text {{track.title}}
-		div.scroll-box
-			div.scroll-text
-				a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
-					|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+div.sidebar-content
+	md-list.nav-list
+		md-list-item(ng-click="goTo($event, 'root.home')" ng-class="{'nav-selected': state == 'root.home'}")
+			i.mdi.mdi.mdi-home.sidebar-icon
+			p.sidebar-selection Home 
+		md-list-item(ng-click="goTo($event, 'root.posts.index')" ng-class="{'nav-selected': state.indexOf('root.posts') == 0}")
+			i.mdi.mdi.mdi-newspaper.sidebar-icon
+			p.sidebar-selection News 	
+		md-list-item(ng-click="goTo($event, 'root.faq')" ng-class="{'nav-selected': state == 'root.faq'}")
+			i.mdi.mdi.mdi-help.sidebar-icon
+			p.sidebar-selection FAQ
+		md-list-item(ng-click="goTo($event, 'root.about')" ng-class="{'nav-selected': state == 'root.about'}")
+			i.mdi.mdi.mdi-school.sidebar-icon
+			p.sidebar-selection About
+		md-divider(style="padding-top:5px;padding-bottom:5px;")
+		md-subheader.md-no-sticky Listen
+		md-list-item(ng-click="goTo($event, 'root.albums.index')" ng-class="{'nav-selected': state.indexOf('root.albums') == 0}")
+			i.mdi.mdi.mdi-headphones.sidebar-icon
+			p.sidebar-selection Albums
+		md-list-item(ng-click="goTo($event, 'root.artists.index')" ng-class="{'nav-selected': state.indexOf('root.artists') == 0}")
+			i.mdi.mdi.mdi-account-circle.sidebar-icon
+			p.sidebar-selection Artists	
+		md-list-item(ng-click="goTo($event, 'root.playlists.index')" ng-class="{'nav-selected': state.indexOf('root.playlists') == 0}")
+			i.mdi.mdi.mdi-database.sidebar-icon
+			p.sidebar-selection Playlists
+		md-list-item(ng-click="goTo($event, 'root.producers.index')" ng-class="{'nav-selected': state.indexOf('root.producers') == 0}")
+			i.mdi.mdi.mdi-account-outline.sidebar-icon
+			p.sidebar-selection Producers
+		md-list-item(ng-click="goTo($event, 'root.tracks.index')" ng-class="{'nav-selected': state.indexOf('root.tracks') == 0}")
+			i.mdi.mdi.mdi-music-note.sidebar-icon
+			p.sidebar-selection Tracks
+	div#now-playing(layout="row")
+		img(ng-src="{{track.album.cover_image.thumb.url}}")
+		div(layout="column")
+			div.scroll-box
+				div.scroll-text {{track.title}}
+			div.scroll-box
+				div.scroll-text
+					a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+						|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}

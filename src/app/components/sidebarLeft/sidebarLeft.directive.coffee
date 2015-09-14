@@ -4,12 +4,17 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {}
       templateUrl: 'app/components/sidebarLeft/sidebar-left.html'
-      controller: ($scope, $element, $timeout, $mdSidenav) ->
+      controller: ($scope, $element, $timeout, $mdSidenav, $state) ->
+        $scope.state = $state.current.name
         $scope.$on "trackplaying", (e, track) ->
           $scope.track = track
 
         $scope.close = () ->
           $mdSidenav("left").close()
+
+        $scope.goTo = (e, state) ->
+          $state.go(state, {}, {reload: true})
+          $scope.close()
 
         scrollBoxes = $element.find(".scroll-box")
 

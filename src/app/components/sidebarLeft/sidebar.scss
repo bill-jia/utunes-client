@@ -1,6 +1,10 @@
-.side-button {
-  margin-left: auto;
-  margin-right: auto;
+.sidebar-icon {
+  font-size: 26px;
+  margin-right: 26px;
+}
+
+.sidebar-selection {
+  font-size: 22px;
 }
 
 #image-box {
@@ -22,4 +26,8 @@
 
 .sidebar-content {
   margin: 10px;
+}
+
+.nav-selected {
+  color: #2979FF;
 }

@@ -16,7 +16,7 @@ angular.module "uTunes"
           $scope.template = if ($scope.template == $scope.login) then $scope.signup else $scope.login
 
         $scope.submitLogin = (loginForm)->
-          $auth.submitLogin(loginForm).then((resp)->).catch((resp)->)
+          $auth.submitLogin(loginForm).then((resp)->$scope.close()).catch((resp)->)
 
         $scope.signOut = () ->
           $auth.signOut().then((resp)->).catch((resp)->)
