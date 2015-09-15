@@ -1,10 +1,12 @@
 md-content(layout-padding="" style="padding: 24px;")
-	h1 News
-	md-card
-		img.md-card-image(ng-src="{{post.cover_image.url}}")
+	h1 
+		a(ui-sref="root.posts.index") News
+	md-card.md-whiteframe-z3
+		img(ng-src="{{post.cover_image.url}}")
 		md-card-content
-			h2.md-title {{post.title}}
-			h3.md-title.md-primary {{post.author}} {{post.updated_at | date:"medium"}}
+			h2.md-title.md-card-title
+				a(ui-sref="root.posts.show({postId: post.id})") {{post.title}}
+			h2.md-subheader.md-card-subheader {{post.author}} {{post.updated_at | date:"medium"}}
 			div.article(ng-bind-html="post.content")
 		div.md-actions(layout="row" layout-align = "end center")
 			md-button.md-raised.md-primary(ui-sref="root.posts.edit({postId: post.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Edit

@@ -11,6 +11,7 @@ app.directive 'trackTable', () ->
     controller: ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService) ->
       orderBy = $filter('orderBy')
       $scope.tablePage = 0
+      $scope.playingTrack = null
       sortable =   ["track_number", "title", "artists", "album", "length_in_seconds"]
       # console.dir $scope.tracks
 
@@ -49,7 +50,6 @@ app.directive 'trackTable', () ->
         $scope.tablePage = page
 
       $scope.playTrack = (index, $event) ->
-        console.dir($scope.tracks[index])
         onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count)
 
       originatorEv = null
@@ -82,11 +82,29 @@ app.directive 'trackTable', () ->
           () ->
             console.log "Dialog closed"
         )
+
+      $scope.$on "trackplaying", (e, track) ->
+        console.log "Track playing"
+        $scope.playingTrack = track
+        console.log $scope.playingTrack.id
 app.filter('startFrom', () ->
   (input, start) ->
     start = +start
     input.slice start
 )
+
+# app.directive('mdColresize', ($timeout) ->
+#   restrict: "A",
+#   link: (scope, element, attrs) ->
+#     scope.$evalAsync( ()->
+#       $timeout(()->
+#         $(element).colResizable(
+#           liveDrag: true
+#           fixed: true
+#         )
+#       ,100)
+#     )
+# )
 
 DialogController = ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->

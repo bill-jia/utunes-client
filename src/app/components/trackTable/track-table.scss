@@ -1,0 +1,44 @@
+.md-table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.md-table-header {
+  border-bottom: 1px solid rgb(230,230,230);
+  text-align: left;
+  padding: 16px 16px 16px 4px;
+}
+
+.md-table tbody tr:hover, .md-table tbody tr:focus {
+  cursor:pointer;
+  background-color:rgba(130,177,255,0.2);
+}
+
+.md-table-content {
+  white-space: nowrap;
+  padding: 16px 16px 16px 4px;
+  height: 40px;
+}
+
+.track-focus{
+  background-color:rgba(130,177,255,0.2);
+}
+
+.md-table-footer {
+  height:40px;
+  padding-left: 16px;
+  padding-right: 32px;
+}
+
+.md-table-count-info {
+  line-height:40px;
+  vertical-align:middle;
+}
+
+.md-table-footer-item {
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  vertical-align:middle;
+  margin: 0;
+}

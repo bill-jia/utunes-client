@@ -56,6 +56,11 @@ a {
   min-height: 800px;
 }
 
+#main-content {
+  width: 60%;
+  margin: auto;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
