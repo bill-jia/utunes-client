@@ -4,6 +4,4 @@ angular.module "uTunes"
     $rootScope.$on "auth:login-success", () ->
     $rootScope.$on "auth:account-update-success", () ->
       $state.go "root.home"
-    $rootScope.$on "auth:logout-success", () ->
-      $state.go "root.home"
   ])

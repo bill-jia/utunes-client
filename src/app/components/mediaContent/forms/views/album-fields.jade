@@ -13,3 +13,6 @@ ng-form(name="form" novalidate)
     {{album.file.name}}
     div(ng-messages="album.file.$error")
       div(ng-show="album.file.$error=='pattern'") An image is required.
+  md-input-container
+    label Description
+    textarea(id="album-description" name="description" type="text" ng-model="album.description" md-maxlength="625")

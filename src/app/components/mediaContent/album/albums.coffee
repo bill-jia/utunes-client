@@ -7,8 +7,8 @@ app.controller("AlbumIndexController", ["$scope", "AlbumService",
     )
 ])
 
-app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService", "TrackService",
-  ($scope, $stateParams, AlbumService, TrackService) ->
+app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService", "TrackService", "onSelectTrack",
+  ($scope, $stateParams, AlbumService, TrackService, onSelectTrack) ->
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
@@ -41,7 +41,14 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         field: 'length_in_seconds'
       }
     ]
+    $scope.$watch('user', (newValue)->
+      if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
+        $scope.headers.push {name: "Download", field: "download"}
+    , true)
     $scope.count=25
+
+    $scope.playAlbum = () ->
+      onSelectTrack.broadcast($scope.tracks, 0)
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",

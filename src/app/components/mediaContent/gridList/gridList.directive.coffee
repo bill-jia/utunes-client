@@ -4,6 +4,7 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {
         items: "="
+        type: "="
       }
       templateUrl: 'app/components/mediaContent/gridList/grid-list.html'
       link: (scope, element, attrs) ->
@@ -11,22 +12,16 @@ angular.module "uTunes"
           tiles = []
           for item in items
             # console.dir item
-            tile = angular.extend({}, {title: "", year: "", image: "", type: "", id: ""})
+            tile = angular.extend({}, {title: "", year: "", image: "", id: ""})
             tile.id = item.id
-            if item.name
-              tile.title = item.name
-              tile.type = "artist"
-            else
+            if scope.type == "album"
               tile.title = item.title
-              tile.type = "album"
-            if item.class_year
-              tile.year = item.class_year
-            else
               tile.year = item.year
-            if item.profile_picture
-              tile.image = item.profile_picture
-            else
               tile.image = item.cover_image
+            else
+              tile.title = item.name
+              tile.year = item.class_year
+              tile.image = item.profile_picture
 
             tiles.push tile
 
@@ -36,7 +31,6 @@ angular.module "uTunes"
         scope.$watch('items', (newValue)->
           if newValue
             scope.tiles = buildGridModel(scope.items)
-            console.dir scope.items
         , true)
 
           # console.dir $scope.tiles

@@ -6,6 +6,17 @@ md-grid-list .md-primary.md-hue-1 {
     border: 5px dashed #7986CB;
 }
 
-md-grid-tile-footer.custom-tile-footer {
-  background-color: rgba(0, 0, 0, 0.3);
+.album-show-image {
+  height: 250px;
+  width: auto;
+  margin-top: 24px;
+}
+
+.album-title {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
+.album-subtitle {
+  margin-bottom: 16px;
 }

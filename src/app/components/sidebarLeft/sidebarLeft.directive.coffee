@@ -13,7 +13,7 @@ angular.module "uTunes"
           $mdSidenav("left").close()
 
         $scope.goTo = (e, state) ->
-          $state.go(state, {}, {reload: true})
+          $state.go(state, {}, {reload: false})
           $scope.close()
 
         scrollBoxes = $element.find(".scroll-box")

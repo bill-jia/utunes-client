@@ -30,7 +30,7 @@ app.directive 'trackTable', () ->
           $scope.tracks = orderBy($scope.tracks, predicate, reverse)
 
         $scope.predicate = predicate
-      $scope.order("title", false)
+      $scope.order("track_number", false)
       orderByArtists = (track) ->
         artistArray = []
         for artist in track.artists

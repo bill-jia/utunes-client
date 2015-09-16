@@ -1,8 +1,11 @@
 md-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
   md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.large.url}})',     'background-repeat': 'no-repeat', 'background-size': 'cover'}")
     md-grid-tile-footer.custom-tile-footer
-      md-button(ng-if="tile.type=='album'" ui-sref="root.albums.show({albumId:tile.id})")
-        |{{tile.title}}
-      md-button(ng-if="tile.type=='artist'" ui-sref="root.artists.show({artistId:tile.id})")
-        |{{tile.title}}
-      {{tile.year}}
+      div(layout="column")
+        md-button.md-grid-button(ng-if="type=='album'" ui-sref="root.albums.show({albumId:tile.id})")
+          |{{tile.title | cut: title.title:false:19}}
+        md-button.md-grid-button(ng-if="type=='artist'" ui-sref="root.artists.show({artistId:tile.id})")
+          |{{tile.title | cut: false:18}}
+        md-button.md-grid-button(ng-if="type=='producer'" ui-sref="root.producers.show({producerId:tile.id})")
+          |{{tile.title | cut: title.title:false:19}}  
+        div.tile-year {{tile.year}}

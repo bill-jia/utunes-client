@@ -23,7 +23,9 @@ angular.module "uTunes"
           $auth.submitLogin(loginForm).then((resp)->$scope.close()).catch((resp)->)
 
         $scope.signOut = () ->
-          $auth.signOut().then((resp)->).catch((resp)->)
+          $auth.signOut().then((resp)->
+            $state.go("root.home", {}, {reload: true})
+          ).catch((resp)->)
 
         $scope.handleRegBtnClick = (registrationForm) ->
           console.log "Registration"
