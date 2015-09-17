@@ -21,7 +21,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         track.artists = TrackService.getArtists(track.id).$object
         track.album = AlbumService.getAlbum(track.album_id).$object
     )
-    
+
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
       if producers.length > 0
         $scope.producers = producers
@@ -233,7 +233,6 @@ AlbumDeleteDialogController = ($scope, $mdDialog) ->
     $mdDialog.cancel()
 
   $scope.answer = (answer) ->
-    console.log answer
     $mdDialog.hide(answer)
 
 app.config(["$stateProvider",

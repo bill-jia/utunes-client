@@ -6,6 +6,6 @@ md-content(layout-padding="" style="padding: 24px;")
 		form(name="parentForm")
 			producer-fields(register-form-scope="registerFormScope" producer="producer" edit = "producerEdit")
 			md-input-container(layout="row")
-				md-button.md-raised.md-warn(ng-click="delete()") Delete
+				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
 				md-progress-circular(md-mode="indeterminate" ng-show="formSending")

@@ -1,9 +1,10 @@
 md-content#artist-show(layout-padding="" style="padding: 24px;")
-	md-content(layout-padding="" layout="row")
+	md-content(layout-padding="" layout="row" flex)
 		h1.md-primary.album-title {{artist.name}} {{artist.class_year}}
+		span(flex)
 		md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
 			|Edit artist
-	md-content.article.primary-content(layout-padding="")
+	md-content.article.primary-content(layout-padding="" ng-if="artist.bio || artist.profile_picture.url")
 		img.md-whiteframe-z2.person-show-image(ng-src="{{artist.profile_picture.url}}")
 		{{artist.bio}}
 	img(ng-src="{{artist.profile_picture.large.url}}")

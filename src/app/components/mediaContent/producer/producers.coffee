@@ -5,6 +5,7 @@ app.controller("ProducerIndexController", ["$scope", "ProducerService",
     ProducerService.listProducers().then((producers) ->
       $scope.producers = producers
       )
+    $scope.count = 24
 ])
 
 app.controller("ProducerShowController", ["$scope", "$stateParams", "ProducerService", "TrackService",
@@ -12,14 +13,17 @@ app.controller("ProducerShowController", ["$scope", "$stateParams", "ProducerSer
 
     ProducerService.getProducer($stateParams.producerId).then((producer) ->
       $scope.producer = producer
+      console.dir $scope.producer
     )
     ProducerService.getAlbums($stateParams.producerId).then((albums) ->
       $scope.albums = albums
     )
+
+    $scope.albumCount = 6
 ])
 
-app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "ProducerService",
-  ($scope, $state, $stateParams, ProducerService) ->
+app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "ProducerService", "$mdDialog",
+  ($scope, $state, $stateParams, ProducerService, $mdDialog) ->
     ProducerService.getProducer($stateParams.producerId).then((producer) ->
       $scope.producer = producer
     )
@@ -45,7 +49,30 @@ app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "P
       $scope.producer.remove().then(() ->
         $state.go("root.producers.index", {}, {reload: true})
       )
+
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: ProducerDeleteDialogController
+          templateUrl: "app/components/mediaContent/producer/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+    )
 ])
+
+ProducerDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider",
   ($stateProvider) ->
