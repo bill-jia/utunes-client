@@ -5,11 +5,14 @@ angular.module "uTunes"
       scope: {
         items: "="
         type: "="
+        count: "="
       }
       templateUrl: 'app/components/mediaContent/gridList/grid-list.html'
       link: (scope, element, attrs) ->
         scope.reverse = 0
+        scope.tablePage = 0
         scope.orderProp = "title"
+        
         buildGridModel = (items) ->
           tiles = []
           for item in items
@@ -30,6 +33,16 @@ angular.module "uTunes"
           return tiles
         # scope.$on "elementsloaded", (e, items) ->
         #   console.log "Elements received"
+
+        scope.numberOfPages = () ->
+          Math.ceil(scope.tiles.length/scope.count)
+
+        scope.getNumber = (number) ->
+          new Array(number)
+
+        scope.goToPage = (page) ->
+          scope.tablePage = page
+
         scope.$watch('items', (newValue)->
           if newValue
             scope.props = []

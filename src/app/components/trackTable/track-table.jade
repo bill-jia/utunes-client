@@ -1,4 +1,4 @@
-table.md-table()
+table.md-table
   thead
     tr.md-table-headers-row
       th.md-table-header(ng-repeat="header in headers")
@@ -31,7 +31,7 @@ table.md-table()
             div(ng-if="header.field == 'remove'")
               a(href="#" ng-click="track._remove = true" stop=event="click") X
 
-.md-table-footer(layout="row")
+div.md-table-footer(layout="row")
   span.md-table-count-info Tracks per page: 
     a(href="#" ng-click="goToPage(0); count = 10") 10
     | , 
@@ -42,7 +42,7 @@ table.md-table()
     a(href="#" ng-click="goToPage(0); count = 100") 100
     | , 
     a(href="#" ng-click="goToPage(0); count = tracks.length") All
-    | (current is {{count}})
+    |&nbsp;(current is {{count}})
   span(flex)
   span(ng-show="numberOfPages() > 1")
     md-button.md-table-footer-item.md-primary.md-hue-2(ng-disabled="tablePage==0" ng-click="goToPage(0)" aria-label="First Page")

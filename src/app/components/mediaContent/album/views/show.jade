@@ -2,20 +2,20 @@ md-content#album-show(layout-padding="" style="padding: 30px;" ng-show="album")
 	div(layout="row")
 		div(ng-if="album.cover_image.url")
 			img.md-whiteframe-z2.album-show-image(ng-src="{{album.cover_image.url}}")
-		md-content(layout-padding="")
+		md-content.primary-content(layout-padding="")
 			div(layout="row")
 				h1.md-primary.album-title {{album.title}}
 				md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")		
 					|Edit album
 			div(layout="row")
-				p.md-subheader.album-subtitle {{album.year}} &nbsp&bull;&nbsp {{album.tracks_count}} tracks &nbsp&bull;&nbsp  {{album.duration*1000 | time}}
+				p.md-subheader.album-subtitle {{album.year}} &nbsp&bull;&nbsp {{album.tracks_count}} {{album.tracks_count == 1 ? 'track' : 'tracks'}} &nbsp&bull;&nbsp  {{album.duration*1000 | time}}
 			div.article(ng-bind-html="album.description")
 			md-button.md-raised.md-accent(ng-click="playAlbum()") Play album			
 
-	md-content#album-producers(layout-padding="")
+	md-content.primary-content#album-producers(layout-padding="")
 		h2.md-primary Producers
 		div(style="padding-bottom: 24px;")
-			grid-list(items="producers" type="'producer'")
-	md-content#album-tracks
+			grid-list(items="producers" type="'producer'" count="producerCount")
+	md-content.primary-content#album-tracks
 		h2.md-primary Tracks
-		x-track-table(tracks="tracks" headers="headers" count="count")
+		x-track-table(tracks="tracks" headers="headers" count="trackCount")

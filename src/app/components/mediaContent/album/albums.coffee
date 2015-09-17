@@ -5,6 +5,7 @@ app.controller("AlbumIndexController", ["$scope", "AlbumService",
     AlbumService.listAlbums().then((albums) ->
       $scope.albums = albums
     )
+    $scope.count = 24
 ])
 
 app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService", "TrackService", "onSelectTrack",
@@ -45,7 +46,8 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
       if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
         $scope.headers.push {name: "Download", field: "download"}
     , true)
-    $scope.count=25
+    $scope.trackCount=25
+    $scope.producerCount = 6
 
     $scope.playAlbum = () ->
       onSelectTrack.broadcast($scope.tracks, 0)
@@ -97,8 +99,8 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         album.tracks.splice(index,1)
 ])
 
-app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService"
-  ($scope, $state, $stateParams, AlbumService, TrackService) ->
+app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService", "$mdDialog",
+  ($scope, $state, $stateParams, AlbumService, TrackService, $mdDialog) ->
     $scope.trackNumbers = []
 
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
@@ -189,12 +191,36 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
         $state.go("root.albums.show", {"albumId": $stateParams.albumId})
       )
 
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: AlbumDeleteDialogController
+          templateUrl: "app/components/mediaContent/album/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+      )
+
     $scope.delete = () ->
       $scope.formSending = true
       $scope.album.remove().then(() ->
         $state.go("root.albums.index", {}, {reload: true})
       )
 ])
+
+AlbumDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    console.log answer
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider",
   ($stateProvider) ->

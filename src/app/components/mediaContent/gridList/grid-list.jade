@@ -9,7 +9,7 @@ div#options(layout="row")
       md-option(value="{{0}}") Ascending
       md-option(value="{{1}}") Descending
 md-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
-  md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles | orderBy:orderProp:reverse==1" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.url}})', 'background-repeat': 'no-repeat', 'background-size': 'cover'}")
+  md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles | orderBy:orderProp:reverse==1 | startFrom:tablePage*count | limitTo: count" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.url}})', 'background-repeat': 'no-repeat', 'background-size': 'cover'}")
     md-grid-tile-footer.custom-tile-footer
       div(layout="column")
         md-button.md-grid-button(ng-if="type=='album'" ui-sref="root.albums.show({albumId:tile.id})")
@@ -19,3 +19,28 @@ md-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-h
         md-button.md-grid-button(ng-if="type=='producer'" ui-sref="root.producers.show({producerId:tile.id})")
           |{{tile.title | cut: title.title:false:19}}  
         div.tile-year {{tile.year}}
+
+div.grid-list-footer(layout="row")
+  span.md-table-count-info Items per page: 
+    a(href="#" ng-click="goToPage(0); count = 6") 6
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 12") 12
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 24") 24
+    | , 
+    a(href="#" ng-click="goToPage(0); count = 48") 48
+    | , 
+    a(href="#" ng-click="goToPage(0); count = tiles.length") All
+    |&nbsp;(current is {{count}})
+  span(flex)
+  span(ng-show="numberOfPages() > 1")
+    md-button.md-table-footer-item.md-primary.md-hue-2(ng-disabled="tablePage==0" ng-click="goToPage(0)" aria-label="First Page")
+      i.mdi.mdi-chevron-double-left
+    md-button.md-table-footer-item.md-primary.md-hue-2(ng-disabled="tablePage==0" ng-click="goToPage(tablePage-1)" aria-label="Previous Page")
+      i.mdi.mdi-chevron-left
+    md-button.md-table-footer-item.md-primary.md-hue-2(href='#' ng-repeat='i in getNumber(numberOfPages()) track by $index' ng-click="goToPage($index)")
+      | {{$index+1}} 
+    md-button.md-table-footer-item.md-primary.md-hue-2(ng-disabled="tablePage==numberOfPages()-1" ng-click="goToPage(tablePage+1)" aria-label="Next Page")
+      i.mdi.mdi-chevron-right
+    md-button.md-table-footer-item.md-primary.md-hue-2(ng-disabled="tablePage==numberOfPages()-1" ng-click="goToPage(numberOfPages-1)")
+      i.mdi.mdi-chevron-double-right

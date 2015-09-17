@@ -87,24 +87,6 @@ app.directive 'trackTable', () ->
         console.log "Track playing"
         $scope.playingTrack = track
         console.log $scope.playingTrack.id
-app.filter('startFrom', () ->
-  (input, start) ->
-    start = +start
-    input.slice start
-)
-
-# app.directive('mdColresize', ($timeout) ->
-#   restrict: "A",
-#   link: (scope, element, attrs) ->
-#     scope.$evalAsync( ()->
-#       $timeout(()->
-#         $(element).colResizable(
-#           liveDrag: true
-#           fixed: true
-#         )
-#       ,100)
-#     )
-# )
 
 DialogController = ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->

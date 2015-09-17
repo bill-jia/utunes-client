@@ -5,6 +5,7 @@ app.controller("ArtistIndexController", ["$scope", "ArtistService",
     ArtistService.listArtists().then((artists) ->
       $scope.artists = artists.plain()
     )
+    $scope.count = 24
 ])
 
 app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService", "TrackService", "AlbumService",
@@ -41,11 +42,12 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
         field: 'length_in_seconds'
       }
     ]
-    $scope.count = 25
+    $scope.trackCount = 25
+    $scope.albumCount = 6
 ])
 
-app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService",
-  ($scope, $state, $stateParams, ArtistService) ->
+app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService", "$mdDialog",
+  ($scope, $state, $stateParams, ArtistService, $mdDialog) ->
     ArtistService.getArtist($stateParams.artistId).then((artist) ->
       $scope.artist = artist
     )
@@ -66,12 +68,37 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
         $state.go("root.artists.show", {"artistId": $stateParams.artistId})
       )
 
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: ArtistDeleteDialogController
+          templateUrl: "app/components/mediaContent/artist/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.artist.delete_associated_tracks = answer[0]
+          $scope.delete()
+        () ->
+      )
     $scope.delete = () ->
       $scope.formSending = true
       $scope.artist.remove({delete_associated_tracks: $scope.artist.delete_associated_tracks}).then(() ->
         $state.go("root.artists.index", {}, {reload: true})
       )
 ])
+
+ArtistDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.deleteAssociatedTracks = false
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    console.log answer
+    $mdDialog.hide([answer])
 
 app.config(["$stateProvider",
   ($stateProvider) ->

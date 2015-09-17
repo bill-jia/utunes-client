@@ -1,5 +1,5 @@
 ng-form(name="form" novalidate)
-  div(ng-hide="track._destroy")
+  div.primary-content(ng-hide="track._destroy")
     md-input-container
       label Track Number
       input(id="track-number" name="track_number" type="number" ng-model="track.track_number" required ui-validate="{unique: 'uniqueTrackNumber($value)'}")
@@ -21,14 +21,15 @@ ng-form(name="form" novalidate)
         div(ng-message="required") This field is required.
       div(ng-messages="track.file.$error")
         div(ng-show="track.file.$error=='pattern'") An HTML5-compliant audio file is required.
-    h3.md-primary Artists
-    ul(ng-repeat="artist in artists")
-      li(ng-hide="artist._remove") {{artist.name}} {{artist.class_year}}
-        a(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
-        a(href="#" ng-click="removeArtistAssociation(artist)") Remove association
-    div(ng-repeat="artist in track.artists" layout="row" ng-hide="artist._remove")
-      artist-fields(register-form-scope="registerFormScope" artist="artist" edit="artistEdit")
+    div.primary-content.nested-field
+      h3.md-primary Artists
+      ul(ng-repeat="artist in artists")
+        li(ng-hide="artist._remove") {{artist.name}} {{artist.class_year}}
+          a(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
+          a(href="#" ng-click="removeArtistAssociation(artist)") Remove association
+      div(ng-repeat="artist in track.artists" layout="row" ng-hide="artist._remove")
+        artist-fields(register-form-scope="registerFormScope" artist="artist" edit="artistEdit")
+        md-input-container
+          md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist
       md-input-container
-        md-button.md-raised.md-warn(ng-click="removeArtist($index, track)") X Remove Artist
-    md-input-container
-      md-button.md-raised.md-accent(ng-click="addArtist(track)") + Add Artist
+        md-button.md-raised.md-accent(ng-click="addArtist(track)") + Add Artist

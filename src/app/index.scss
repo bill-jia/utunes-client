@@ -65,6 +65,14 @@ h1.md-primary, h2.md-primary, h3.md-primary {
   color: #3949ab;
 }
 
+.primary-content {
+  margin-bottom: 48px;
+}
+
+.nested-field {
+  margin-left: 36px;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
