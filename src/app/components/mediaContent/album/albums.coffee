@@ -21,7 +21,8 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         track.album = AlbumService.getAlbum(track.album_id).$object
     )
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
-      $scope.producers = producers
+      if producers.size > 0
+        $scope.producers = producers
     )
 
     $scope.headers = [

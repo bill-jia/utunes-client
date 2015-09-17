@@ -1,12 +1,15 @@
 md-content#artist-show(layout-padding="" style="padding: 24px;")
-	h1 {{artist.name}} {{artist.class_year}}
-	md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
-		|Edit this artist
-	div.article {{artist.bio}}
+	md-content(layout-padding="" layout="row")
+		h1.md-primary.album-title {{artist.name}} {{artist.class_year}}
+		md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
+			|Edit artist
+	md-content.article.primary-content(layout-padding="")
+		img.md-whiteframe-z2.person-show-image(ng-src="{{artist.profile_picture.url}}")
+		{{artist.bio}}
 	img(ng-src="{{artist.profile_picture.large.url}}")
-	div#artist-albums
-		h2 Albums
-		grid-list(items="albums")
-	div#artist-tracks
-		h2 Tracks
-		x-track-table(tracks="tracks" headers="headers" count="count")
+	md-content.primary-content#artist-albums(layout-padding="")
+		h2.md-primary Albums
+		grid-list(items="albums" type="'album'" count="albumCount")
+	md-content.primary-content#artist-tracks(layout-padding="")
+		h2.md-primary Tracks
+		x-track-table(tracks="tracks" headers="headers" count="trackCount")

@@ -1,9 +1,9 @@
 md-content(layout-padding="" style="padding: 24px;")
-	md-content(layout-padding="")
+	md-content(layout-padding="" flex)
 		div(layout="row")
 			h1.md-primary.album-title Albums
-			md-button.md-raised.md-accent(ui-sref="root.albums.new" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
-				|Add album
+			span(flex)
+			md-button.md-raised.md-accent(ui-sref="root.albums.new" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Add album
 
 	md-content(layout-padding="")
 		grid-list(items="albums" type="'album'" count="count")
