@@ -7,11 +7,13 @@ md-content(layout-padding="" style="padding: 24px;")
 			album-fields(register-form-scope="registerFormScope" album="album" edit="albumEdit")
 			
 			h2.md-primary Producers
-			ul(ng-repeat="producer in producers")
-				li(ng-hide="producer._remove")
-					a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}			
-					a(ui-sref="root.producers.edit({producerId: producer.id})") Edit Producer
-					a(href="#" ng-click="removeProducerAssociation(producer)") Remove Association
+			div(ng-repeat="producer in producers" ng-hide="producer._remove" layout="row" flex)
+					span.producer-link
+						a(ui-sref="root.producers.show({producerId: producer.id})") {{producer.name}} {{producer.class_year}}
+					span(flex)
+					span.producer-options
+						md-button.md-raised.md-accent(ui-sref="root.producers.edit({producerId: producer.id})") Edit Producer
+						md-button.md-raised.md-warn(href="#" ng-click="removeProducerAssociation(producer)) Remove Association") Remove association
 			div(ng-repeat="producer in album.producers" layout="row" ng-hide="producer._remove")
 				producer-fields(register-form-scope="registerFormScope" producer="producer" edit="producerEdit")
 				md-input-container

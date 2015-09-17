@@ -14,14 +14,16 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
     AlbumService.getAlbum($stateParams.albumId).then((album) ->
       $scope.album = album
     )
+
     AlbumService.getTracks($stateParams.albumId).then((tracks) ->
       $scope.tracks = tracks
       for track in $scope.tracks
         track.artists = TrackService.getArtists(track.id).$object
         track.album = AlbumService.getAlbum(track.album_id).$object
     )
+    
     AlbumService.getProducers($stateParams.albumId).then((producers) ->
-      if producers.size > 0
+      if producers.length > 0
         $scope.producers = producers
     )
 
