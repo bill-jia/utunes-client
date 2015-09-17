@@ -37,6 +37,7 @@ angular.module "uTunes"
               title: formData.title
               year: formData.year
               description: formData.description
+              cover_designer: formData.cover_designer
               producers: formData.producers
               tracks: formData.tracks
         console.log "Uploader"

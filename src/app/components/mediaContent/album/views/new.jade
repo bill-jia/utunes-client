@@ -3,6 +3,10 @@ md-content(layout-padding="" style="padding: 24px;")
 		h1.md-primary Add an album
 	md-content(layout-padding="" layout="row")
 		form(name="parentForm" novalidate)
+			md-input-container
+				input(name="tracksLength" ng-model="tracksLength" style="display:none;" ui-validate="{hastracks: 'hasTracks($value)'}")
+				div(ng-messages="parentForm.tracksLength.$error")
+					div(ng-message="hastracks") Album must have at least one track
 			md-content.primary-content
 				album-fields(register-form-scope="registerFormScope" album="album" edit="albumEdit")
 			md-content.primary-content.nested-field

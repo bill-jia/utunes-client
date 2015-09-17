@@ -98,6 +98,17 @@ app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
         track._destroy = true
       else
         album.tracks.splice(index,1)
+      console.dir $scope.album
+
+    $scope.hasTracks = (value) ->
+      if value > 0
+        return true
+      else
+        return false
+
+    $scope.$watch((() -> $scope.album.tracks.length), (newValue)->
+      $scope.tracksLength = newValue
+    , true)
 ])
 
 app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService", "$mdDialog",

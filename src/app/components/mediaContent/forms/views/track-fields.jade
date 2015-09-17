@@ -17,7 +17,7 @@ ng-form(name="form" novalidate)
       div.drop-box(id="track-audio" name = "file" type="file" ngf-select ngf-drop ngf-drag-over-class="dragover" ngf-pattern="'.mp3,.ogg,.wav'" ng-model="track.file" required)  Drag and drop or click to upload
       p {{track.file.name}}
       audio#new-track-audio(ngf-src="track.file") 
-      div(ng-messages="form.audio.$error")
+      div(ng-messages="form.file.$error")
         div(ng-message="required") This field is required.
       div(ng-messages="track.file.$error")
         div(ng-show="track.file.$error=='pattern'") An HTML5-compliant audio file is required.

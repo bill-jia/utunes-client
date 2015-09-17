@@ -15,6 +15,10 @@ ng-form(name="form" novalidate)
     {{album.file.name}}
     div(ng-messages="album.file.$error")
       div(ng-show="album.file.$error=='pattern'") An image is required.
+    label Cover image designer
+    input(id="cover-designer" name="cover_designer" type="text" ng-model="album.cover_designer")
   md-input-container
     label Description
     textarea(id="album-description" name="description" type="text" ng-model="album.description" md-maxlength="625")
+    div(ng-messages="form.description.$error")
+      div(ng-message="md-maxlength") Max length: 625 characters

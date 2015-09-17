@@ -12,7 +12,8 @@ md-content#album-show(layout-padding="" style="padding: 30px;" ng-show="album")
 			div(layout="row")
 				p.md-subheader.album-subtitle 
 					span(ng-if="album.year"){{album.year}} &nbsp&bull;&nbsp
-					{{album.tracks_count}} {{album.tracks_count == 1 ? 'track' : 'tracks'}} &nbsp&bull;&nbsp  {{album.duration*1000 | time}}
+					{{album.tracks_count}} {{album.tracks_count == 1 ? 'track' : 'tracks'}} &nbsp&bull;&nbsp {{album.duration*1000 | time}} 
+					span(ng-if="album.cover_designer")&nbsp&bull;&nbsp Cover design:  {{album.cover_designer}}
 			div.article(ng-bind-html="album.description")
 		
 
