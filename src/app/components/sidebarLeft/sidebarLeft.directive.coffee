@@ -5,9 +5,12 @@ angular.module "uTunes"
       scope: {}
       templateUrl: 'app/components/sidebarLeft/sidebar-left.html'
       controller: ($scope, $element, $timeout, $mdSidenav, $state) ->
-        $scope.state = $state.current.name
         $scope.$on "trackplaying", (e, track) ->
           $scope.track = track
+
+        $scope.$watch((()-> $state.current.name), (newValue)->
+          $scope.state = $state.current.name
+        , true)
 
         $scope.close = () ->
           $mdSidenav("left").close()

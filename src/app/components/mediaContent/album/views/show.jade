@@ -1,8 +1,8 @@
-md-content#album-show(layout-padding="" style="padding: 30px;")
+md-content#album-show(layout-padding="" style="padding: 30px;" ng-show="album")
 	div(layout="row")
-		div
+		div(ng-if="album.cover_image.url")
 			img.md-whiteframe-z2.album-show-image(ng-src="{{album.cover_image.url}}")
-		md-content(layout-padding="" style="padding-left: 24px;")
+		md-content(layout-padding="")
 			div(layout="row")
 				h1.md-primary.album-title {{album.title}}
 				md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")		
@@ -12,10 +12,10 @@ md-content#album-show(layout-padding="" style="padding: 30px;")
 			div.article(ng-bind-html="album.description")
 			md-button.md-raised.md-accent(ng-click="playAlbum()") Play album			
 
-	div#album-producers
+	md-content#album-producers(layout-padding="")
 		h2.md-primary Producers
-		md-content(layout-padding="" style="padding-bottom: 24px;")
+		div(style="padding-bottom: 24px;")
 			grid-list(items="producers" type="'producer'")
-	div#album-tracks
+	md-content#album-tracks
 		h2.md-primary Tracks
 		x-track-table(tracks="tracks" headers="headers" count="count")

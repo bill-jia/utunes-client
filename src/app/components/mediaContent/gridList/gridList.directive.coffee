@@ -8,6 +8,8 @@ angular.module "uTunes"
       }
       templateUrl: 'app/components/mediaContent/gridList/grid-list.html'
       link: (scope, element, attrs) ->
+        scope.reverse = 0
+        scope.orderProp = "title"
         buildGridModel = (items) ->
           tiles = []
           for item in items
@@ -30,6 +32,29 @@ angular.module "uTunes"
         #   console.log "Elements received"
         scope.$watch('items', (newValue)->
           if newValue
+            scope.props = []
+            if scope.type == "album"
+              scope.props = [
+                {
+                  name: "Title"
+                  field: "title"
+                }
+                {
+                  name: "Year"
+                  field: "year"
+                }
+              ]
+            else
+              scope.props = [
+                {
+                  name: "Name"
+                  field: "title"
+                }
+                {
+                  name: "Class Year"
+                  field: "year"
+                }
+              ]
             scope.tiles = buildGridModel(scope.items)
         , true)
 

@@ -114,3 +114,16 @@ app.directive 'mdContextMenu', [
         return
       return
 ]
+
+app.directive "integer", () ->
+  require: "ngModel"
+  restrict: "A"
+  link: (scope, element, attrs, ctrl) ->
+    console.log "Integer validation"
+    INTEGER_REGEXP = /^\-?\d+$/
+    ctrl.$validators.integer = (modelValue, viewValue) ->
+      if ctrl.$isEmpty(modelValue)
+        return true
+      if INTEGER_REGEXP.test(viewValue)
+        return true
+      return false

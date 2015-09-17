@@ -1,17 +1,17 @@
 md-content(layout-padding="" style="padding: 24px;")
-	h1 Add an album
-
-	md-content(layout-padding="" layout="row" layout-sm="column")
+	md-content(layout-padding="")
+		h1.md-primary Add an album
+	md-content(layout-padding="" layout="row")
 		form(name="parentForm" novalidate)
 			album-fields(register-form-scope="registerFormScope" album="album" edit="albumEdit")
-			h2 Producers
+			h2.md-primary Producers
 			div(ng-repeat="producer in album.producers" layout="row")
 				producer-fields(register-form-scope="registerFormScope" producer="producer" edit="producerEdit")
 				md-input-container
 					md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") X Remove Producer
 			md-input-container
 				md-button.md-raised.md-accent(ng-click="addProducer()") + Add Producer		
-			h2 Tracks
+			h2.md-primary Tracks
 			div(ng-repeat="track in album.tracks" layout="row")
 				track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" tracks="album.tracks" track-numbers="trackNumbers")
 				md-input-container

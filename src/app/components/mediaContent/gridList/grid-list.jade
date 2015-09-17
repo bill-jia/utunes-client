@@ -1,5 +1,15 @@
+div#options(layout="row")
+  md-input-container.grid-list-sort
+    label Sort by:
+    md-select(ng-model="orderProp")
+      md-option(ng-repeat="prop in props" value="{{prop.field}}") {{prop.name}}
+  div(flex)  
+  md-input-container.grid-list-sort
+    md-select(ng-model="reverse")
+      md-option(value="{{0}}") Ascending
+      md-option(value="{{1}}") Descending
 md-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
-  md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.large.url}})',     'background-repeat': 'no-repeat', 'background-size': 'cover'}")
+  md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles | orderBy:orderProp:reverse==1" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.url}})', 'background-repeat': 'no-repeat', 'background-size': 'cover'}")
     md-grid-tile-footer.custom-tile-footer
       div(layout="column")
         md-button.md-grid-button(ng-if="type=='album'" ui-sref="root.albums.show({albumId:tile.id})")

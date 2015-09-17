@@ -13,9 +13,7 @@ angular.module "uTunes"
       templateUrl: 'app/components/mediaContent/forms/views/track-fields.html'
       link: (scope, element) ->
         scope.disabled = false
-        # console.dir scope.track
-
-
+        
         scope.addArtist = (track) ->
           unless track.artists
             track.artists = []
@@ -33,15 +31,9 @@ angular.module "uTunes"
           scope.track.artists.push artist
 
         scope.uniqueTrackNumber = (value) ->
-          # console.log "Comparison"
           trackNumbers = scope.trackNumbers.slice(0)
-          console.log "From existing tracks"
-          console.dir trackNumbers
           for track in scope.tracks
             trackNumbers.push track.track_number
-          # console.log trackNumbers
-          console.log "From potential tracks"
-          console.dir trackNumbers
           if trackNumbers.indexOf(value) == -1
             true
           else

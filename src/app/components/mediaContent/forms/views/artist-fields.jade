@@ -7,7 +7,15 @@ ng-form(name="form" novalidate)
         div(ng-message="required") This field is required
     md-input-container
       label Class Year
-      input(id="artist-class-year" name="class_year" type="number" ng-model="artist.class_year")
+      input(id="artist-class-year" name="class_year" type="text" ng-model="artist.class_year" integer)
+      div(ng-messages="form.class_year.$error")
+        div(ng-message="integer") Integers only
+    md-input-container(ng-if="edit")
+      h3.md-primary Profile picture
+      div.drop-box(id="profile-picture" name = "profile_picture" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="artist.file" ng-disabled="disabled") Drag and drop or click to upload
+      {{artist.file.name}}
+      div(ng-messages="artist.file.$error")
+        div(ng-show="artist.file.$error=='pattern'") An image is required.        
     md-input-container(ng-if="edit")
       label Bio
       textarea(id="artist-bio" name="bio" type="text" ng-model="artist.bio")
