@@ -10,5 +10,5 @@ md-content(layout-padding="" style="padding: 24px;")
       h2 Tracks      
       x-track-table(tracks="tracks" headers="headers" count="count")
     md-input-container(layout="row")
-      md-button.md-raised.md-warn(ng-click="delete()") Delete
+      md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
       md-button.md-raised.md-primary(ng-click="save()") Save    

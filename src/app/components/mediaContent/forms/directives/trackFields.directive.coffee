@@ -13,7 +13,7 @@ angular.module "uTunes"
       templateUrl: 'app/components/mediaContent/forms/views/track-fields.html'
       link: (scope, element) ->
         scope.disabled = false
-        
+
         scope.addArtist = (track) ->
           unless track.artists
             track.artists = []
@@ -32,11 +32,15 @@ angular.module "uTunes"
 
         scope.uniqueTrackNumber = (value) ->
           trackNumbers = scope.trackNumbers.slice(0)
-          for track in scope.tracks
-            trackNumbers.push track.track_number
+          console.dir trackNumbers
+          if scope.tracks
+            for track in scope.tracks
+              trackNumbers.push track.track_number
           if trackNumbers.indexOf(value) == -1
+            console.log "Valid"
             true
           else
+            console.log "Invalid"
             false
 
         $timeout(() ->
@@ -57,4 +61,8 @@ angular.module "uTunes"
           audio.onloadedmetadata = (e) ->
             scope.track.length_in_seconds = audio.duration
         )
+        scope.$watch('trackNumbers', (newValue)->
+          scope.trackNumbers = newValue
+          console.dir scope.trackNumbers
+        , true)
   ]

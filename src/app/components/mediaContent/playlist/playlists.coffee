@@ -47,6 +47,10 @@ app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumSer
         field: 'length_in_seconds'
       }
     ]
+    $scope.$watch('user', (newValue)->
+      if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
+        $scope.headers.push {name: "Download", field: "download"}
+    , true)
     $scope.count = 25
 ])
 
@@ -60,8 +64,8 @@ app.controller("PlaylistNewController", ["$scope", "PlaylistService", "$state",
       )
 ])
 
-app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$stateParams", "$state", "AlbumService", "TrackService",
-  ($scope, PlaylistService, $stateParams, $state, AlbumService, TrackService) ->
+app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$stateParams", "$state", "AlbumService", "TrackService", "$mdDialog",
+  ($scope, PlaylistService, $stateParams, $state, AlbumService, TrackService, $mdDialog) ->
     PlaylistService.getPlaylist($stateParams.playlistId).then((playlist) ->
       $scope.playlist = playlist
     )
@@ -106,11 +110,34 @@ app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$statePa
         # $state.go("root.playlists.show", {"playlistId": $stateParams.playlistId})
       )
 
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: PlaylistDeleteDialogController
+          templateUrl: "app/components/mediaContent/playlist/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          # $scope.delete()
+        () ->
+      )
+
     $scope.delete = () ->
       $scope.playlist.remove().then(() ->
         $state.go("root.playlists.index", {}, {reload: true})
       )
 ])
+
+PlaylistDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider

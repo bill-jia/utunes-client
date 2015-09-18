@@ -1,11 +1,10 @@
 md-content(layout-padding="" style="padding: 24px;")
-
-	h1 Edit {{track.title}}
-
+	md-content(layout-padding)
+		h1.md-primary Edit {{track.title}}
 	md-content(layout-padding="" layout="row" layout-sm="column")
 		form(name="parentForm")
-			track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit")
+			track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" track-numbers="trackNumbers")
 			md-input-container(layout="row")
-				md-button.md-raised.md-warn(ng-click="delete()") Delete
+				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
 				md-progress-circular(md-mode="indeterminate" ng-show="formSending")

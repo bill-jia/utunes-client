@@ -44,6 +44,10 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
     ]
     $scope.trackCount = 25
     $scope.albumCount = 6
+    $scope.$watch('user', (newValue)->
+      if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
+        $scope.headers.push {name: "Download", field: "download"}
+    , true)
 ])
 
 app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService", "$mdDialog",

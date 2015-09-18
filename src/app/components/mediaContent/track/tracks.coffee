@@ -29,15 +29,22 @@ app.controller("TrackIndexController", ["$scope", "TrackService", "AlbumService"
       }
     ]
     if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
+      $scope.headers.push {name: "Download", field: "download"}
       $scope.headers.push {name: "Edit", field: "edit"}
     $scope.count = 25
 ])
 
-app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "TrackService",
-  ($scope, $state, $stateParams, TrackService) ->
+app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "AlbumService", "TrackService", "$mdDialog",
+  ($scope, $state, $stateParams, AlbumService, TrackService, $mdDialog) ->
+    $scope.trackNumbers = []
     TrackService.getTrack($stateParams.trackId).then((track) ->
-      # console.dir track
       $scope.track = track
+      AlbumService.getTracks(track.album_id).then((tracks) ->
+        for track in tracks
+          if track.track_number != $scope.track.track_number
+            $scope.trackNumbers.push track.track_number
+        console.log $scope.trackNumbers.length
+      )
     )
 
     $scope.formsValid = false
@@ -62,7 +69,30 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Trac
         $state.go("root.tracks.index", {}, {reload: true})
       )
 
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: TrackDeleteDialogController
+          templateUrl: "app/components/mediaContent/track/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+      )
+
 ])
+
+TrackDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider",
   ($stateProvider) ->

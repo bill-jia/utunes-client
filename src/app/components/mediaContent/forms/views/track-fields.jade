@@ -23,10 +23,13 @@ ng-form(name="form" novalidate)
         div(ng-show="track.file.$error=='pattern'") An HTML5-compliant audio file is required.
     div.primary-content.nested-field
       h3.md-primary Artists
-      ul(ng-repeat="artist in artists")
-        li(ng-hide="artist._remove") {{artist.name}} {{artist.class_year}}
-          a(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
-          a(href="#" ng-click="removeArtistAssociation(artist)") Remove association
+      
+      div(ng-repeat="artist in artists" ng-hide="artist._remove" layout="row" flex)
+        span.producer-link
+          a(ui-sref="root.artists.show({artistId: artist.id})"){{artist.name}} {{artist.class_year}}
+        span.producer-options
+          md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
+          md-button.md-raised.md-warn(href="#" ng-click="removeArtistAssociation(artist)") Remove association
       div(ng-repeat="artist in track.artists" layout="row" ng-hide="artist._remove")
         artist-fields(register-form-scope="registerFormScope" artist="artist" edit="artistEdit")
         md-input-container
