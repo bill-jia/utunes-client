@@ -1,6 +1,6 @@
 app = angular.module "uTunes"
 
-app.directive 'playlistTable', () ->
+app.directive 'playlistTable', ["PlaylistService", (PlaylistService) ->
   directive =
     restrict: 'E'
     scope:
@@ -8,7 +8,7 @@ app.directive 'playlistTable', () ->
       headers: '='
       count: '='
     templateUrl: "app/components/mediaContent/playlist/playlist-table.html"
-    controller: ($scope, $filter, $window, onSelectTrack) ->
+    controller: ($scope, $filter, $window, onSelectTrack, PlaylistService) ->
       orderBy = $filter('orderBy')
       $scope.tablePage = 0
       sortable =   ["title", "author"]
@@ -48,6 +48,12 @@ app.directive 'playlistTable', () ->
       $scope.goToPage = (page) ->
         $scope.tablePage = page
 
+      $scope.playPlaylist = (id) ->
+        PlaylistService.getTracks(id).then((tracks) ->
+          console.dir tracks
+          onSelectTrack.broadcast(tracks, 0, true)
+        )
+]
 app.filter('startFrom', () ->
   (input, start) ->
     start = +start
