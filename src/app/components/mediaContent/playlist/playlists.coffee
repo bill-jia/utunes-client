@@ -18,8 +18,8 @@ app.controller("PlaylistIndexController", ["$scope", "PlaylistService", "$state"
     $scope.count = 25
 ])
 
-app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumService", "TrackService", "$stateParams",
-  ($scope, PlaylistService, AlbumService, TrackService, $stateParams) ->
+app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumService", "TrackService", "$stateParams", "onSelectTrack",
+  ($scope, PlaylistService, AlbumService, TrackService, $stateParams, onSelectTrack) ->
     PlaylistService.getPlaylist($stateParams.playlistId).then((playlist) ->
       $scope.playlist = playlist
     )

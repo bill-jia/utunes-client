@@ -41,30 +41,81 @@ app.controller("UserNewController", ["$scope", "$auth", ($scope, $auth) ->
   )
 ])
 
-app.controller("UserEditController", ["$scope", "$auth", ($scope, $auth) ->
-  $scope.$on("auth:account-update-error", (ev, reason) ->
-    $scope.errors = reason.errors
-  )
+app.controller("UserEditController", ["$scope", "$auth","$mdDialog", "$state"
+  ($scope, $auth, $mdDialog, $state) ->
+    $scope.$on("auth:account-update-error", (ev, reason) ->
+      $scope.errors = reason.errors
+    )
+
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: UserDeleteDialogController
+          templateUrl: "app/components/users/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+      )
+      
+    $scope.save = () ->
+      $scope.formSending = true
+      $auth.updateAccount($scope.updateAccountForm).then(()->
+        $state.go("root.home")
+      ).catch(()->)
+
+    $scope.delete = () ->
+      $scope.formSending = true
+      $auth.destroyAccount().then(()->
+        $state.go("root.home")
+      ).catch(()->)
 ])
 
-app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "UserService",
-  ($scope, $state, $stateParams, UserService) ->
+app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "UserService", "$mdDialog",
+  ($scope, $state, $stateParams, UserService, $mdDialog) ->
+    $scope.formSending = false
     UserService.getUser($stateParams.userId).then((user) ->
       console.dir user
       $scope.otheruser = user
     )
 
     $scope.save = () ->
+      $scope.formSending = true
       UserService.updateUser($scope.otheruser).then(() ->
         $state.go("root.users.index", {}, {reload: true})
       )
 
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: UserDeleteDialogController
+          templateUrl: "app/components/users/views/admin-delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+      )
+
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.otheruser.remove({admin_password: $scope.otheruser.admin_password}).then(() ->
         $state.go("root.users.index", {}, {reload: true})
       )
-
 ])
+
+UserDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider

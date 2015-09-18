@@ -1,6 +1,6 @@
 md-content(layout-padding="" style="padding: 24px;")
-
-	h1 Edit {{otheruser.name}}
+	md-content(layout-padding="")
+		h1.md-primary Edit {{otheruser.name}}
 
 	md-content(layout-padding="" layout="row" layout-sm="column")
 		form(name="form")
@@ -8,7 +8,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				label Name
 				input(id="name" name="name" type="text" ng-model="otheruser.name")
 			md-input-container
-				label Eamil
+				label Email
 				input(id="email" name="email" type="email" ng-model="otheruser.email")
 			md-input-container
 				label Role
@@ -20,5 +20,6 @@ md-content(layout-padding="" style="padding: 24px;")
 				label Admin password
 				input(id="admin_password" name="admin_password" type="password" ng-model="otheruser.admin_password")
 			md-input-container(layout="row")
-				md-button.md-raised.md-warn(ng-click="delete()") Delete
+				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
+				md-progress-circular(md-mode="indeterminate" ng-show="formSending")				

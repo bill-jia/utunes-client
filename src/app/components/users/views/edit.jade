@@ -1,28 +1,34 @@
 md-content(layout-padding="" style="padding: 24px;")
-  form(ng-submit="updateAccount(updateAccountForm)" role="form" ng-init="updateAccountForm = {name: user.name, email: user.email}")
-    md-input-container
-      label Name
-      input(type="text" name="name" id="name" ng-model="updateAccountForm.name" required)
-      div(ng-messages="errors")
-        div(ng-message="name") {{errors.name[0]}}      
-    md-input-container
-      label Email
-      input(type="email" name="email" id="email" ng-model="updateAccountForm.email" required)
-      div(ng-messages="errors")
-        div(ng-message="email") {{errors.email[0]}}      
-    md-input-container
-      label Current password
-      input(type="password" name="current_password" id="current_password" ng-model="updateAccountForm.current_password" required)
-      div(ng-messages="errors")
-        div(ng-message="current_password") {{errors.current_password[0]}}      
-    md-input-container
-      label New password
-      input(type="password" name="password" id="password" ng-model="updateAccountForm.password")
-      div(ng-messages="errors")
-        div(ng-message="password") {{errors.password[0]}}
-    md-input-container
-      label Re-enter new password
-      input(type="password" name="password_confirmation" id="password_confirmation" ng-model="updateAccountForm.password_confirmation")
-      div(ng-messages="errors")
-        div(ng-message="password_confirmation") {{errors.password_confirmation[0]}}
-    md-button.md-raised.md-primary(type="submit") Update  
+  md-content(layout-padding="")
+    h1.md-primary Edit your account
+  md-content(layout-padding="")
+    form(role="form" ng-init="updateAccountForm = {name: user.name, email: user.email}")
+      md-input-container
+        label Name
+        input(type="text" name="name" id="name" ng-model="updateAccountForm.name" required)
+        div(ng-messages="errors")
+          div(ng-message="name") {{errors.name[0]}}      
+      md-input-container
+        label Email
+        input(type="email" name="email" id="email" ng-model="updateAccountForm.email" required)
+        div(ng-messages="errors")
+          div(ng-message="email") {{errors.email[0]}}      
+      md-input-container
+        label Current password
+        input(type="password" name="current_password" id="current_password" ng-model="updateAccountForm.current_password" required)
+        div(ng-messages="errors")
+          div(ng-message="current_password") {{errors.current_password[0]}}      
+      md-input-container
+        label New password
+        input(type="password" name="password" id="password" ng-model="updateAccountForm.password")
+        div(ng-messages="errors")
+          div(ng-message="password") {{errors.password[0]}}
+      md-input-container
+        label Re-enter new password
+        input(type="password" name="password_confirmation" id="password_confirmation" ng-model="updateAccountForm.password_confirmation")
+        div(ng-messages="errors")
+          div(ng-message="password_confirmation") {{errors.password_confirmation[0]}}
+      md-input-container(layout="row")
+        md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete        
+        md-button.md-raised.md-primary(ng-click="save()") Update
+        md-progress-circular(md-mode="indeterminate" ng-show="formSending")		

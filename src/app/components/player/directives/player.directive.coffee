@@ -58,14 +58,10 @@ angular.module "uTunes"
             $scope.canRewind = true
 
         shuffle = (array, includeIndexInShuffle) ->
-          console.log "Input Array"
-          console.dir array
           if includeIndexInShuffle
             arrayCopy = array.slice(0)
           else
             arrayCopy = array.slice(1)
-          console.log "Initial Copy"
-          console.dir arrayCopy
           shuffledArray = []
           if !includeIndexInShuffle
             shuffledArray.push array[0]
@@ -73,8 +69,6 @@ angular.module "uTunes"
             j = Math.floor(Math.random()*i)
             shuffledArray.push arrayCopy[j]
             arrayCopy.splice(j, 1)
-          console.log "ShuffledArray"
-          console.dir shuffledArray
           shuffledArray
 
         $scope.audio.onended = (e) ->
