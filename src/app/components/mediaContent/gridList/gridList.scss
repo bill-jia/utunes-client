@@ -28,3 +28,10 @@ md-grid-tile-footer.custom-tile-footer {
 #options{
   margin-bottom: 16px;
 }
+
+.play-overlay {
+  height: 50%;
+  width: 50%;
+  z-index:2;
+  opacity: 0.6;
+}
