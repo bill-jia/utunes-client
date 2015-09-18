@@ -52,6 +52,9 @@ app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumSer
         $scope.headers.push {name: "Download", field: "download"}
     , true)
     $scope.count = 25
+
+    $scope.playPlaylist = () ->
+      onSelectTrack.broadcast($scope.tracks, 0, true)
 ])
 
 app.controller("PlaylistNewController", ["$scope", "PlaylistService", "$state",

@@ -50,7 +50,7 @@ app.directive 'trackTable', () ->
         $scope.tablePage = page
 
       $scope.playTrack = (index, $event) ->
-        onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count)
+        onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count, false)
 
       originatorEv = null
       $scope.menuOptions =[

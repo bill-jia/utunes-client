@@ -53,7 +53,7 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
     $scope.producerCount = 6
 
     $scope.playAlbum = () ->
-      onSelectTrack.broadcast($scope.tracks, 0)
+      onSelectTrack.broadcast($scope.tracks, 0, true)
 ])
 
 app.controller("AlbumNewController", ["$scope", "$state", "AlbumService",
