@@ -37,6 +37,11 @@ app.directive 'mdContextMenu', [
         position: 'absolute'
         left: event.pageX + 'px'
         top: event.pageY + 'px'
+        paddingLeft: 16 + 'px'
+        paddingRight: 16 + 'px'
+        paddingTop: 8 + 'px'
+        paddingBottom: 8 + 'px'
+        listStyle: 'none'
         zIndex: 100
         opacity: 0.99
         backgroundColor : "white"
