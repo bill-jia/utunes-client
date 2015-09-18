@@ -56,9 +56,10 @@ app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumSer
 
 app.controller("PlaylistNewController", ["$scope", "PlaylistService", "$state",
   ($scope, PlaylistService, $state) ->
+    $scope.formSending = false
     $scope.playlist = {title: "", user_id: $scope.user.id, author: $scope.user.name, is_public: false}
     $scope.save = () ->
-      # console.dir $scope.album
+      $scope.formSending = true
       PlaylistService.createPlaylist($scope.playlist).then(() ->
         $state.go("root.playlists.index", {}, {reload: true})
       )
@@ -66,6 +67,7 @@ app.controller("PlaylistNewController", ["$scope", "PlaylistService", "$state",
 
 app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$stateParams", "$state", "AlbumService", "TrackService", "$mdDialog",
   ($scope, PlaylistService, $stateParams, $state, AlbumService, TrackService, $mdDialog) ->
+    $scope.formSending = false
     PlaylistService.getPlaylist($stateParams.playlistId).then((playlist) ->
       $scope.playlist = playlist
     )
@@ -104,7 +106,7 @@ app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$statePa
 
 
     $scope.save = () ->
-      console.dir $scope.playlist
+      $scope.formSending = true
       PlaylistService.updatePlaylist($scope.playlist, $stateParams.playlistId).then(() ->
         $state.go("root.playlists.index", {}, {reload: true})
         # $state.go("root.playlists.show", {"playlistId": $stateParams.playlistId})
@@ -119,11 +121,12 @@ app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$statePa
           clickOutsideToClose: true
       }).then(
         (answer) ->
-          # $scope.delete()
+          $scope.delete()
         () ->
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.playlist.remove().then(() ->
         $state.go("root.playlists.index", {}, {reload: true})
       )

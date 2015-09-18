@@ -7,4 +7,5 @@ app.directive 'searchbar', () ->
     templateUrl: "app/components/search/searchbar.html"
     controller: ($scope, $element, $state) ->
       $scope.submit = () ->
+        console.log "Submitted"
         $state.go("root.search", {"searchParams": $scope.searchParams})

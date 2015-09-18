@@ -1,12 +1,20 @@
 app = angular.module 'uTunes'
 
-app.controller("SearchResultsController", ["$scope", "AlbumService", "ArtistService", "TrackService", "ProducerService", "$stateParams"
-  ($scope, AlbumService, ArtistService, TrackService, ProducerService, $stateParams) ->
+app.controller("SearchResultsController", [
+  "$scope",
+  "AlbumService",
+  "ArtistService",
+  "TrackService",
+  "ProducerService",
+  "PlaylistService",
+  "$stateParams",
+  ($scope, AlbumService, ArtistService, TrackService, ProducerService, PlaylistService, $stateParams) ->
     searchParams = $stateParams.searchParams
     $scope.albumsLoaded = false
     $scope.artistsLoaded = false
     $scope.producersLoaded = false
     $scope.tracksLoaded = false
+    $scope.playlistsLoaded = false
 
     AlbumService.searchAlbums(searchParams).then((albums) ->
       $scope.albums = albums
@@ -33,7 +41,12 @@ app.controller("SearchResultsController", ["$scope", "AlbumService", "ArtistServ
       $scope.tracksLoaded = true
     )
 
-    $scope.headers = [
+    PlaylistService.searchPlaylists(searchParams).then((playlists) ->
+      $scope.playlists = playlists
+      $scope.playlistsLoaded = true
+    )
+
+    $scope.trackHeaders = [
       {
         name: 'Title'
         field: 'title'
@@ -52,8 +65,20 @@ app.controller("SearchResultsController", ["$scope", "AlbumService", "ArtistServ
       }
     ]
     if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
-      $scope.headers.push {name: "Edit", field: "edit"}
-    $scope.count = 25
+      $scope.trackHeaders.push {name: "Edit", field: "edit"}
+    $scope.trackCount = 25
+
+    $scope.playlistHeaders = [
+      {
+        name: "Title"
+        field: "title"
+      }
+      {
+        name: "Author"
+        field: "author"
+      }
+    ]
+    $scope.playlistCount = 25
 ])
 
 app.config(["$stateProvider",

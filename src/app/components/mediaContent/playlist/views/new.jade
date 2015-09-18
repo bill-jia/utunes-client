@@ -10,3 +10,4 @@ md-content(layout-padding="" style="padding: 24px;")
       md-switch(id="is_public" ng-model="playlist.is_public" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Public
     md-input-container(layout="row")
       md-button.md-raised.md-primary(ng-click="save()") Save
+      md-progress-circular(md-mode="indeterminate" ng-show="formSending")

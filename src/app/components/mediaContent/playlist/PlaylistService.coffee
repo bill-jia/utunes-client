@@ -15,6 +15,7 @@ angular.module "uTunes"
       model = "playlists"
 
       listPlaylists: () -> PlaylistRestangular.all(model).getList()
+      searchPlaylists: (searchParams) -> PlaylistRestangular.all(model).getList({"search": searchParams})
       getPlaylist: (playlistId) -> PlaylistRestangular.one(model, playlistId).get()
       getUserPlaylists: (userId) -> PlaylistRestangular.one("users", userId).getList(model)
       getTracks: (playlistId) -> PlaylistRestangular.one(model, playlistId).getList("tracks")
