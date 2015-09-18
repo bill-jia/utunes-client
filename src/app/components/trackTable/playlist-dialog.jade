@@ -7,8 +7,12 @@ md-dialog
         md-button(ng-click="cancel()") Close
     md-dialog-content(style="max-width:700px; max-height:810px;")
       md-list
-        md-list-item(ng-repeat="playlist in playlists")
+        md-list-item(ng-repeat="playlist in playlists | limitTo: playlists.length-1")
           p {{playlist.title}}
           md-checkbox.md-primary(ng-model="playlist.wanted")
+      form(name="form")
+        md-input-container
+          label New Playlist
+          input(id="title" name="title" type="text" ng-model="playlists[playlists.length-1].title")
     div.md-actions
       md-button(ng-click="answer()") Add

@@ -78,7 +78,12 @@ app.directive 'trackTable', () ->
         }).then(
           (playlists)->
             for playlist in playlists
-              PlaylistService.addTrackToPlaylist(playlist, $scope.menuTrack)
+              if !playlist.id
+                playlist.tracks = []
+                playlist.seed_track_id = $scope.menuTrack.id
+                PlaylistService.createPlaylist(playlist)
+              else
+                PlaylistService.addTrackToPlaylist(playlist, $scope.menuTrack)
           () ->
             console.log "Dialog closed"
         )
@@ -91,7 +96,8 @@ app.directive 'trackTable', () ->
 DialogController = ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->
     $scope.playlists = playlists
-    console.dir $scope.playlists
+    $scope.playlists.push {title: "", user_id: $scope.$root.user.id, author: $scope.$root.user.name, wanted: true}
+    console.log $scope.playlists.length
   )
 
   $scope.hide = () ->
@@ -104,7 +110,7 @@ DialogController = ($scope, $mdDialog, PlaylistService) ->
   $scope.answer = () ->
     wantedPlaylists = []
     for playlist in $scope.playlists
-      if playlist.wanted
+      if playlist.wanted and playlist.title
         delete playlist.wanted
         wantedPlaylists.push playlist
     console.dir wantedPlaylists
