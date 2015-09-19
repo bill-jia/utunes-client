@@ -19,6 +19,12 @@ app.factory("onTrackPlaying", ["$rootScope",
       $rootScope.$broadcast("trackplaying", track)
 ])
 
+app.factory("onTrackFinished", ["$rootScope",
+  ($rootScope) ->
+    broadcast: (track) ->
+      $rootScope.$broadcast("trackfinished", track)
+])
+
 app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
   ($q, $timeout, $rootScope) ->
     user = $rootScope.user

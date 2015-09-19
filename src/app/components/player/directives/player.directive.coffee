@@ -4,7 +4,7 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {}
       templateUrl: 'app/components/player/views/player.html'
-      controller: ($scope, $element, onTrackPlaying, AlbumService, TrackService) ->
+      controller: ($scope, $element, onTrackPlaying, onTrackFinished, AlbumService, TrackService) ->
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
@@ -72,6 +72,7 @@ angular.module "uTunes"
           shuffledArray
 
         $scope.audio.onended = (e) ->
+          onTrackFinished.broadcast($scope.queue[$scope.ccurrentIndex])
           if $scope.repeat == "once"
             $scope.audio.load()
           else
