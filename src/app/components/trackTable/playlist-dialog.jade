@@ -6,16 +6,20 @@ md-dialog
         span(flex)
         md-button.md-icon-button(ng-click="cancel()")
           i.mdi.mdi-close
-    md-dialog-content(style="max-width:700px; max-height:450px;")
+    md-dialog-content(style="width:700px; height:450px;")
+      form
+        md-input-container
+          label Filter
+          input(id="query" name="query" type="Text" ng-model="query")
       md-list(style="max-height:200px;overflow: scroll;")
-        md-list-item(ng-repeat="playlist in playlists | limitTo: playlists.length-1")
+        md-list-item(ng-repeat="playlist in playlists | filter:query")
           p {{playlist.title}}
           md-checkbox.md-primary(ng-model="playlist.wanted")
       form(name="form")
         md-input-container(style="padding-bottom: 12px;")
           label New playlist
-          input(id="title" name="title" type="text" ng-model="playlists[playlists.length-1].title")
+          input(id="title" name="title" type="text" ng-model="newPlaylist.title")
         md-input-container(style="padding-bottom: 12px;")
-          md-switch(id="is_public" ng-model="playlists[playlists.length-1].is_public" ng-if = "$root.user.role && ($root.user.role == 'admin' || $root.user.role == 'producer')") Public
+          md-switch(id="is_public" ng-model="newPlaylist.is_public" ng-if = "$root.user.role && ($root.user.role == 'admin' || $root.user.role == 'producer')") Public
     div.md-actions
       md-button(ng-click="answer()") Add
