@@ -31,11 +31,9 @@ angular.module "uTunes"
           $scope.handleRegBtnClick = (registrationForm) ->
             console.log "Registration"
             $auth.submitRegistration(registrationForm).then(()->
-              $auth.submitLogin({
-                email: registrationForm.email,
-                password: registrationForm.password
-              })
+              $state.go("root.emailnotif", {}, {reload: false})
             )
+            $scope.close()
 
           $scope.$on("auth:login-error", (ev, reason) ->
             $scope.errors = reason.errors
