@@ -1,14 +1,14 @@
 app = angular.module 'uTunes'
 
-app.directive 'stopEvent', () ->
+app.directive 'stopEvent', [ () ->
   directive =
     restrict: 'A'
     link: (scope, element, attr) ->
       if attr and attr.stopEvent
         element.bind attr.stopEvent, (e) ->
           e.stopPropagation()
-
-app.directive 'ngRightClick', ($parse) ->
+]
+app.directive 'ngRightClick', ["$parse", ($parse) ->
   (scope, element, attrs) ->
     fn = $parse(attrs.ngRightClick)
     element.bind 'contextmenu', (event) ->
@@ -18,9 +18,10 @@ app.directive 'ngRightClick', ($parse) ->
         return
       return
     return
+]
 
 app.directive 'mdContextMenu', [
-  '$parse'
+  '$parse',
   ($parse) ->
 
     renderContextMenu = ($scope, event, options, model) ->
@@ -120,7 +121,7 @@ app.directive 'mdContextMenu', [
       return
 ]
 
-app.directive "integer", () ->
+app.directive "integer", [ () ->
   require: "ngModel"
   restrict: "A"
   link: (scope, element, attrs, ctrl) ->
@@ -131,3 +132,4 @@ app.directive "integer", () ->
       if INTEGER_REGEXP.test(viewValue)
         return true
       return false
+]

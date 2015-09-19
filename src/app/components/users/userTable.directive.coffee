@@ -8,7 +8,7 @@ app.directive 'userTable', () ->
       headers: '='
       count: '='
     templateUrl: "app/components/users/user-table.html"
-    controller: ($scope, $filter, $window, onSelectTrack) ->
+    controller: ["$scope", "$filter", "$window", "onSelectTrack", ($scope, $filter, $window, onSelectTrack) ->
       orderBy = $filter('orderBy')
       $scope.tablePage = 0
       sortable =   ["name", "email", "role"]
@@ -47,7 +47,7 @@ app.directive 'userTable', () ->
 
       $scope.goToPage = (page) ->
         $scope.tablePage = page
-
+    ]
 app.filter('startFrom', () ->
   (input, start) ->
     start = +start
