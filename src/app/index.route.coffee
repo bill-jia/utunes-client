@@ -31,5 +31,9 @@ angular.module "uTunes"
         url: "sign_in"
         templateUrl: "app/components/userSessions/views/new.html"
         controller: "UserSessionsController"
+      .state "root.emailnotif",
+        name: "emailnotif"
+        url: "confirm_email"
+        templateUrl: "app/main/confirm-email.html"
 
     $urlRouterProvider.otherwise '/'
