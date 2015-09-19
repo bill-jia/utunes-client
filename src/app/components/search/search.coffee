@@ -32,6 +32,11 @@ app.controller("SearchResultsController", [
       $scope.artistsLoaded = true
     )
 
+    PlaylistService.searchPlaylists(searchParams).then((playlists) ->
+      $scope.playlists = playlists
+      $scope.playlistsLoaded = true
+    )
+
     TrackService.searchTracks(searchParams).then((tracks) ->
       $scope.tracks = tracks
 
@@ -39,11 +44,6 @@ app.controller("SearchResultsController", [
         track.album = AlbumService.getAlbum(track.album_id).$object
         track.artists = TrackService.getArtists(track.id).$object
       $scope.tracksLoaded = true
-    )
-
-    PlaylistService.searchPlaylists(searchParams).then((playlists) ->
-      $scope.playlists = playlists
-      $scope.playlistsLoaded = true
     )
 
     $scope.trackHeaders = [

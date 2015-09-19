@@ -4,21 +4,26 @@ md-content(layout-padding="" style="padding: 24px;")
   md-content.primary-content(layout-padding="")
     h2.md-primary Albums
     md-progress-circular(md-mode="indeterminate" ng-show="!albumsLoaded")
-    grid-list(items="albums" type="'album'" count="albumCount" ng-show="albumsLoaded")
+    grid-list(items="albums" type="'album'" count="albumCount" ng-show="albumsLoaded && albums.length > 0")
+    p(ng-show="albumsLoaded && albums.length == 0") No results
   md-content.primary-content(layout-padding="")
     h2.md-primary Producers
     md-progress-circular(md-mode="indeterminate" ng-show="!producersLoaded")
-    grid-list(items="producers" type="'producer'" count="producerCount" ng-show="producersLoaded")
+    grid-list(items="producers" type="'producer'" count="producerCount" ng-show="producersLoaded && producers.length > 0")
+    p(ng-show="producersLoaded && producers.length == 0") No results
   md-content.primary-content(layout-padding="")
     h2.md-primary Artists
     md-progress-circular(md-mode="indeterminate" ng-show="!artistsLoaded")
-    grid-list(items="artists" type="'artist'" count="artistCount" ng-show="artistsLoaded")
+    grid-list(items="artists" type="'artist'" count="artistCount" ng-show="artistsLoaded && artists.length > 0")
+    p(ng-show="artistsLoaded && artists.length == 0") No results
   md-content.primary-content(layout-padding="")    
     h2.md-primary Playlists
     md-progress-circular(md-mode="indeterminate" ng-show="!playlistsLoaded")
-    playlist-table(content="playlists" headers="playlistHeaders" count="playlistCount" ng-show="playlistsLoaded")
+    playlist-table(content="playlists" headers="playlistHeaders" count="playlistCount" ng-show="playlistsLoaded && playlists.length > 0")
+    p(ng-show="playlistsLoaded && playlists.length == 0") No results
   md-content.primary-content(layout-padding="")
     h2.md-primary Tracks
     md-progress-circular(md-mode="indeterminate" ng-show="!tracksLoaded")
     x-track-table(tracks="tracks" headers="trackHeaders" count="trackCount" ng-show="tracksLoaded")
+    p(ng-show="tracksLoaded && tracks.length == 0") No results
   
