@@ -55,29 +55,19 @@ app.controller("PostEditController", ["$scope", "PostService", "$stateParams", "
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider
-    .state "root.posts",
-      name: "posts"
-      abstract: true
-      url: "posts"
-      template: "<ui-view/>",
-    .state "root.posts.index",
-      name: "posts.index"
-      url: "/"
-      templateUrl: "app/components/posts/views/index.html"
-      controller: "PostIndexController"
     .state "root.posts.show",
       name: "posts.show"
-      url: "/{postId}/show"
+      url: "/posts/{postId}/show"
       templateUrl: "app/components/posts/views/show.html"
       controller: "PostShowController"
     .state "root.posts.new",
       name: "posts.new"
-      url: "/new"
+      url: "/posts/new"
       templateUrl: "app/components/posts/views/new.html"
       controller: "PostNewController"
     .state "root.posts.edit",
       name: "posts.edit"
-      url: "/{postId}/edit"
+      url: "/posts/{postId}/edit"
       templateUrl: "app/components/posts/views/edit.html"
       controller: "PostEditController"
 ])

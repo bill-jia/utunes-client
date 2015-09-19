@@ -1,6 +1,6 @@
 md-content(layout-padding="" style="padding: 24px;")
-
-	h1 Edit post
+	md-content(layout-padding="")
+		h1.md-primary Edit post
 
 	md-content(layout-padding="" layout="row" layout-sm="column")
 		form(name="form")
@@ -13,7 +13,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				label Content
 				textarea(id="content" name="content" type="text" ng-model="post.content")
 			md-input-container
-				h3 Image
+				h3.md-primary Image
 				div.drop-box(id="cover_image" name = "cover_image" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="post.file" ng-disabled="disabled") Drop file
 				{{post.file.name}}
 				div(ng-messages="post.file.$error")

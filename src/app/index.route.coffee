@@ -7,19 +7,25 @@ angular.module "uTunes"
         url: "/"
         templateUrl: "app/main/index.html"
         controller: "MainController"
-      .state "root.home",
-        name: "home"
+      .state "root.posts",
+        name: "posts"
+        abstract: true
         url: ""
-        templateUrl: "app/main/home.html"
+        template: "<ui-view/>",
+      .state "root.posts.index",
+        name: "posts.index"
+        url: ""
+        templateUrl: "app/components/posts/views/index.html"
+        controller: "PostIndexController"
 # Root children
       .state "root.faq",
         name: "faq"
         url: "faq"
         templateUrl: "app/main/faq.html"
-      .state "root.about",
-        name: "about"
-        url: "about"
-        templateUrl: "app/main/about.html"
+      .state "root.contact",
+        name: "contact"
+        url: "contact"
+        templateUrl: "app/main/contact.html"
       .state "root.login",
         name: "login"
         url: "sign_in"

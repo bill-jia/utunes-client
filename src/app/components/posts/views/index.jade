@@ -1,17 +1,19 @@
 md-content(layout-padding="" style="padding: 24px;")
-	h1
-		a(ui-sref="root.posts.index") News
-	md-button.md-raised.md-accent(ui-sref="root.posts.new" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
-		|Add a post
-	md-card.md-whiteframe-z2(ng-repeat = "post in posts")
-		div.md-card-image(ng-if="post.cover_image.url")
-			img(ng-src="{{post.cover_image.url}}")
-		div.md-whiteframe-z2
-		md-card-content
-			h2.md-title.md-card-title
-				a(ui-sref="root.posts.show({postId: post.id})") {{post.title}}
-			h2.md-subheader.md-card-subheader {{post.author}} {{post.updated_at | date:"medium"}}
-			div.article(ng-bind-html="post.content")
-		div.md-actions(layout="row" layout-align = "end center")
-			md-button(ui-sref="root.posts.show({postId: post.id})") Read more
-			md-button.md-raised.md-accent(ui-sref="root.posts.edit({postId: post.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Edit
+	md-content(layout-padding="" layout="row" flex)
+		h1.md-primary.album-title News
+		span(flex)
+		md-button.md-raised.md-accent(ui-sref="root.posts.new" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")
+			|Add a post
+	md-content(layout-padding="")
+		md-card.md-whiteframe-z2(ng-repeat = "post in posts")
+			div.md-card-image(ng-if="post.cover_image.url")
+				img(ng-src="{{post.cover_image.url}}")
+			div.md-whiteframe-z2
+			md-card-content
+				h2.md-title.md-card-title
+					a(ui-sref="root.posts.show({postId: post.id})") {{post.title}}
+				h2.md-subheader.md-card-subheader {{post.author}} {{post.updated_at | date:"medium"}}
+				div.article(ng-bind-html="post.content")
+			div.md-actions(layout="row" layout-align = "end center")
+				md-button(ui-sref="root.posts.show({postId: post.id})") Read more
+				md-button.md-raised.md-accent(ui-sref="root.posts.edit({postId: post.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Edit

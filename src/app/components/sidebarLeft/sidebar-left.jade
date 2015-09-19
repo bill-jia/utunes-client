@@ -7,18 +7,15 @@ md-toolbar
 			i.mdi.mdi-close
 div.sidebar-content
 	md-list
-		md-list-item(ng-click="goTo($event, 'root.home')" ng-class="{'nav-selected': state == 'root.home'}")
+		md-list-item(ng-click="goTo($event, 'root.posts.index')" ng-class="{'nav-selected': state == 'root.posts.index'}")
 			i.mdi.mdi.mdi-home.sidebar-icon
 			p.sidebar-selection Home 
-		md-list-item(ng-click="goTo($event, 'root.posts.index')" ng-class="{'nav-selected': state.indexOf('root.posts') == 0}")
-			i.mdi.mdi.mdi-newspaper.sidebar-icon
-			p.sidebar-selection News 	
 		md-list-item(ng-click="goTo($event, 'root.faq')" ng-class="{'nav-selected': state == 'root.faq'}")
 			i.mdi.mdi.mdi-help.sidebar-icon
 			p.sidebar-selection FAQ
-		md-list-item(ng-click="goTo($event, 'root.about')" ng-class="{'nav-selected': state == 'root.about'}")
+		md-list-item(ng-click="goTo($event, 'root.contact')" ng-class="{'nav-selected': state == 'root.about'}")
 			i.mdi.mdi.mdi-school.sidebar-icon
-			p.sidebar-selection About
+			p.sidebar-selection Contact
 		md-divider(style="padding-top:5px;padding-bottom:5px;")
 		md-subheader.md-no-sticky Listen
 		md-list-item(ng-click="goTo($event, 'root.albums.index')" ng-class="{'nav-selected': state.indexOf('root.albums') == 0}")
