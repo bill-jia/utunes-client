@@ -72,9 +72,6 @@ app.directive 'trackTable', () ->
           parent: angular.element(document.body)
           targetEvent: e
           clickOutsideToClose: true
-          locals: {
-            three: 3
-          }
         }).then(
           (playlists)->
             for playlist in playlists
@@ -89,9 +86,7 @@ app.directive 'trackTable', () ->
         )
 
       $scope.$on "trackplaying", (e, track) ->
-        console.log "Track playing"
         $scope.playingTrack = track
-        console.log $scope.playingTrack.id
 
 DialogController = ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->

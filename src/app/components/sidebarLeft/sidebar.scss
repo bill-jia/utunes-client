@@ -26,8 +26,22 @@
 
 .sidebar-content {
   margin: 10px;
+  position: relative;
 }
 
 .nav-selected {
   color: #2979FF;
+}
+
+#now-playing {
+  position: absolute;
+  bottom: 75px;
+}
+.playing-text {
+  margin: 10px;
+}
+
+x-sidebar-left {
+  height: 100%;
+  position: relative;
 }

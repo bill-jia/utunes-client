@@ -36,12 +36,12 @@ div.sidebar-content
 		md-list-item(ng-click="goTo($event, 'root.tracks.index')" ng-class="{'nav-selected': state.indexOf('root.tracks') == 0}")
 			i.mdi.mdi.mdi-music-note.sidebar-icon
 			p.sidebar-selection Tracks
-	div#now-playing(layout="row")
-		img(ng-src="{{track.album.cover_image.thumb.url}}")
-		div(layout="column")
-			div.scroll-box
-				div.scroll-text {{track.title}}
-			div.scroll-box
-				div.scroll-text
-					a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
-						|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+div#now-playing(layout="row")
+	img(ng-src="{{track.album.cover_image.thumb.url}}")
+	div.playing-text(layout="column")
+		div.scroll-box
+			div.scroll-text {{track.title}}
+		div.scroll-box
+			div.scroll-text
+				a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+					|{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
