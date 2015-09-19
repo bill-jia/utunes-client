@@ -1,10 +1,10 @@
 angular.module "uTunes"
-  .directive 'audioPlayer', ["$interval", ($interval) ->
+  .directive 'audioPlayer', ["$interval", "rfc4122", ($interval, rfc4122) ->
     directive =
       restrict: 'E'
       scope: {}
       templateUrl: 'app/components/player/views/player.html'
-      controller: ($scope, $element, onTrackPlaying, onTrackFinished, AlbumService, TrackService) ->
+      controller: ($scope, $element, onTrackPlaying, onTrackFinished, AlbumService, TrackService, rfc4122) ->
         $scope.playing = false
         $scope.shuffle = false
         $scope.repeat = "off"
@@ -38,12 +38,15 @@ angular.module "uTunes"
 
         loadTrack = (index) ->
           $scope.currentIndex = index
-          $scope.source = $scope.queue[index].audio.url
-          $scope.currentTime = 0
-          $scope.audio.load()
-          updateCanFastForward()
-          updateCanRewind()
-          onTrackPlaying.broadcast(completeInfo($scope.queue[index]))
+          uid = rfc4122.v4()
+          TrackService.postToken(uid).then(()->
+            $scope.source = "/api/" + $scope.queue[index].audio.url + "?uid=" + uid
+            $scope.currentTime = 0
+            $scope.audio.load()
+            updateCanFastForward()
+            updateCanRewind()
+            onTrackPlaying.broadcast(completeInfo($scope.queue[index]))
+          )
 
         updateCanFastForward = () ->
           if $scope.repeat == "off" && ($scope.currentIndex+1)%$scope.queue.length == $scope.stopIndex

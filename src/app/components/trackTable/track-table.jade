@@ -27,7 +27,7 @@ table.md-table
             div(ng-if="header.field == 'edit'")
               a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click") Edit Track
             div(ng-if="header.field=='download'")
-              a(ng-href="{{track.audio.url}}" stop-event="click" download) Download
+              a(href="#" ng-click="downloadFile(track.audio.url)" stop-event="click") Download
             div(ng-if="header.field == 'remove'")
               a(href="#" ng-click="track._remove = true" stop=event="click") X
 

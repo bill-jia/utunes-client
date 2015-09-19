@@ -10,5 +10,6 @@ angular.module 'uTunes', [
   'ngMessages',
   'ui.validate',
   'ui.bootstrap.contextMenu',
-  'ng-token-auth'
+  'ng-token-auth',
+  'uuid'
 ]

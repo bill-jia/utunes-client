@@ -8,7 +8,7 @@ app.directive 'trackTable', () ->
       headers: '='
       count: '='
     templateUrl: "app/components/trackTable/track-table.html"
-    controller: ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService) ->
+    controller: ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService, TrackService, rfc4122) ->
       orderBy = $filter('orderBy')
       $scope.tablePage = 0
       $scope.playingTrack = null
@@ -61,6 +61,13 @@ app.directive 'trackTable', () ->
               $scope.showPlaylists($event, $scope.menuTrack)
           ]
         ]
+
+      $scope.downloadFile = (url) ->
+        uid = rfc4122.v4()
+        TrackService.postToken(uid).then(()->
+          source = "/api/" + url + "?uid=" + uid
+          $window.location.assign(source)
+        )
 
       $scope.setMenuTrack = (track) ->
         $scope.menuTrack = track

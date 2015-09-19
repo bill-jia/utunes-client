@@ -46,5 +46,6 @@ angular.module "uTunes"
           sendPayload(track, "PUT", "/api/tracks/#{trackId}")
         else
           track.put()
-
+      postToken: (uid) ->
+        TrackRestangular.one(model).customPOST({},"tokens", {token: uid})
   ])
