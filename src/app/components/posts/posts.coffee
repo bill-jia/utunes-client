@@ -26,32 +26,58 @@ app.controller("PostShowController", ["$scope", "PostService", "$stateParams"
 
 app.controller("PostNewController", ["$scope", "PostService", "$state",
   ($scope, PostService, $state) ->
+    $scope.formSending = false
     $scope.post = {title: "", content: "", user_id: $scope.user.id, author: $scope.user.name}
     $scope.save = () ->
-      # console.dir $scope.album
+      $scope.formSending = true
       PostService.createPost($scope.post).then(() ->
         $state.go("root.posts.index", {}, {reload: true})
       )
 ])
 
-app.controller("PostEditController", ["$scope", "PostService", "$stateParams", "$state",
-  ($scope, PostService, $stateParams, $state) ->
+app.controller("PostEditController", ["$scope", "PostService", "$stateParams", "$state", "$mdDialog",
+  ($scope, PostService, $stateParams, $state, $mdDialog) ->
+    $scope.formSending = false
     PostService.getPost($stateParams.postId).then((post) ->
       $scope.post = post
     )
 
     $scope.save = () ->
-      console.dir $scope.post
+      $scope.formSending = true
       PostService.updatePost($scope.post, $stateParams.postId).then(() ->
         $state.go("root.posts.index", {}, {reload: true})
         # $state.go("root.posts.show", {"postId": $stateParams.postId})
       )
 
     $scope.delete = () ->
+      $scope.formSending = true
       $scope.post.remove().then(() ->
         $state.go("root.posts.index", {}, {reload: true})
       )
+
+    $scope.openDeleteDialog = (e) ->
+      $mdDialog.show({
+          controller: PostDeleteDialogController
+          templateUrl: "app/components/posts/views/delete-dialog.html"
+          parent: angular.element(document.body)
+          targetEvent: e
+          clickOutsideToClose: true
+      }).then(
+        (answer) ->
+          $scope.delete()
+        () ->
+      )
 ])
+
+PostDeleteDialogController = ($scope, $mdDialog) ->
+  $scope.hide = () ->
+    $mdDialog.hide()
+
+  $scope.cancel = () ->
+    $mdDialog.cancel()
+
+  $scope.answer = (answer) ->
+    $mdDialog.hide(answer)
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider

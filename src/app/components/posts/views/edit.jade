@@ -19,5 +19,6 @@ md-content(layout-padding="" style="padding: 24px;")
 				div(ng-messages="post.file.$error")
 					div(ng-show="post.file.$error=='pattern'") An image is required.	
 			md-input-container(layout="row")
-				md-button.md-raised.md-warn(ng-click="delete()") Delete
+				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save
+				md-progress-circular(md-mode="indeterminate" ng-show="formSending")
