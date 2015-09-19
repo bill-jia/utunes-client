@@ -73,6 +73,10 @@ h1.md-primary, h2.md-primary, h3.md-primary {
   margin-left: 36px;
 }
 
+md-sidenav {
+  z-index:100;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

@@ -1,2 +1,18 @@
 md-toast#playing-toast
-  span A track is playing
+  div.toast-container(layout="row" flex)
+    div.toast-icon
+      i.mdi.mdi-play-circle-outline(style="")
+    div.playing-text(layout="column")
+      div.scroll-box
+        div.scroll-text {{track.title}}
+      div.scroll-box
+        div.scroll-text
+          a(ui-sref="root.albums.show({albumId: track.album.id})")
+            |{{track.album.title}}   
+      div.scroll-box
+        div.scroll-text
+          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
+            |{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+    span(flex)
+    div.toast-icon
+      i.mdi.mdi-plus

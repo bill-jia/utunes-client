@@ -1,4 +1,22 @@
 #playing-toast{
   position: fixed;
-  top: 75px;
+  bottom: 75px;
+  max-height: 200px;
+  min-height: 72px;
+  padding-left: 12px;
+}
+
+#playing-toast a{
+  color: #FAFAFA;
+  text-decoration: underline;
+}
+
+div.toast-container{
+  margin: 10px;
+}
+
+.toast-icon {
+  font-size: 30px;
+  position: relative;
+  top: 18px;
 }
