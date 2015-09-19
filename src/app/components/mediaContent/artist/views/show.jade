@@ -1,4 +1,4 @@
-md-content#artist-show(layout-padding="" style="padding: 24px;")
+md-content#artist-show(layout-padding="" style="padding: 24px;" ng-show="artist")
 	md-content(layout-padding="" layout="row" flex)
 		h1.md-primary.album-title {{artist.name}} {{artist.class_year}}
 		span(flex)
@@ -10,7 +10,7 @@ md-content#artist-show(layout-padding="" style="padding: 24px;")
 	img(ng-src="{{artist.profile_picture.large.url}}")
 	md-content.primary-content#artist-albums(layout-padding="")
 		h2.md-primary Albums
-		grid-list(items="albums" type="'album'" count="albumCount")
+		grid-list(items="albums" type="'album'" count="albumCount" ng-show="albums")
 	md-content.primary-content#artist-tracks(layout-padding="")
 		h2.md-primary Tracks
-		x-track-table(tracks="tracks" headers="headers" count="trackCount")
+		x-track-table(tracks="tracks" headers="headers" count="trackCount" ng-show="tracks")

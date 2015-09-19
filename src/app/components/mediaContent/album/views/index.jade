@@ -6,4 +6,4 @@ md-content(layout-padding="" style="padding: 24px;")
 			md-button.md-raised.md-accent(ui-sref="root.albums.new" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Add album
 
 	md-content(layout-padding="")
-		grid-list(items="albums" type="'album'" count="count")
+		grid-list(items="albums" type="'album'" count="count" ng-show="albums")
