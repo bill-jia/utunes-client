@@ -63,11 +63,12 @@ app.directive 'trackTable', () ->
         ]
 
       $scope.downloadFile = (url) ->
-        uid = rfc4122.v4()
-        TrackService.postToken(uid).then(()->
-          source = "/api/" + url + "?uid=" + uid
-          $window.location.assign(source)
-        )
+        if $scope.$root.user.role == "admin" || $scope.$root.user.role == "producer"
+          uid = rfc4122.v4()
+          TrackService.postToken(uid).then(()->
+            source = "/api/" + url + "?uid=" + uid
+            $window.location.assign(source)
+          )
 
       $scope.setMenuTrack = (track) ->
         $scope.menuTrack = track
