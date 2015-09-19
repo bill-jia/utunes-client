@@ -85,6 +85,9 @@ app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "
       $scope.formSending = true
       UserService.updateUser($scope.otheruser).then(() ->
         $state.go("root.users.index", {}, {reload: true})
+      ).catch((errors) ->
+        $scope.errors = errors.data
+        $scope.formSending = false
       )
 
     $scope.openDeleteDialog = (e) ->
@@ -104,6 +107,9 @@ app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "
       $scope.formSending = true
       $scope.otheruser.remove({admin_password: $scope.otheruser.admin_password}).then(() ->
         $state.go("root.users.index", {}, {reload: true})
+      ).catch((errors) ->
+        $scope.errors = errors.data
+        $scope.formSending = false
       )
 ])
 
