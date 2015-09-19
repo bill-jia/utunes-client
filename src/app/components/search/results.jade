@@ -1,18 +1,24 @@
 md-content(layout-padding="" style="padding: 24px;")
-  h1 Search Results
-  h2 Albums
-  md-progress-circular(md-mode="indeterminate" ng-show="!albumsLoaded")
-  grid-list(items="albums")
-  h2 Producers
-  md-progress-circular(md-mode="indeterminate" ng-show="!producersLoaded")
-  grid-list(items="producers")
-  h2 Artists
-  md-progress-circular(md-mode="indeterminate" ng-show="!artistsLoaded")
-  grid-list(items="artists")
-  h2 Playlists
-  md-progress-circular(md-mode="indeterminate" ng-show="!playlistsLoaded")
-  playlist-table(content="playlists" headers="playlistHeaders" count="playlistCount")
-  h2 Tracks
-  md-progress-circular(md-mode="indeterminate" ng-show="!tracksLoaded")
-  x-track-table(tracks="tracks" headers="trackHeaders" count="trackCount" ng-show="tracksLoaded")
+  md-content(layout-padding="")
+    h1.md-primary Search Results
+  md-content.primary-content(layout-padding="")
+    h2.md-primary Albums
+    md-progress-circular(md-mode="indeterminate" ng-show="!albumsLoaded")
+    grid-list(items="albums" type="'album'" count="albumCount" ng-show="albumsLoaded")
+  md-content.primary-content(layout-padding="")
+    h2.md-primary Producers
+    md-progress-circular(md-mode="indeterminate" ng-show="!producersLoaded")
+    grid-list(items="producers" type="'producer'" count="producerCount" ng-show="producersLoaded")
+  md-content.primary-content(layout-padding="")
+    h2.md-primary Artists
+    md-progress-circular(md-mode="indeterminate" ng-show="!artistsLoaded")
+    grid-list(items="artists" type="'artist'" count="artistCount" ng-show="artistsLoaded")
+  md-content.primary-content(layout-padding="")    
+    h2.md-primary Playlists
+    md-progress-circular(md-mode="indeterminate" ng-show="!playlistsLoaded")
+    playlist-table(content="playlists" headers="playlistHeaders" count="playlistCount" ng-show="playlistsLoaded")
+  md-content.primary-content(layout-padding="")
+    h2.md-primary Tracks
+    md-progress-circular(md-mode="indeterminate" ng-show="!tracksLoaded")
+    x-track-table(tracks="tracks" headers="trackHeaders" count="trackCount" ng-show="tracksLoaded")
   

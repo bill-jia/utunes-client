@@ -66,7 +66,6 @@ app.controller("SearchResultsController", [
     ]
     if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
       $scope.trackHeaders.push {name: "Edit", field: "edit"}
-    $scope.trackCount = 25
 
     $scope.playlistHeaders = [
       {
@@ -78,7 +77,12 @@ app.controller("SearchResultsController", [
         field: "author"
       }
     ]
+
+    $scope.trackCount = 25
     $scope.playlistCount = 25
+    $scope.albumCount = 6
+    $scope.producerCount = 6
+    $scope.artistCount = 6
 ])
 
 app.config(["$stateProvider",
