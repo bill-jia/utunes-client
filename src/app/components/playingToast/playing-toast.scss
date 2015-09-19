@@ -3,7 +3,10 @@
   bottom: 75px;
   max-height: 200px;
   min-height: 72px;
+  min-width: 300px;
+  width: auto;
   padding-left: 12px;
+  padding-right: 12px;
 }
 
 #playing-toast a{
@@ -13,10 +16,43 @@
 
 div.toast-container{
   margin: 10px;
+  position: relative;
+}
+
+.toast-icon-container {
+  font-size: 30px;
+  position: relative;
+  width: 30px;
 }
 
 .toast-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toast-button-container {
   font-size: 30px;
   position: relative;
-  top: 18px;
+  width: 60px;
+  margin-left: 12px;
+}
+
+.toast-button {
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-box {
+  width: 150px;
+  height: 18px;
+  overflow: hidden;
+  position: relative;
+}
+//
+.scroll-text {
+  position: absolute;
+  white-space: nowrap;
 }

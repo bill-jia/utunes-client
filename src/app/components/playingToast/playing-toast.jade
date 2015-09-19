@@ -1,18 +1,13 @@
 md-toast#playing-toast
   div.toast-container(layout="row" flex)
-    div.toast-icon
-      i.mdi.mdi-play-circle-outline(style="")
+    div.toast-icon-container
+      i.mdi.mdi-play-circle-outline.toast-icon(style="")
     div.playing-text(layout="column")
-      div.scroll-box
-        div.scroll-text {{track.title}}
-      div.scroll-box
-        div.scroll-text
-          a(ui-sref="root.albums.show({albumId: track.album.id})")
-            |{{track.album.title}}   
-      div.scroll-box
-        div.scroll-text
-          a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})")
-            |{{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
-    span(flex)
-    div.toast-icon
-      i.mdi.mdi-plus
+      div {{track.title}}
+      div
+        a(ui-sref="root.albums.show({albumId: track.album.id})") {{track.album.title}}
+      div
+        a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+    div.toast-button-container
+      md-button.md-icon-button.toast-button(ng-click="showPlaylists($event)")
+        i.mdi.mdi-plus
