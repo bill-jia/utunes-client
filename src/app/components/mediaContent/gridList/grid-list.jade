@@ -8,7 +8,7 @@ div#options(layout="row")
     md-select(ng-model="reverse")
       md-option(value="{{0}}") Ascending
       md-option(value="{{1}}") Descending
-md-grid-list(md-cols-sm="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
+md-grid-list(md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="2:2" md-gutter="12px" md-gutter-gt-sm="8px")
   md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles | orderBy:orderProp:reverse==1 | startFrom:tablePage*count | limitTo: count" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.url}})', 'background-repeat': 'no-repeat', 'background-size': 'cover'}" ng-mouseover="mousedOver=$index" ng-mouseleave="mousedOver=null" ng-click="playItem(tile.id)")
     img.play-overlay(ng-show="mousedOver!=$parent.$index && type != 'producer'" src="/api/assets/images/play_button_overlay.png")
     md-grid-tile-footer.custom-tile-footer
