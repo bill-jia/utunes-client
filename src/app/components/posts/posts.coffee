@@ -69,7 +69,7 @@ app.controller("PostEditController", ["$scope", "PostService", "$stateParams", "
       )
 ])
 
-PostDeleteDialogController = ($scope, $mdDialog) ->
+PostDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -78,6 +78,7 @@ PostDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
+]
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider

@@ -113,7 +113,7 @@ app.controller("UserAdminEditController", ["$scope", "$state", "$stateParams", "
       )
 ])
 
-UserDeleteDialogController = ($scope, $mdDialog) ->
+UserDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -122,7 +122,7 @@ UserDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
-
+]
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider
     .state "root.users",

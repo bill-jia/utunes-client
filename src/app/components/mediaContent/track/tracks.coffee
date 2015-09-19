@@ -84,7 +84,7 @@ app.controller("TrackEditController", ["$scope", "$state", "$stateParams", "Albu
 
 ])
 
-TrackDeleteDialogController = ($scope, $mdDialog) ->
+TrackDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -93,6 +93,7 @@ TrackDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
+]
 
 app.config(["$stateProvider",
   ($stateProvider) ->

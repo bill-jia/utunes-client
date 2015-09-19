@@ -64,7 +64,7 @@ app.controller("ProducerEditController", ["$scope", "$state", "$stateParams", "P
     )
 ])
 
-ProducerDeleteDialogController = ($scope, $mdDialog) ->
+ProducerDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -73,6 +73,7 @@ ProducerDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
+]
 
 app.config(["$stateProvider",
   ($stateProvider) ->

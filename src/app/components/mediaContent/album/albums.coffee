@@ -225,7 +225,7 @@ app.controller("AlbumEditController", ["$scope", "$state", "$stateParams", "Albu
       )
 ])
 
-AlbumDeleteDialogController = ($scope, $mdDialog) ->
+AlbumDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -234,6 +234,8 @@ AlbumDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
+
+]
 
 app.config(["$stateProvider",
   ($stateProvider) ->

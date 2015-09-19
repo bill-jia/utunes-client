@@ -4,7 +4,7 @@ angular.module "uTunes"
       restrict: 'E'
       scope: {}
       template: ""
-      controller: ($scope, $element, $timeout, $mdToast, $document) ->
+      controller: ["$scope", "$element", "$timeout", "$mdToast", "$document", ($scope, $element, $timeout, $mdToast, $document) ->
         $scope.$on "trackplaying", (e, track) ->
           console.log "A track is playing"
           $mdToast.show({
@@ -17,44 +17,46 @@ angular.module "uTunes"
             }
             position: "bottom right"
           })
-
+      ]
   ]
 
-ToastController = ($scope, $mdToast, $mdDialog, TrackService, AlbumService, PlaylistService, trackId) ->
-  TrackService.getTrack(trackId).then((track) ->
-    $scope.track = track
-    $scope.track.album = AlbumService.getAlbum(track.album_id).$object
-    $scope.track.artists = TrackService.getArtists(track.id).$object
-    console.dir $scope.track
-  )
-
-  $scope.$on "trackfinished", (e, track)->
-    $mdToast.hide()
-
-  $scope.showPlaylists = (e) ->
-    $mdDialog.show({
-      controller: DialogController
-      templateUrl: 'app/components/trackTable/playlist-dialog.html'
-      parent: angular.element(document.body)
-      targetEvent: e
-      clickOutsideToClose: true
-    }).then(
-      (playlists)->
-        for playlist in playlists
-          if !playlist.id
-            playlist.tracks = []
-            playlist.seed_track_id = $scope.track.id
-            PlaylistService.createPlaylist(playlist)
-          else
-            PlaylistService.addTrackToPlaylist(playlist, $scope.track)
-      () ->
-        console.log "Dialog closed"
+ToastController = ["$scope", "$mdToast", "$mdDialog", "TrackService", "AlbumService", "PlaylistService", "trackId",
+  ($scope, $mdToast, $mdDialog, TrackService, AlbumService, PlaylistService, trackId) ->
+    TrackService.getTrack(trackId).then((track) ->
+      $scope.track = track
+      $scope.track.album = AlbumService.getAlbum(track.album_id).$object
+      $scope.track.artists = TrackService.getArtists(track.id).$object
+      console.dir $scope.track
     )
 
-DialogController = ($scope, $mdDialog, PlaylistService) ->
+    $scope.$on "trackfinished", (e, track)->
+      $mdToast.hide()
+
+    $scope.showPlaylists = (e) ->
+      $mdDialog.show({
+        controller: DialogController
+        templateUrl: 'app/components/trackTable/playlist-dialog.html'
+        parent: angular.element(document.body)
+        targetEvent: e
+        clickOutsideToClose: true
+      }).then(
+        (playlists)->
+          for playlist in playlists
+            if !playlist.id
+              playlist.tracks = []
+              playlist.seed_track_id = $scope.track.id
+              PlaylistService.createPlaylist(playlist)
+            else
+              PlaylistService.addTrackToPlaylist(playlist, $scope.track)
+        () ->
+          console.log "Dialog closed"
+      )
+]
+
+DialogController = ["$scope", "$mdDialog", "PlaylistService", ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->
     $scope.playlists = playlists
-    $scope.playlists.push {title: "", user_id: $scope.$root.user.id, author: $scope.$root.user.name, wanted: true}
+    $scope.playlists.push {title: "", user_id: $scope.$root.user.id, author: $scope.$root.user.name, is_public: false, wanted: true}
     console.log $scope.playlists.length
   )
 
@@ -73,3 +75,5 @@ DialogController = ($scope, $mdDialog, PlaylistService) ->
         wantedPlaylists.push playlist
     console.dir wantedPlaylists
     $mdDialog.hide(wantedPlaylists)
+
+]

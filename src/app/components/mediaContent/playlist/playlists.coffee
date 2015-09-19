@@ -135,7 +135,7 @@ app.controller("PlaylistEditController", ["$scope", "PlaylistService", "$statePa
       )
 ])
 
-PlaylistDeleteDialogController = ($scope, $mdDialog) ->
+PlaylistDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.hide = () ->
     $mdDialog.hide()
 
@@ -144,6 +144,7 @@ PlaylistDeleteDialogController = ($scope, $mdDialog) ->
 
   $scope.answer = (answer) ->
     $mdDialog.hide(answer)
+]
 
 app.config(["$stateProvider", ($stateProvider) ->
   $stateProvider

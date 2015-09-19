@@ -92,7 +92,7 @@ app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "Art
       )
 ])
 
-ArtistDeleteDialogController = ($scope, $mdDialog) ->
+ArtistDeleteDialogController = ["$scope", "$mdDialog", ($scope, $mdDialog) ->
   $scope.deleteAssociatedTracks = false
   $scope.hide = () ->
     $mdDialog.hide()
@@ -103,6 +103,7 @@ ArtistDeleteDialogController = ($scope, $mdDialog) ->
   $scope.answer = (answer) ->
     console.log answer
     $mdDialog.hide([answer])
+]
 
 app.config(["$stateProvider",
   ($stateProvider) ->
