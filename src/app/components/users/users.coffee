@@ -59,7 +59,7 @@ app.controller("UserEditController", ["$scope", "$auth","$mdDialog", "$state"
           $scope.delete()
         () ->
       )
-      
+
     $scope.save = () ->
       $scope.formSending = true
       $auth.updateAccount($scope.updateAccountForm).then(()->
@@ -129,6 +129,14 @@ app.config(["$stateProvider", ($stateProvider) ->
       url: "/"
       templateUrl: "app/components/users/views/index.html"
       controller: "UserIndexController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+        admin: ["trackRoles", (trackRoles) ->
+          return trackRoles.admin()
+        ]
+      }
     .state "root.users.new",
       name: "users.new"
       url: "/new"
@@ -139,9 +147,22 @@ app.config(["$stateProvider", ($stateProvider) ->
       url: "/{userId}/edit"
       templateUrl: "app/components/users/views/edit.html"
       controller: "UserEditController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+      }
     .state "root.users.adminEdit",
       name: "users.adminEdit"
       url: "/admin/{userId}/edit"
       templateUrl: "app/components/users/views/admin-edit.html"
       controller: "UserAdminEditController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+        admin: ["trackRoles", (trackRoles) ->
+          return trackRoles.admin()
+        ]
+      }
 ])

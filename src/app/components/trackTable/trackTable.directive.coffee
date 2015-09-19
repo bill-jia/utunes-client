@@ -53,12 +53,14 @@ app.directive 'trackTable', () ->
         onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count, false)
 
       originatorEv = null
-      $scope.menuOptions =[
-        [
-          "Add to Playlist", ($event) ->
-            $scope.showPlaylists($event, $scope.menuTrack)
+
+      if $scope.$root.user.signedIn
+        $scope.menuOptions =[
+          [
+            "Add to Playlist", ($event) ->
+              $scope.showPlaylists($event, $scope.menuTrack)
+          ]
         ]
-      ]
 
       $scope.setMenuTrack = (track) ->
         $scope.menuTrack = track

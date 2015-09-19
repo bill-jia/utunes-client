@@ -58,4 +58,5 @@ app.factory("trackRoles", ["$q", "$timeout", "$rootScope"
           deferred.reject("User is not a user")
       ,500)
       deferred.promise
+
 ])

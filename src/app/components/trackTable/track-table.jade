@@ -7,7 +7,7 @@ table.md-table
           i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
         span(ng-if="!handleSort(header.field)")
           |{{header.name}}
-  tbody(md-context-menu="menuOptions")
+  tbody(ng-attr-md-context-menu="menuOptions")
     tr.md-table-content-row(ng-repeat="track in tracks | startFrom:tablePage*count | limitTo: count" ng-click="playTrack($index, $event)" ng-right-click = "setMenuTrack(track)" ng-if="!track._remove" ng-class="{'track-focus': track.id == playingTrack.id}")
         td.md-table-content(ng-repeat= "header in headers")
             div(ng-if="header.field == 'track_number'")

@@ -167,9 +167,19 @@ app.config(["$stateProvider", ($stateProvider) ->
       url: "/new"
       templateUrl: "app/components/mediaContent/playlist/views/new.html"
       controller: "PlaylistNewController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+      }
     .state "root.playlists.edit",
       name: "playlists.edit"
       url: "/{playlistId}/edit"
       templateUrl: "app/components/mediaContent/playlist/views/edit.html"
       controller: "PlaylistEditController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+      }
 ])

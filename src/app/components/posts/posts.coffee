@@ -91,9 +91,25 @@ app.config(["$stateProvider", ($stateProvider) ->
       url: "/posts/new"
       templateUrl: "app/components/posts/views/new.html"
       controller: "PostNewController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+        producer: ["trackRoles", (trackRoles) ->
+          return trackRoles.producer()
+        ]
+      }
     .state "root.posts.edit",
       name: "posts.edit"
       url: "/posts/{postId}/edit"
       templateUrl: "app/components/posts/views/edit.html"
       controller: "PostEditController"
+      resolve: {
+        auth: ["$auth", ($auth) ->
+          return $auth.validateUser()
+        ]
+        producer: ["trackRoles", (trackRoles) ->
+          return trackRoles.producer()
+        ]
+      }
 ])
