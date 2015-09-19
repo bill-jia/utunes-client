@@ -8,7 +8,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				label Title
 				input(id="title" name="title" type="text" ng-model="post.title" required)
 				div(ng-messages="form.title.$error")
-					div(ng-show="required") A title is required.					
+					div(ng-show="required") required					
 			md-input-container
 				label Content
 				textarea(id="content" name="content" type="text" ng-model="post.content")
@@ -17,7 +17,7 @@ md-content(layout-padding="" style="padding: 24px;")
 				div.drop-box(id="cover_image" name = "cover_image" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="post.file" ng-disabled="disabled") Drop file
 				{{post.file.name}}
 				div(ng-messages="post.file.$error")
-					div(ng-show="post.file.$error=='pattern'") An image is required.	
+					div(ng-show="post.file.$error=='pattern'") image required	
 			md-input-container(layout="row")
 				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save

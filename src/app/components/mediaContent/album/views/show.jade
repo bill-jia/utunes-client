@@ -8,7 +8,7 @@ md-content#album-show(layout-padding="" style="padding: 24px;" ng-show="album")
 				span(flex)
 				md-button.md-raised.md-accent(ui-sref="root.albums.edit({albumId: album.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')")		
 					|Edit album
-				md-button.md-raised.md-accent(ng-click="playAlbum()") Play album	
+				md-button.md-raised.md-accent(ng-click="playAlbum()") Play	
 			div(layout="row")
 				p.md-subheader.album-subtitle 
 					span(ng-if="album.year"){{album.year}} &nbsp&bull;&nbsp

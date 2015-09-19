@@ -4,23 +4,23 @@ ng-form(name="form" novalidate)
       label Track Number
       input(id="track-number" name="track_number" type="number" ng-model="track.track_number" required ui-validate="{unique: 'uniqueTrackNumber($value)'}")
       div(ng-messages="form.track_number.$error")
-        div(ng-message="required") This field is required.
-        div(ng-message="number") A number is required.
-        div(ng-message="unique") Track numbers must be unique.
+        div(ng-message="required") required
+        div(ng-message="number") number required
+        div(ng-message="unique") track numbers must be unique
     md-input-container
       label Title
       input(id="track-title" name="track_title" type="text" ng-model="track.title" required)
       div(ng-messages="form.track_title.$error")
-        div(ng-message="required") This field is required.
+        div(ng-message="required") required
     md-input-container
       h3.md-primary Audio File
       div.drop-box(id="track-audio" name = "file" type="file" ngf-select ngf-drop ngf-drag-over-class="dragover" ngf-pattern="'.mp3,.ogg,.wav'" ng-model="track.file" required)  Drag and drop or click to upload
       p {{track.file.name}}
       audio#new-track-audio(ngf-src="track.file") 
       div(ng-messages="form.file.$error")
-        div(ng-message="required") This field is required.
+        div(ng-message="required") required
       div(ng-messages="track.file.$error")
-        div(ng-show="track.file.$error=='pattern'") An HTML5-compliant audio file is required.
+        div(ng-show="track.file.$error=='pattern'") .mp3, .wav, or .ogg audio required
     div.primary-content.nested-field
       h3.md-primary Artists
       

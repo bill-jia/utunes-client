@@ -6,10 +6,15 @@ md-content(layout-padding="" style="padding: 24px;")
 		form(name="form")
 			md-input-container
 				label Name
-				input(id="name" name="name" type="text" ng-model="otheruser.name")
+				input(id="name" name="name" type="text" ng-model="otheruser.name" required)
+				div(ng-messages="form.name.$error")
+					div(ng-message="required") required
 			md-input-container
 				label Email
 				input(id="email" name="email" type="email" ng-model="otheruser.email")
+				div(ng-messages="form.email.$error")
+					div(ng-message="required") required
+					div(ng-message="email") valid email required
 			md-input-container
 				label Role
 				md-select(ng-model="otheruser.role")
@@ -19,6 +24,10 @@ md-content(layout-padding="" style="padding: 24px;")
 			md-input-container
 				label Admin password
 				input(id="admin_password" name="admin_password" type="password" ng-model="otheruser.admin_password")
+				div(ng-messages="form.admin_password.$error")
+					div(ng-message="required") required
+				div(ng-messages="errors")
+					div(ng-message="admin_password") {{errors.admin_password[0]}}					
 			md-input-container(layout="row")
 				md-button.md-raised.md-warn(ng-click="openDeleteDialog($event)") Delete
 				md-button.md-raised.md-primary(ng-click="save()") Save

@@ -5,7 +5,7 @@ md-content#playlist-show(layout-padding="" style="padding: 24px;" ng-show="playl
         h1.md-primary.album-title {{playlist.title}}
         span(flex)
         md-button.md-raised.md-accent(ui-sref="root.playlists.edit({playlistId: playlist.id})" ng-if = "user.id && (user.id == playlist.user_id || user.role == 'producer' || user.role == 'admin')") Edit this playlist
-        md-button.md-raised.md-accent(ng-click="playPlaylist()") Play	
+        md-button.md-raised.md-accent(ng-click="playPlaylist()") Play
       div(layout="row")
         p.md-subheader.album-subtitle
           {{playlist.author}} &nbsp&bull;&nbsp {{tracks.length}} {{tracks.length == 1 ? 'track' : 'tracks'}} &nbsp&bull;&nbsp {{playlist.duration*1000 | time}}

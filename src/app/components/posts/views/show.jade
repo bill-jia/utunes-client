@@ -10,4 +10,4 @@ md-content(layout-padding="" style="padding: 24px;")
 				h2.md-subheader.md-card-subheader {{post.author}} {{post.updated_at | date:"medium"}}
 				div.article(ng-bind-html="post.content")
 			div.md-actions(layout="row" layout-align = "end center")
-				md-button.md-raised.md-primary(ui-sref="root.posts.edit({postId: post.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Edit
+				md-button.md-raised.md-primary(ui-sref="root.posts.edit({postId: post.id})" ng-if = "user.role && (user.role == 'admin' || user.role == 'producer')") Edit post

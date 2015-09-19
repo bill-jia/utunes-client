@@ -3,22 +3,22 @@ ng-form(name="form" novalidate)
     label Album Title
     input(id="album-title" name="title" type="text" ng-model="album.title" ng-required="true" ng-disabled="disabled")
     div(ng-messages="form.title.$error")
-      div(ng-message="required") This field is required
+      div(ng-message="required") required
   md-input-container
     label Year
     input(id="album-year" name="year" type="text" ng-model="album.year" ng-disabled="disabled" integer)
     div(ng-messages="form.year.$error")
-      div(ng-message="integer") Integers only
+      div(ng-message="integer") number required
   md-input-container
     h3.md-primary Album Cover
     div.drop-box(id="album-cover-image" name = "cover_image" type="file" ngf-select ngf-pattern="'.jpg,.jpeg,.gif,.png'" ngf-drop ngf-drag-over-class="dragover" ng-model="album.file" ng-disabled="disabled") Drag and drop or click to upload
     {{album.file.name}}
     div(ng-messages="album.file.$error")
-      div(ng-show="album.file.$error=='pattern'") An image is required.
+      div(ng-show="album.file.$error=='pattern'") image required
     label Cover image designer
     input(id="cover-designer" name="cover_designer" type="text" ng-model="album.cover_designer")
   md-input-container
     label Description
     textarea(id="album-description" name="description" type="text" ng-model="album.description" md-maxlength="625")
     div(ng-messages="form.description.$error")
-      div(ng-message="md-maxlength") Max length: 625 characters
+      div(ng-message="md-maxlength") max length: 625 characters

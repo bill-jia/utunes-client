@@ -6,7 +6,7 @@ md-content(layout-padding="" style="padding: 24px;")
 			md-input-container
 				input(name="tracksLength" ng-model="tracksLength" style="display:none;" ui-validate="{hastracks: 'hasTracks($value)'}")
 				div(ng-messages="parentForm.tracksLength.$error")
-					div(ng-message="hastracks") Album must have at least one track
+					div(ng-message="hastracks") album must have at least one track
 			md-content.primary-content
 				album-fields(register-form-scope="registerFormScope" album="album" edit="albumEdit")
 			md-content.primary-content.nested-field
@@ -14,17 +14,17 @@ md-content(layout-padding="" style="padding: 24px;")
 				div(ng-repeat="producer in album.producers" layout="row")
 					producer-fields(register-form-scope="registerFormScope" producer="producer" edit="producerEdit")
 					md-input-container
-						md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") X Remove Producer
+						md-button.md-raised.md-warn(ng-click="removeProducer($index, album)") Remove Producer
 				md-input-container
-					md-button.md-raised.md-accent(ng-click="addProducer()") + Add Producer	
+					md-button.md-raised.md-accent(ng-click="addProducer()") Add Producer	
 			md-content.primary-content.nested-field
 				h2.md-primary Tracks
 				div(ng-repeat="track in album.tracks" layout="row")
 					track-fields(register-form-scope="registerFormScope" track="track" edit="trackEdit" artist-edit="artistEdit" tracks="album.tracks" track-numbers="trackNumbers")
 					md-input-container
-						md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") X Remove Track
+						md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") Remove Track
 				md-input-container
-					md-button.md-raised.md-accent(ng-click="addTrack()") + Add track
+					md-button.md-raised.md-accent(ng-click="addTrack()") Add track
 			md-input-container
 				md-button.md-raised.md-primary(ng-click="save()") Add
 				md-progress-circular(md-mode="indeterminate" ng-show="formSending")

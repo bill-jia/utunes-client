@@ -4,6 +4,6 @@ md-content(layout-padding="" style="padding: 24px;")
       h1.md-primary.album-title Playlists
       span(flex)
       md-button.md-raised.md-accent(ui-sref="root.playlists.new" ng-if = "user.id")
-        |Add a playlist
+        |Add playlist
   md-content.primary-content(layout-padding="")
     playlist-table(content="playlists" headers="headers" count="count" ng-show="playlists")

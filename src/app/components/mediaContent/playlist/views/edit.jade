@@ -5,7 +5,7 @@ md-content(layout-padding="" style="padding: 24px;")
       label Title
       input(id="title" name="title" type="text" ng-model="playlist.title")
       div(ng-messages="form.title.$error")
-        div(ng-show="required") A title is required.  
+        div(ng-show="required") required  
     div#playlist-tracks
       h2 Tracks      
       x-track-table(tracks="tracks" headers="headers" count="count")

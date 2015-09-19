@@ -13,7 +13,7 @@ div.sidebar-content
 		div(ng-include="template")
 		a(href="#" ng-click="switchLogin()")
 			span(ng-if= "template == login") Not registered? Sign up!
-			span(ng-if= "template == signup") Already have an account? Login
+			span(ng-if= "template == signup") Already have an account? Login!
 	div(ng-show="user.signedIn")
 		md-list
 			md-list-item(ng-click="goTo($event, 'root.users.edit', {userId:user.id})" ng-class="{'nav-selected': state == 'root.home'}")
