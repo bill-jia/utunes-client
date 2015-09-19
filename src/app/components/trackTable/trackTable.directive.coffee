@@ -101,8 +101,7 @@ app.directive 'trackTable', () ->
 DialogController = ($scope, $mdDialog, PlaylistService) ->
   PlaylistService.getUserPlaylists($scope.$root.user.id).then((playlists) ->
     $scope.playlists = playlists
-    $scope.playlists.push {title: "", user_id: $scope.$root.user.id, author: $scope.$root.user.name, wanted: true}
-    console.log $scope.playlists.length
+    $scope.playlists.push {title: "", user_id: $scope.$root.user.id, author: $scope.$root.user.name, is_public: false, wanted: true}
   )
 
   $scope.hide = () ->

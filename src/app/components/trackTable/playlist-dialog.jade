@@ -15,5 +15,7 @@ md-dialog
         md-input-container
           label New playlist
           input(id="title" name="title" type="text" ng-model="playlists[playlists.length-1].title")
+        md-input-container
+          md-switch(id="is_public" ng-model="playlists[playlists.length-1].is_public" ng-if = "$root.user.role && ($root.user.role == 'admin' || $root.user.role == 'producer')") Public
     div.md-actions
       md-button(ng-click="answer()") Add
