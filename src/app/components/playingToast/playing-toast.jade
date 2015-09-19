@@ -8,6 +8,7 @@ md-toast#playing-toast
         a(ui-sref="root.albums.show({albumId: track.album.id})") {{track.album.title}}
       div
         a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})") {{artist.name}} {{artist.class_year}}{{$last ? '' : ', '}}
+    div(flex)
     div.toast-button-container
       md-button.md-icon-button.toast-button(ng-click="showPlaylists($event)")
         i.mdi.mdi-plus
