@@ -24,7 +24,7 @@ angular.module "uTunes"
 
         $scope.signOut = () ->
           $auth.signOut().then((resp)->
-            $state.go("root.home", {}, {reload: true})
+            $state.go("root.posts.index", {}, {reload: true})
           ).catch((resp)->)
 
         $scope.handleRegBtnClick = (registrationForm) ->

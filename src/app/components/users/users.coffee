@@ -63,13 +63,13 @@ app.controller("UserEditController", ["$scope", "$auth","$mdDialog", "$state"
     $scope.save = () ->
       $scope.formSending = true
       $auth.updateAccount($scope.updateAccountForm).then(()->
-        $state.go("root.home")
+        $state.go("root.posts.index")
       ).catch(()->)
 
     $scope.delete = () ->
       $scope.formSending = true
       $auth.destroyAccount().then(()->
-        $state.go("root.home")
+        $state.go("root.posts.index")
       ).catch(()->)
 ])
 
