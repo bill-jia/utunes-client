@@ -25,6 +25,6 @@ md-content(layout-padding="" style="")
 						md-button.md-raised.md-warn(ng-click="removeTrack($index, album)") Remove Track
 				md-input-container
 					md-button.md-raised.md-accent(ng-click="addTrack()") Add track
-			md-input-container
+			md-input-container(layout="row")
 				md-button.md-raised.md-primary(ng-click="save()") Add
 				md-progress-circular(md-mode="indeterminate" ng-show="formSending")
