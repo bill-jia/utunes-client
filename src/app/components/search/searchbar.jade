@@ -1,7 +1,7 @@
 form(layout="row" ng-submit="submit()")
+  md-button.md-icon-button(ng-submit="submit()" style="position:relative;top:17px;")
+    i.mdi.mdi-magnify
   md-input-container(layout="row")
-    md-button.md-icon-button(ng-submit="submit()" style="position:relative;top:17px;")
-      i.mdi.mdi-magnify
     section(layout="column")
       label Search
       input(id="search_params" name="search_params" type="text" ng-model="searchParams")
