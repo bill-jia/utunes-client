@@ -1,6 +1,5 @@
-form(layout="row" ng-submit="submit()")
+form(layout="row")
   md-input-container(layout="row")
-    md-button.md-icon-button(ng-submit="submit()")
-      i.mdi.mdi-magnify  
-    section(layout="column")
+    md-button.md-icon-button(ng-click="submit()")
+      i.mdi.mdi-magnify
       input(id="search_params" name="search_params" type="text" ng-model="searchParams")
