@@ -7,11 +7,11 @@ md-dialog
         md-button.md-icon-button(ng-click="cancel()")
           i.mdi.mdi-close
     md-dialog-content(style="width:700px; height:450px;")
-      form(ng-show="playlists")
+      form(ng-if="playlists.size > 0")
         md-input-container
           label Filter
           input(id="query" name="query" type="Text" ng-model="query")
-      md-list(style="max-height:200px;overflow: scroll;")
+      md-list(ng-if = "playlists.size > 0" style="max-height:200px;overflow: scroll;")
         md-list-item(ng-repeat="playlist in playlists | filter:query")
           p {{playlist.title}}
           md-checkbox.md-primary(ng-model="playlist.wanted")
