@@ -6,7 +6,11 @@ div.md-toolbar-tools
 	span(flex)
 	md-button.md-icon-button(ng-click="toggleRight()")
 		i.mdi.mdi-account
-	x-searchbar
+	div(layout="row")
+		md-input-container(layout="row")
+			md-button.md-icon-button(ng-click="submit()")
+		    i.mdi.mdi-magnify
+		  input(id="search_params" name="search_params" type="text" ng-model="searchParams")
 	
 	//- div.md-toolbar-tools(ng-if="!user.signedIn")
 	//- 	md-button.nav-button(ui-sref=".login") Login
