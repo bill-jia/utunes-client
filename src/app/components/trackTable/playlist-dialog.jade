@@ -7,7 +7,7 @@ md-dialog
         md-button.md-icon-button(ng-click="cancel()")
           i.mdi.mdi-close
     md-dialog-content(style="width:700px; height:450px;")
-      form
+      form(ng-show="playlists")
         md-input-container
           label Filter
           input(id="query" name="query" type="Text" ng-model="query")
