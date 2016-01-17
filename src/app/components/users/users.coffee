@@ -29,17 +29,16 @@ app.controller("UserIndexController", ["$scope", "UserService", ($scope, UserSer
 app.controller("UserNewController", ["$scope", "$auth", ($scope, $auth) ->
   $scope.handleRegBtnClick = () ->
     console.log "Registration"
-    $auth.submitRegistration($scope.registrationForm).then(
-      ()->
-        console.log "Registration successful"
-        $auth.submitLogin({
-          email: $scope.registrationForm.email,
-          password: $scope.registrationForm.password
-        })
-      (ev, reason) ->
-        console.log "Registration failed"
-        $scope.errors = reason.errors
+    $auth.submitRegistration($scope.registrationForm).then(()->
+      $auth.submitLogin({
+        email: $scope.registrationForm.email,
+        password: $scope.registrationForm.password
+      })
     )
+
+  $scope.$on("auth:registration-email-error", (ev, reason) ->
+    $scope.errors = reason.errors
+  )
 ])
 
 app.controller("UserEditController", ["$scope", "$auth","$mdDialog", "$state"
