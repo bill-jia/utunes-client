@@ -32,8 +32,9 @@ angular.module "uTunes"
             console.log "Registration"
             $auth.submitRegistration(registrationForm).then(()->
               $state.go("root.emailnotif", {}, {reload: false})
-            )
-            $scope.close()
+              $scope.close()
+            ).catch((resp)->)
+            
 
           $scope.$on("auth:login-error", (ev, reason) ->
             $scope.errors = reason.errors

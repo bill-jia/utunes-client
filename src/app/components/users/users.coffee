@@ -31,11 +31,13 @@ app.controller("UserNewController", ["$scope", "$auth", ($scope, $auth) ->
     console.log "Registration"
     $auth.submitRegistration($scope.registrationForm).then(
       ()->
+        console.log "Registration successful"
         $auth.submitLogin({
           email: $scope.registrationForm.email,
           password: $scope.registrationForm.password
         })
       (ev, reason) ->
+        console.log "Registration failed"
         $scope.errors = reason.errors
     )
 ])
