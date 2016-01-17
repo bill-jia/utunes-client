@@ -26,21 +26,6 @@ app.controller("UserIndexController", ["$scope", "UserService", ($scope, UserSer
     $scope.count = 25
 ])
 
-app.controller("UserNewController", ["$scope", "$auth", ($scope, $auth) ->
-  $scope.handleRegBtnClick = () ->
-    console.log "Registration"
-    $auth.submitRegistration($scope.registrationForm).then(()->
-      $auth.submitLogin({
-        email: $scope.registrationForm.email,
-        password: $scope.registrationForm.password
-      })
-    )
-
-  $scope.$on("auth:registration-email-error", (ev, reason) ->
-    $scope.errors = reason.errors
-  )
-])
-
 app.controller("UserEditController", ["$scope", "$auth","$mdDialog", "$state"
   ($scope, $auth, $mdDialog, $state) ->
     $scope.$on("auth:account-update-error", (ev, reason) ->
@@ -143,11 +128,6 @@ app.config(["$stateProvider", ($stateProvider) ->
           return trackRoles.admin()
         ]
       }
-    .state "root.users.new",
-      name: "users.new"
-      url: "/new"
-      templateUrl: "app/components/users/views/new.html"
-      controller: "UserNewController"
     .state "root.users.edit",
       name: "users.edit"
       url: "/{userId}/edit"
