@@ -4,17 +4,17 @@ md-content(layout-padding="" style="")
       label Name
       input(type="text" name="name" id="name" ng-model="registrationForm.name" required)
       div(ng-messages="errors")
-        div(ng-message="name") Name {{errors.name[0]}}          
+        div(ng-message="name") {{errors.name[0]}}          
     md-input-container
       label Email
       input(type="email" name="email" id="email" ng-model="registrationForm.email" required)
       div(ng-messages="errors")
-        div(ng-message="email") Email {{errors.email[0]}}
+        div(ng-message="email") {{errors.email[0]}}
     md-input-container
       label Password
       input(type="password" name="password" id="password" ng-model="registrationForm.password" required)
       div(ng-messages="errors")
-        div(ng-message="password") Password {{errors.password[0]}}
+        div(ng-message="password") {{errors.password[0]}}
     md-input-container
       label Re-enter your password
       input(type="password" name="password_confirmation" id="password_confirmation" ng-model="registrationForm.password_confirmation" required)
