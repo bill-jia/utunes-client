@@ -11,7 +11,7 @@ md-toolbar
 div.sidebar-content
 	div(ng-show="!user.signedIn")
 		div(ng-include="template")
-		a(href="#top" ng-click="switchLogin()")
+		a( ng-click="switchLogin()")
 			span(ng-if= "template == login") Not registered? Sign up!
 			span(ng-if= "template == signup") Already have an account? Login!
 	div(ng-show="user.signedIn")

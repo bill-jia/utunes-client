@@ -30,7 +30,7 @@ ng-form(name="form" novalidate)
           a(ui-sref="root.artists.show({artistId: artist.id})"){{artist.name}} {{artist.class_year}}
         span.producer-options
           md-button.md-raised.md-accent(ui-sref="root.artists.edit({artistId: artist.id})") Edit artist
-          md-button.md-raised.md-warn(href="#top" ng-click="removeArtistAssociation(artist)") Remove association
+          md-button.md-raised.md-warn( ng-click="removeArtistAssociation(artist)") Remove association
       div(ng-repeat="artist in track.artists" layout="row" ng-hide="artist._remove")
         artist-fields(register-form-scope="registerFormScope" artist="artist" edit="artistEdit")
         md-input-container
