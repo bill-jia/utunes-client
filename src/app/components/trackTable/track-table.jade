@@ -2,7 +2,7 @@ table.md-table
   thead
     tr.md-table-headers-row
       th.md-table-header(ng-repeat="header in headers")
-        a(" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
+        a(href="#top" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
           i.mdi.mdi-chevron-up(ng-show="reverse && header.field == predicate")
           i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
         span(ng-if="!handleSort(header.field)")
@@ -27,21 +27,21 @@ table.md-table
             div(ng-if="header.field == 'edit'")
               a(ui-sref="root.tracks.edit({trackId:track.id})" stop-event="click") Edit Track
             div(ng-if="header.field=='download'")
-              a(" ng-click="downloadFile(track.audio.url)" stop-event="click") Download
+              a(href="#top" ng-click="downloadFile(track.audio.url)" stop-event="click") Download
             div(ng-if="header.field == 'remove'")
-              a(" ng-click="track._remove = true" stop=event="click") X
+              a(href="#top" ng-click="track._remove = true" stop=event="click") X
 
 div.md-table-footer(layout="row")
   span.md-table-count-info Tracks per page: 
-    a(" ng-click="goToPage(0); count = 10") 10
+    a(href="#top" ng-click="goToPage(0); count = 10") 10
     | , 
-    a(" ng-click="goToPage(0); count = 25") 25
+    a(href="#top" ng-click="goToPage(0); count = 25") 25
     | , 
-    a(" ng-click="goToPage(0); count = 50") 50
+    a(href="#top" ng-click="goToPage(0); count = 50") 50
     | , 
-    a(" ng-click="goToPage(0); count = 100") 100
+    a(href="#top" ng-click="goToPage(0); count = 100") 100
     | , 
-    a(" ng-click="goToPage(0); count = tracks.length") All
+    a(href="#top" ng-click="goToPage(0); count = tracks.length") All
     |&nbsp;(current is {{count}})
   span(flex)
   span(ng-show="numberOfPages() > 1")

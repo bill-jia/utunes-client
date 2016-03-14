@@ -4,7 +4,7 @@ table.md-table
   thead
     tr.md-table-headers-row
       th.md-table-header(ng-repeat="header in headers")
-        a(" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
+        a(href="#top" ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
           i.mdi.mdi-chevron-up(ng-show="reverse && header.field == predicate")
           i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
         span(ng-if="!handleSort(header.field)")
@@ -19,15 +19,15 @@ table.md-table
         
 div.md-table-footer(layout="row")
   span.md-table-count-info Items per page:
-    a(" ng-click="goToPage(0); count = 10") 10
+    a(href="#top" ng-click="goToPage(0); count = 10") 10
     | , 
-    a(" ng-click="goToPage(0); count = 25") 25
+    a(href="#top" ng-click="goToPage(0); count = 25") 25
     | , 
-    a(" ng-click="goToPage(0); count = 50") 50
+    a(href="#top" ng-click="goToPage(0); count = 50") 50
     | , 
-    a(" ng-click="goToPage(0); count = 100") 100
+    a(href="#top" ng-click="goToPage(0); count = 100") 100
     | , 
-    a(" ng-click="goToPage(0); count = content.length") All
+    a(href="#top" ng-click="goToPage(0); count = content.length") All
     | (current is {{count}})
   span(flex)
   span(ng-show="numberOfPages() > 1")

@@ -23,15 +23,15 @@ md-grid-list(md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md
 
 div.grid-list-footer(layout="row")
   span.md-table-count-info Items per page: 
-    a(" ng-click="goToPage(0); count = 6") 6
+    a(href="#top" ng-click="goToPage(0); count = 6") 6
     | , 
-    a(" ng-click="goToPage(0); count = 12") 12
+    a(href="#top" ng-click="goToPage(0); count = 12") 12
     | , 
-    a(" ng-click="goToPage(0); count = 24") 24
+    a(href="#top" ng-click="goToPage(0); count = 24") 24
     | , 
-    a(" ng-click="goToPage(0); count = 48") 48
+    a(href="#top" ng-click="goToPage(0); count = 48") 48
     | , 
-    a(" ng-click="goToPage(0); count = tiles.length") All
+    a(href="#top" ng-click="goToPage(0); count = tiles.length") All
     |&nbsp;(current is {{count}})
   span(flex)
   span(ng-show="numberOfPages() > 1")
