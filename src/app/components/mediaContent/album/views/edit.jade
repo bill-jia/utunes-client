@@ -13,7 +13,7 @@ md-content(layout-padding="" style="")
 				span(flex)
 				span.producer-options
 					md-button.md-raised.md-accent(ui-sref="root.producers.edit({producerId: producer.id})") Edit Producer
-					md-button.md-raised.md-warn(href="#" ng-click="removeProducerAssociation(producer)") Remove association
+					md-button.md-raised.md-warn(href="#top" ng-click="removeProducerAssociation(producer)") Remove association
 			div(ng-repeat="producer in album.producers" layout="row" ng-hide="producer._remove")
 				producer-fields(register-form-scope="registerFormScope" producer="producer" edit="producerEdit")
 				md-input-container
