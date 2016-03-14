@@ -28,10 +28,10 @@ app.directive 'trackTable', () ->
           else if predicate == "album"
             $scope.tracks = orderBy($scope.tracks, orderByAlbum, reverse)
           else
-            $scope.tracks = orderBy($scope.tracks, predicate, reverse)
+            $scope.tracks = orderBy($scope.tracks, orderByTrackNumber, reverse)
 
           $scope.predicate = predicate
-        $scope.order("track_number", false)
+        $scope.order("track_number", true)
         orderByArtists = (track) ->
           artistArray = []
           for artist in track.artists
@@ -40,6 +40,9 @@ app.directive 'trackTable', () ->
 
         orderByAlbum = (track) ->
           track.album.title
+
+        orderByTrackNumber = (track) ->
+          track.track_number
 
         $scope.numberOfPages = () ->
           Math.ceil($scope.tracks.length/$scope.count)
