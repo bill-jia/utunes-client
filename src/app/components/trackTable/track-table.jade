@@ -2,7 +2,7 @@ table.md-table
   thead
     tr.md-table-headers-row
       th.md-table-header(ng-repeat="header in headers")
-        a( ng-if="handleSort(header.field)" ng-click="reverse=!reverse;order(header.field, reverse)"){{header.name}}
+        a( ng-if="handleSort(header.field)" ng-click="console.log(reverse);reverse=!reverse;order(header.field, reverse)"){{header.name}}
           i.mdi.mdi-chevron-up(ng-show="reverse && header.field == predicate")
           i.mdi.mdi-chevron-down(ng-show="!reverse && header.field == predicate")
         span(ng-if="!handleSort(header.field)")
