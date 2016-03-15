@@ -15,6 +15,7 @@ app.directive 'trackTable', () ->
         $scope.playingTrack = null
         $scope.reverse = false
         $scope.predicate = null
+        $scope.tracksLoaded = false
         # console.dir $scope.tracks
 
         $scope.handleSort = (field) ->
@@ -39,10 +40,8 @@ app.directive 'trackTable', () ->
           $scope.predicate = predicate
         
         $scope.$watch 'tracks', () ->
-          console.log "tracks changed"
-          console.log $scope.predicate
-          if not $scope.predicate
-            console.log "tracks first loaded"
+          if not $scope.tracksLoaded
+            $scope.tracksLoaded = true
             $scope.order("track_number", $scope.reverse)
             $scope.$apply()
 
