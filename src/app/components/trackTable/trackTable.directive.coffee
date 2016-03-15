@@ -8,8 +8,8 @@ app.directive 'trackTable', () ->
       headers: '='
       count: '='
     templateUrl: "app/components/trackTable/track-table.html"
-    controller:["$scope", "$filter", "$window", "$mdDialog", "onSelectTrack", "PlaylistService", "TrackService", "rfc4122",
-      ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService, TrackService, rfc4122) ->
+    controller:["$scope", "$filter", "$window", "$mdDialog", "onSelectTrack", "PlaylistService", "TrackService", "rfc4122", "$timeout",
+      ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService, TrackService, rfc4122, $timeout) ->
         orderBy = $filter('orderBy')
         $scope.tablePage = 0
         $scope.playingTrack = null
@@ -44,8 +44,9 @@ app.directive 'trackTable', () ->
           if $scope.tracksLoaded == false
             $scope.tracksLoaded = true
             console.log $scope.reverse
-            $scope.order("track_number", $scope.reverse)
-            # $scope.$apply()
+            $timeout(() ->
+              $scope.order("track_number", $scope.reverse)
+            )
 
         orderByArtists = (track) ->
           artistArray = []
