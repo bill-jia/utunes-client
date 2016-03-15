@@ -41,7 +41,7 @@ app.directive 'trackTable', () ->
         
         $scope.$watch 'tracks', () ->
           console.log $scope.tracksLoaded
-          if $scope.tracksLoaded == false
+          if $scope.tracksLoaded == false and $scope.tracks
             $scope.tracksLoaded = true
             console.log $scope.reverse
             $timeout(() ->
