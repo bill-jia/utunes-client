@@ -39,8 +39,9 @@ app.directive 'trackTable', () ->
           $scope.predicate = predicate
         
         $scope.$watch 'tracks', () ->
-          if $scope.predicate == null
+          if not $scope.predicate
             $scope.order("track_number", $scope.reverse)
+            $scope.$apply()
 
         orderByArtists = (track) ->
           artistArray = []
