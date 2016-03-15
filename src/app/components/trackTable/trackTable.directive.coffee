@@ -45,7 +45,7 @@ app.directive 'trackTable', () ->
             $scope.tracksLoaded = true
             console.log $scope.reverse
             $scope.order("track_number", $scope.reverse)
-            $scope.$apply()
+            # $scope.$apply()
 
         orderByArtists = (track) ->
           artistArray = []
