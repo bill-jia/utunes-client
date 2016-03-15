@@ -14,10 +14,11 @@ app.directive 'trackTable', () ->
         $scope.tablePage = 0
         $scope.playingTrack = null
         $scope.reverse = false
-        sortable =   ["track_number", "title", "artists", "album", "length_in_seconds"]
+        $scope.order("track_number", $scope.reverse)
         # console.dir $scope.tracks
 
         $scope.handleSort = (field) ->
+          sortable = ["track_number", "title", "artists", "album", "length_in_seconds"]
           if (sortable.indexOf(field) > -1)
             true
           else
@@ -36,7 +37,6 @@ app.directive 'trackTable', () ->
             $scope.tracks = orderBy($scope.tracks, orderByLength, reverse)
 
           $scope.predicate = predicate
-        $scope.order("track_number", $scope.reverse)
         orderByArtists = (track) ->
           artistArray = []
           for artist in track.artists
