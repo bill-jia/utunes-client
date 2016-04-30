@@ -50,6 +50,7 @@ app.controller("PlaylistShowController", ["$scope", "PlaylistService", "AlbumSer
     $scope.$watch('user', (newValue)->
       if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
         $scope.headers.push {name: "Download", field: "download"}
+        $scope.headers.push {name: "Edit", field: "edit"}
     , true)
     $scope.count = 25
 

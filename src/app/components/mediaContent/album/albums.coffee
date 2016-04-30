@@ -44,10 +44,12 @@ app.controller("AlbumShowController", ["$scope", "$stateParams", "AlbumService",
         name: 'Length'
         field: 'length_in_seconds'
       }
+
     ]
     $scope.$watch('user', (newValue)->
       if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
         $scope.headers.push {name: "Download", field: "download"}
+        $scope.headers.push {name: "Edit", field: "edit"}
     , true)
     $scope.trackCount=25
     $scope.producerCount = 6

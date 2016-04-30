@@ -47,7 +47,8 @@ app.controller("ArtistShowController", ["$scope", "$stateParams", "ArtistService
     $scope.$watch('user', (newValue)->
       if $scope.user.role && ($scope.user.role == 'admin' || $scope.user.role == 'producer')
         $scope.headers.push {name: "Download", field: "download"}
-    , true)
+        $scope.headers.push {name: "Edit", field: "edit"}
+      , true)
 ])
 
 app.controller("ArtistEditController", ["$scope", "$state", "$stateParams", "ArtistService", "$mdDialog",
