@@ -16,7 +16,7 @@ table.md-table
               |{{track.title}}
             div(ng-if="header.field == 'artists'")
               a(ng-repeat="artist in track.artists" ui-sref="root.artists.show({artistId: artist.id})" stop-event="click")
-                {{artist.name}} {{artist.class_year ? artist.class_year : ''}}{{$last ? '' : ', '}}
+                {{artist.name}}{{artist.class_year ? ' ': ''}}{{artist.class_year}}{{$last ? '' : ', '}}
             div(ng-if="header.field == 'album'")
               a(ui-sref="root.albums.show({albumId: track.album.id})" stop-event="click"){{track.album.title}}
             div(ng-if="header.field == 'length_in_seconds'")
