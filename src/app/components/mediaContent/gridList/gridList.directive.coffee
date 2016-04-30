@@ -13,6 +13,8 @@ angular.module "uTunes"
           $scope.mousedOver = null
           $scope.reverse = 0
           $scope.tablePage = 0
+          $scope.pageIndexStart = 0
+          $scope.pageCount = 10          
           $scope.orderProp = "title"
 
           buildGridModel = (items) ->
@@ -44,6 +46,10 @@ angular.module "uTunes"
 
           $scope.goToPage = (page) ->
             $scope.tablePage = page
+            if $scope.tablePage - $scope.pageCount/2 + 1 < 0
+              $scope.pageIndexStart = 0
+            else
+              $scope.pageIndexStart = $scope.tablePage - $scope.pageCount/2 + 1            
 
           $scope.playItem = (id) ->
             if $scope.type == 'album'

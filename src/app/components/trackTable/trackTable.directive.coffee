@@ -80,9 +80,7 @@ app.directive 'trackTable', () ->
             $scope.pageIndexStart = 0
           else
             $scope.pageIndexStart = $scope.tablePage - $scope.pageCount/2 + 1
-          console.log $scope.pageCount
-          console.log $scope.pageIndexStart
-          console.dir $scope.getNumber($scope.numberOfPages())
+
         $scope.playTrack = (index, $event) ->
           onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count, false)
 
