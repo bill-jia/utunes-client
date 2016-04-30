@@ -11,13 +11,19 @@ div#options(layout="row")
 md-grid-list(md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height-md="1:1" md-gutter="12px" md-gutter-gt-sm="8px")
   md-grid-tile.md-whiteframe-z2.md-primary.md-hue-1(ng-repeat="tile in tiles | orderBy:orderProp:reverse==1 | startFrom:tablePage*count | limitTo: count" md-rowspan="1" md-colspan="1" ng-style="{'background-image': 'url({{tile.image.url.substring(7)}})', 'background-repeat': 'no-repeat', 'background-size': 'cover'}" ng-mouseover="mousedOver=$index" ng-mouseleave="mousedOver=null" ng-click="playItem(tile.id)")
     img.play-overlay(ng-show="mousedOver!=$parent.$index && type != 'producer'" src="/assets/images/play_button_overlay.png")
-    md-grid-tile-footer.custom-tile-footer
+    md-grid-tile-footer.custom-tile-footer(ng-if="type=='album'" ui-sref="root.albums.show({albumId:tile.id})" stop-event="click")
       div(layout="column")
-        md-button.md-grid-button(ng-if="type=='album'" ui-sref="root.albums.show({albumId:tile.id})" stop-event="click")
+        md-button.md-grid-button
           |{{tile.title | cut: title.title:false:19}}
-        md-button.md-grid-button(ng-if="type=='artist'" ui-sref="root.artists.show({artistId:tile.id})" stop-event="click")
+        div.tile-year {{tile.year}}
+    md-grid-tile-footer.custom-tile-footer(ng-if="type=='artist'" ui-sref="root.artists.show({artistId:tile.id})" stop-event="click")
+      div(layout="column")
+        md-button.md-grid-button
           |{{tile.title | cut: false:18}}
-        md-button.md-grid-button(ng-if="type=='producer'" ui-sref="root.producers.show({producerId:tile.id})" stop-event="click")
+        div.tile-year {{tile.year}}          
+    md-grid-tile-footer.custom-tile-footer(ng-if="type=='producer'" ui-sref="root.producers.show({producerId:tile.id})" stop-event="click")
+      div(layout="column")
+        md-button.md-grid-button
           |{{tile.title | cut: title.title:false:19}}  
         div.tile-year {{tile.year}}
 
