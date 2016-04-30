@@ -12,6 +12,8 @@ app.directive 'trackTable', () ->
       ($scope, $filter, $window, $mdDialog, onSelectTrack, PlaylistService, TrackService, rfc4122, $timeout) ->
         orderBy = $filter('orderBy')
         $scope.tablePage = 0
+        $scope.pageIndexStart = 0
+        $scope.pageCount = 10
         $scope.playingTrack = null
         $scope.reverse = false
         $scope.predicate = null
@@ -74,6 +76,10 @@ app.directive 'trackTable', () ->
 
         $scope.goToPage = (page) ->
           $scope.tablePage = page
+          if $scope.tablePage - $scope.pageCount/2 + 1 < 0
+            $scope.pageIndexStart = 0
+          else
+            $scope.pageIndexStart = $scope.tablePage - $scope.pageCount/2 + 1
 
         $scope.playTrack = (index, $event) ->
           onSelectTrack.broadcast($scope.tracks, index + $scope.tablePage*$scope.count, false)
